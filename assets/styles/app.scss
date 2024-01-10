@@ -1,0 +1,51 @@
+@import "~bootstrap/scss/bootstrap";
+body {
+    background-image: url('/public/images/fond.png'); /* Mettez à jour le chemin selon votre structure de dossier */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Pour que le fond soit fixe lors du défilement de la page */
+
+}
+
+.navbar {
+    background-image: url('/public/images/bande.png');
+    height: 65px; /* Définir la hauteur à 100 pixels */
+     background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+.navbar-logo img {
+    height: 50px; /* Ajustez selon la taille souhaitée */
+}
+
+.navbar-menu {
+    margin-left: auto; /* Cela pousse la liste du menu vers la droite */
+    list-style-type: none;
+    display: flex;
+}
+
+.navbar-menu li a {
+    color: rgb(88, 85, 62); /* Texte doré */
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+    font-weight: bold; 
+}
+
+.navbar-search {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-search input {
+    padding: 5px;
+}
+
+.navbar-search button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
