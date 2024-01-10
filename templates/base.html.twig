@@ -3,17 +3,44 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
         {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
 {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
     <body>
+    {% block navbar %}
+    <nav class="navbar">
+    <!-- Logo à gauche -->
+    <a href="/" class="navbar-logo">
+        <img src="/images/logo.jpg" alt="Logo DantecMarket">
+    </a>
+
+    <!-- Éléments du Menu -->
+    <ul class="navbar-menu">
+        <li><a href="/lien1">Menu 1</a></li>
+        <li><a href="/lien2">Menu 2</a></li>
+        <li><a href="/lien3">Menu 3</a></li>
+        <li><a href="/lien4">Menu 4</a></li>
+        <li><a href="/lien5">Menu 5</a></li>
+        <li><a href="/lien6">Menu 6</a></li>
+    </ul>
+
+    <!-- Zone de Recherche à droite -->
+    <div class="navbar-search">
+        <input type="text" placeholder="Rechercher...">
+        <button @click="search">
+            <i class="fa fa-search"></i> <!-- Utilisez Font Awesome pour l'icône de la loupe -->
+        </button>
+    </div>
+</nav>
+
+    {% endblock %}
+
         {% block body %}{% endblock %}
     </body>
 </html>
