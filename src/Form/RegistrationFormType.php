@@ -11,14 +11,62 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
+
 
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
-            ->add('agreeTerms', CheckboxType::class, [
+        ->add('nom', TextType::class, [
+            'label' => 'Nom',
+            'constraints' => [
+                new NotBlank([
+                    'message' => 'Veuillez entrer un nom',
+                ]),
+                new Length([
+                    'max' => 255,
+                    'maxMessage' => 'Le nom ne peut pas dépasser 255 caractères',
+                ]),
+            ],
+        ])
+        ->add('prenom', TextType::class, [
+            'label' => 'Prénom',
+            'constraints' => [
+                new NotBlank([
+                    'message' => 'Veuillez entrer un prénom',
+                ]),
+                new Length([
+                    'max' => 255,
+                    'maxMessage' => 'Le prénom ne peut pas dépasser 255 caractères',
+                ]),
+            ],
+        ])
+        ->add('telephone', TextType::class, [
+            'label' => 'Téléphone',
+            'constraints' => [
+                new NotBlank([
+                    'message' => 'Veuillez entrer un numéro de téléphone',
+                ]),
+                // Vous pouvez ajouter d'autres contraintes spécifiques aux numéros de téléphone
+            ],
+        ])
+        ->add('classe', TextType::class, [
+            'label' => 'Classe',
+            'constraints' => [
+                new NotBlank([
+                    'message' => 'Veuillez entrer une classe',
+                ]),
+                new Length([
+                    'max' => 255,
+                    'maxMessage' => 'La classe ne peut pas dépasser 255 caractères',
+                ]),
+            ],
+        ])
+        ->add('email')
+        ->add('agreeTerms', CheckboxType::class, [
                                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
