@@ -8,17 +8,15 @@ body {
 }
 
 .navbar {
-    background-image: url('/public/images/bande.png');
-    height: 65px; /* Définir la hauteur à 100 pixels */
-     background-size: cover;
-    background-repeat: no-repeat;
+    background-color: #000; /* Utilisation d'une couleur noire pour le fond */
+    height: 65px; /* Hauteur de la navbar */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
 }
 .navbar-logo img {
-    height: 50px; /* Ajustez selon la taille souhaitée */
+    height: 80px; /* Ajustez selon la taille souhaitée */
 }
 
 .navbar-menu {
@@ -78,4 +76,14 @@ body {
 }
 .btn-primary:hover {
     background-color: darken(#A52A2A, 10%);
+}
+.container-body {
+    background-image: url('/public/images/fond.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center; /* Centrer l'image dans le conteneur */
+    margin-top: 10px;
+    padding: 20px;
+    width: 100%; /* Assurez-vous que le conteneur prend toute la largeur */
+    min-height: 400px; /* Ajustez en fonction de la taille de votre image et du contenu */
 }
