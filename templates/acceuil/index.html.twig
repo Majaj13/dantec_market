@@ -1,0 +1,223 @@
+{% block body %}
+<style>
+
+    body {
+        background: #FAFAFA;
+    }
+
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Oswald', sans-serif;
+        scroll-behavior: smooth;
+    }
+    .container{
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        height: 100vh;
+        width: 100%;
+    }
+
+    .navbar{
+        z-index: 1;
+        position: relative;
+        height: 7vh;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 20px;
+        background-color: #2D2D2D;
+    }
+
+    .textNav{
+        text-decoration: none;
+        color: #FAFAFA;
+        text-align: center;
+        font-family: Inter;
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+
+    }
+
+    .navbar .nav-right a{
+        padding-right: 20px;
+        text-decoration: none;
+    }
+
+    .boutonNav{
+        width: 184px;
+        height: 80px;
+        flex-shrink: 0;
+        background:linear-gradient(113deg, #DFBA61 34.85%, #F3E5AB 95.45%);
+        box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.63);
+        text-decoration: none;
+        color: #2D2D2D;
+        text-align: center;
+        font-family: Inter;
+        font-size: 44px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+
+
+    .carousel-container {
+        z-index: 2;
+        width: 100%;
+        height: 50%;
+        overflow: hidden;
+        }
+
+    .carousel {
+        display: flex;
+        width: 300%;
+        height: 100%;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .slide {
+        min-width: 100%;
+        height: 100%;
+    }
+
+    .section2 {
+        width: 100%;
+        height: 605px;
+        flex-shrink: 0;
+        background: #2D2D2D;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 7vh;
+        flex-wrap: wrap; /* Permet aux cartes de passer à la ligne si l'espace est insuffisant */
+    }
+
+    .card1 {
+        width: 610px;
+        height: 981px;
+        flex-shrink: 0;
+        border: 5px solid #000;
+        margin-right: 10px; /* Ajustez la marge selon vos besoins pour l'espace entre les cartes */
+        margin-bottom: 10px; /* Ajoutez une marge en bas pour l'espace entre les lignes */
+    }
+
+    .card2 {
+        width: 920px;
+        height: 852px;
+        flex-shrink: 0;
+        border: 5px solid #000;
+        background: url(<path-to-image>), lightgray 50% / cover no-repeat;
+        margin-right: 10px; /* Ajustez la marge selon vos besoins pour l'espace entre les cartes */
+        margin-bottom: 10px; /* Ajoutez une marge en bas pour l'espace entre les lignes */
+    }
+
+    .avis-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap; /* Permet aux cartes d'avis de passer à la ligne si l'espace est insuffisant */
+        margin-top: 20px; /* Ajoutez une marge en haut pour l'espace entre les cartes d'avis et les autres conteneurs */
+    }
+
+    .card-avis {
+        width: 553px;
+        height: 580px;
+        flex-shrink: 0;
+        background: #E3E3E3;
+        margin-right: 10px; /* Ajustez la marge selon vos besoins pour l'espace entre les cartes d'avis */
+        margin-bottom: 10px; /* Ajoutez une marge en bas pour l'espace entre les lignes */
+    }
+
+    footer {
+        width: 100%;
+        height: 30%;
+        flex-shrink: 0;
+        background: #2D2D2D;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+<div class="navbar">
+    <div class="nav-right">
+        <a href="" class="textNav">Nos produits</a>
+        <a href="" class="textNav">Nos actualités</a>
+        <a href="" class="textNav">Contactez nous</a>
+        <a href="" class="boutonNav">Profil</a>
+    </div>
+</div>
+
+<div class="carousel-container">
+    <div class="carousel">
+      <div class="slide" style="background-color: #ff5733;">Slides 1</div>
+      <div class="slide" style="background-color: #33ff57;">Slides 2</div>
+      <div class="slide" style="background-color: #5733ff;">Slides 3</div>
+    </div>
+</div>
+
+<div class="section2">
+
+</div>
+
+<div class="card-container">
+    <div class="card1" style="background: url('path-to-image-1'), lightgray 50% / cover no-repeat;"></div>
+    <div class="card1" style="background: url('path-to-image-2'), lightgray 50% / cover no-repeat;"></div>
+    <div class="card1" style="background: url('path-to-image-3'), lightgray 50% / cover no-repeat;"></div>
+</div>
+
+<div class="card-container">
+    <div class="card2" style="background: url('path-to-image-2'), lightgray 50% / cover no-repeat;"></div>
+    <div class="card2" style="background: url('path-to-image-3'), lightgray 50% / cover no-repeat;"></div>
+</div>
+
+<div class="avis-container">
+    <div class="card-avis"></div>
+    <div class="card-avis"></div>
+    <div class="card-avis"></div>
+    <!-- Ajoutez autant de cartes d'avis que nécessaire -->
+</div>
+
+<footer>
+
+</footer>
+
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+  let currentIndex = 0;
+  const totalSlides = document.querySelectorAll(".slide").length;
+
+  function updateCarousel() {
+    const carousel = document.querySelector(".carousel");
+    const slideWidth = document.querySelector(".slide").clientWidth;
+    carousel.style.transform = `translateX(${-currentIndex * slideWidth}px)`;
+  }
+
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % totalSlides;
+    updateCarousel();
+  }
+
+  function prevSlide() {
+    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+    updateCarousel();
+  }
+
+  setInterval(nextSlide, 3000); // Change slide every 3 seconds
+});
+</script>
+
+{% endblock %}
