@@ -7,7 +7,7 @@ body {
 
 }
 .frame {
-    border: 2px solid black;
+    border: 2px solid rgb(255, 255, 255);
     background-color: white;
     border-radius: 10px;
     height: 200px;
@@ -74,14 +74,14 @@ body {
 }
 .btn-primary {
     background-color: #A52A2A; /* Marron */
-    border-color: #A52A2A;
+    border-color: #ffffff;
     padding: 10px 15px;
     border-radius: 4px;
     color: white;
     cursor: pointer;
 }
 .btn-primary:hover {
-    background-color: darken(#A52A2A, 10%);
+    background-color: darken(#fbf7f7, 10%);
 }
 .container-body {
     background-image: url('/public/images/fond.jpg');
@@ -95,3 +95,40 @@ body {
     margin-bottom: 20px;
 }
 
+.carousel-container {
+    perspective: 1200px; /* Augmenter la perspective pour un effet de profondeur plus marqué */
+    width: 500px;
+    height: 500px;
+    overflow: hidden;
+    position: relative;
+    margin: auto;
+  }
+  
+  .carousel {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    animation: rotate 20s infinite linear;
+  }
+  
+  @keyframes rotate {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
+  }
+  
+  .carousel-item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    opacity: 0.9;
+    border: 1px solid #fff; /* Ajouter une bordure pour renforcer l'effet 3D */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Ombres pour un effet de profondeur */
+  }
+  
+
+.image1 { background-image: url('/public/images/image1.jpg'); transform: rotateY(0deg) translateZ(400px); }
+.image2 { background-image: url('/public/images/image2.jpg'); transform: rotateY(90deg) translateZ(400px); }
+.image3 { background-image: url('/public/images/image3.jpg'); transform: rotateY(180deg) translateZ(400px); }
+.image4 { background-image: url('/public/images/image4.jpg'); transform: rotateY(270deg) translateZ(400px); }
