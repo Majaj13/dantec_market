@@ -1,173 +1,29 @@
-{% extends 'base.html.twig' %}
-
 {% block stylesheets %}
-    {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_link_tags('test') }}
 {% endblock %}
 
 {% block body %}
-<style>
 
-    body {
-        background-image: url('/public/images/dantecMarket1.jpg');
-    }
-
-    *{
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Oswald', sans-serif;
-        scroll-behavior: smooth;
-    }
-    .container{
-        align-items: center;
-        justify-content: center;
-        display: flex;
-        height: 100vh;
-        width: 100%;
-    }
-
-    .navbar{
-        z-index: 1;
-        position: relative;
-        height: 7vh;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        padding: 10px 20px;
-        background-color: #2D2D2D;
-    }
-
-    .textNav{
-        text-decoration: none;
-        color: #FAFAFA;
-        text-align: center;
-        font-family: Inter;
-        font-size: 40px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-
-    }
-
-    .navbar .nav-right a{
-        padding-right: 20px;
-        text-decoration: none;
-    }
-
-    .boutonNav{
-        width: 184px;
-        height: 80px;
-        flex-shrink: 0;
-        background:linear-gradient(113deg, #DFBA61 34.85%, #F3E5AB 95.45%);
-        box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.63);
-        text-decoration: none;
-        color: #2D2D2D;
-        text-align: center;
-        font-family: Inter;
-        font-size: 44px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-    }
-
-
-    .carousel-container {
-        z-index: 2;
-        width: 100%;
-        height: 50%;
-        overflow: hidden;
-        }
-
-    .carousel {
-        display: flex;
-        width: 300%;
-        height: 100%;
-        transition: transform 0.5s ease-in-out;
-    }
-
-    .slide {
-        min-width: 100%;
-        height: 100%;
-    }
-
-    .section2 {
-        width: 100%;
-        height: 605px;
-        flex-shrink: 0;
-        background: #2D2D2D;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .card-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 20px;
-        flex-wrap: wrap; /* Permet aux cartes de passer à la ligne si l'espace est insuffisant */
-    }
-
-    .card1 {
-        width: 65vh;
-        height: 75vh;
-        flex-shrink: 0;
-        border: 5px solid #faa;
-        margin-right: 10px; 
-        background-image: url('/public/images/dantecMarket1.jpg');
-    }
-
-    .card2 {
-        width: 95vh;
-        height: 75vh;
-        flex-shrink: 0;
-        border: 5px solid #000;
-        margin-right: 10px; /* Ajustez la marge selon vos besoins pour l'espace entre les cartes */
-        margin-bottom: 10px; 
-    }
-
-    .avis-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap; /* Permet aux cartes d'avis de passer à la ligne si l'espace est insuffisant */
-        margin-top: 20px; /* Ajoutez une marge en haut pour l'espace entre les cartes d'avis et les autres conteneurs */
-    }
-
-    .card-avis {
-        width: 553px;
-        height: 580px;
-        flex-shrink: 0;
-        background: #E3E3E3;
-        margin-right: 10px; /* Ajustez la marge selon vos besoins pour l'espace entre les cartes d'avis */
-        margin-bottom: 10px; /* Ajoutez une marge en bas pour l'espace entre les lignes */
-    }
-
-    footer {
-        width: 100%;
-        height: 30%;
-        flex-shrink: 0;
-        background: #2D2D2D;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-</style>
 
 <div class="navbar">
-    <div class="nav-right">
-        <a href="" class="textNav">Nos produits</a>
-        <a href="" class="textNav">Nos actualités</a>
-        <a href="" class="textNav">Contactez nous</a>
+    <div class="navbar-left">
+        <a href="" class="textNav">Nos<br>produits</a>
+        <a href="" class="textNav">Nos<br>actualités</a>
+    </div>
+    <div class="navbar-middle">
+        <img src="/images/logo.jpg">
+    </div>
+    <div class="navbar-right">
+        <a href="" class="textNav">Contactez<br>nous</a>
         <a href="" class="boutonNav">Profil</a>
     </div>
 </div>
 
 <div class="carousel-container">
     <div class="carousel">
-      <div class="slide">Slides 1</div>
-      <div class="slide">Slides 2</div>
-      <div class="slide">Slides 3</div>
+      <div class="slide" id="slide1">Slides 1</div>
+      <div class="slide" id="slide2">Slides 2</div>
+      <div class="slide" id="slide3">Slides 3</div>
     </div>
 </div>
 
@@ -176,20 +32,50 @@
 </div>
 
 <div class="card-container">
-    <div class="card1" id="application"></div>
-    <div class="card1" id="produits"></div>
-    <div class="card1" id="actualité"></div>
+    <div class="card1" id="application">
+        <button>Télécharger</button>
+        <p>Téléchargez l’application Dantec Market</p>
+    </div>
+    <div class="card1" id="produits">
+        <button>Commander</button>
+        <p>Commandez nos meilleurs produits</p>
+    </div>
+    <div class="card1" id="actualité">
+        <button>Découvrir</button>
+        <p>Découvrez  l’actualité sur le magasin</p>
+    </div>
 </div>
 
 <div class="card-container">
-    <div class="card2" id="catalogue"></div>
-    <div class="card2" id="partenaires"></div>
+    <div class="card2" id="catalogue">
+        <button>Découvrir</button>
+        <p>Découvrez les nouveautés de ce mois</p>
+    </div>
+    <div class="card2" id="partenaires">
+        <button>Découvrir</button>
+        <p>Découvrez  nos partenaires</p>
+    </div>
 </div>
 
 <div class="avis-container">
-    <div class="card-avis"></div>
-    <div class="card-avis"></div>
-    <div class="card-avis"></div>
+    <div class="card-avis">
+        <div class="etoiles">5 étoiles</div>
+        <div class="titre">Titre de l'avis 1</div>
+        <div class="avis">C'est un avis fantastique. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+        <div class="date">2024-01-01</div>
+    </div>
+    <div class="card-avis">
+        <div class="etoiles">4 étoiles</div>
+        <div class="titre">Titre de l'avis 2</div>
+        <div class="avis">Un autre avis intéressant. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</div>
+        <div class="date">2024-01-05</div>
+    </div>
+    <div class="card-avis">
+        <div class="etoiles">3 étoiles</div>
+        <div class="titre">Titre de l'avis 3</div>
+        <div class="avis">Un avis moyen. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+        <div class="date">2024-01-10</div>
+    </div>
     <!-- Ajoutez autant de cartes d'avis que nécessaire -->
 </div>
 
