@@ -98,27 +98,26 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 7vh;
+        margin-top: 20px;
         flex-wrap: wrap; /* Permet aux cartes de passer à la ligne si l'espace est insuffisant */
     }
 
     .card1 {
-        width: vh;
+        width: 65vh;
         height: 75vh;
         flex-shrink: 0;
         border: 5px solid #000;
-        margin-right: 10px; /* Ajustez la marge selon vos besoins pour l'espace entre les cartes */
-        margin-bottom: 10px; /* Ajoutez une marge en bas pour l'espace entre les lignes */
+        margin-right: 10px; 
+        background-image: url('public/images/dantecMarket1.jpg');
     }
 
     .card2 {
-        width: 75vh;
+        width: 95vh;
         height: 75vh;
         flex-shrink: 0;
         border: 5px solid #000;
-        background: url(<path-to-image>), lightgray 50% / cover no-repeat;
         margin-right: 10px; /* Ajustez la marge selon vos besoins pour l'espace entre les cartes */
-        margin-bottom: 10px; /* Ajoutez une marge en bas pour l'espace entre les lignes */
+        margin-bottom: 10px; 
     }
 
     .avis-container {
@@ -160,9 +159,9 @@
 
 <div class="carousel-container">
     <div class="carousel">
-      <div class="slide" style="background: '../../assets/images/dantecMarket1.jpg';">Slides 1</div>
-      <div class="slide" style="background-color: #33ff57;">Slides 2</div>
-      <div class="slide" style="background-color: #5733ff;">Slides 3</div>
+      <div class="slide" style="background-image: url('/public/images/dantecMarket1.jpg');">Slides 1</div>
+      <div class="slide" style="background-image: url('/public/images/dantecMarket2.jpg');">Slides 2</div>
+      <div class="slide" style="background-image: url('/public/images/partenaires.jpg');">Slides 3</div>
     </div>
 </div>
 
@@ -171,14 +170,14 @@
 </div>
 
 <div class="card-container">
-    <div class="card1" style="background: url('path-to-image-1'), lightgray 50% / cover no-repeat;"></div>
-    <div class="card1" style="background: url('path-to-image-2'), lightgray 50% / cover no-repeat;"></div>
-    <div class="card1" style="background: url('path-to-image-3'), lightgray 50% / cover no-repeat;"></div>
+    <div class="card1" id="application"></div>
+    <div class="card1" id="produits"></div>
+    <div class="card1" id="actualité"></div>
 </div>
 
 <div class="card-container">
-    <div class="card2" style="background: url('path-to-image-2'), lightgray 50% / cover no-repeat;"></div>
-    <div class="card2" style="background: url('path-to-image-3'), lightgray 50% / cover no-repeat;"></div>
+    <div class="card2" id="catalogue"></div>
+    <div class="card2" id="partenaires"></div>
 </div>
 
 <div class="avis-container">
