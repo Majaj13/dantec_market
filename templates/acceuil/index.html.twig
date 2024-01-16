@@ -1,8 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
+
 {% block body %}
 <style>
 
     body {
-        background: #FAFAFA;
+        background-image: url('/public/images/dantecMarket1.jpg');
     }
 
     *{
@@ -106,9 +112,9 @@
         width: 65vh;
         height: 75vh;
         flex-shrink: 0;
-        border: 5px solid #000;
+        border: 5px solid #faa;
         margin-right: 10px; 
-        background-image: url('public/images/dantecMarket1.jpg');
+        background-image: url('/public/images/dantecMarket1.jpg');
     }
 
     .card2 {
@@ -159,9 +165,9 @@
 
 <div class="carousel-container">
     <div class="carousel">
-      <div class="slide" style="background-image: url('/public/images/dantecMarket1.jpg');">Slides 1</div>
-      <div class="slide" style="background-image: url('/public/images/dantecMarket2.jpg');">Slides 2</div>
-      <div class="slide" style="background-image: url('/public/images/partenaires.jpg');">Slides 3</div>
+      <div class="slide">Slides 1</div>
+      <div class="slide">Slides 2</div>
+      <div class="slide">Slides 3</div>
     </div>
 </div>
 
