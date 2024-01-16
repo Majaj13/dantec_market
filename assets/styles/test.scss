@@ -258,7 +258,6 @@ body {
 .avis,
 .date {
     width: 100%;
-    
     font-family: Inter;
     line-height: normal;
 }
@@ -292,13 +291,51 @@ body {
     text-align: right;
 }
 
-
 footer {
     width: 100%;
-    height: 30%;
+    height: 65%;
     flex-shrink: 0;
     background: #2D2D2D;
     display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: #FAFAFA;
+}
+
+.footer-container {
+    width: 100%;
+    display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.container-foot {
+    width: 45%;
+    height: 30%;
+    margin-right: 50px;
+    margin-bottom: 10px;
+}
+
+.container-foot p
+.container-foot ul{
+    width: 100%;
+    height: 10%;
+    flex-shrink: 0;
+    color: #FAFAFA;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+}
+
+.container-foot ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.container-foot ul li {
+    margin-bottom: 5px;
 }
