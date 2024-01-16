@@ -6,6 +6,12 @@ body {
     background-attachment: fixed; /* Pour que le fond soit fixe lors du défilement de la page */
 
 }
+.frame {
+    border: 2px solid black;
+    background-color: white;
+    border-radius: 10px;
+    height: 200px;
+}
 
 .navbar {
     background-color: #000; /* Utilisation d'une couleur noire pour le fond */
@@ -86,4 +92,6 @@ body {
     padding: 20px;
     width: 100%; /* Assurez-vous que le conteneur prend toute la largeur */
     min-height: 400px; /* Ajustez en fonction de la taille de votre image et du contenu */
+    margin-bottom: 20px;
 }
+
