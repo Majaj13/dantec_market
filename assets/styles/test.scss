@@ -24,55 +24,58 @@ body {
     height: calc(7vh + 60px); /* 7vh + 30px top + 30px bottom */
     width: 100%;
     display: flex;
+    align-items: center; /* Align items vertically in the middle */
     justify-content: center;
     background-color: #2D2D2D;
-    flex-wrap: wrap; /* Permet aux cartes de passer à la ligne si l'espace est insuffisant */
 }
 
 .navbar-left {
     display: flex;
     align-items: center; /* Align items vertically in the middle */
-
-    width: 30vh;
-    height: 5vh;
+    width: 30%;
+    height: 100%;
     flex-shrink: 0;
+    padding-left: 20vh; /* Adjust the padding as needed */
+    padding-bottom: 45px;
 }
 
 .navbar-middle {
-    width: 30vh;
-    height: auto;
+    display: flex;
+    align-items: center; /* Align items vertically in the middle */
+    width: 30%;
+    height: 100%;
     flex-shrink: 0;
-    border-radius: 50%; 
-    overflow: hidden; 
-    top: 20%;
-    left: 6%; 
-
+    padding-left: 22.5vh; /* Adjust the padding as needed */
+    padding-top: 140px;
 }
 
 .navbar-middle img {
-    width: 100%; 
+    width: 30vh;
     height: auto;
+    border-radius: 50%;
 }
 
 .navbar-right {
     display: flex;
     align-items: center; /* Align items vertically in the middle */
-    width: 30vh;
-    height: 5vh;
+    width: 40%;
+    height: 100%;
     flex-shrink: 0;
+    padding-left: 10vh; /* Adjust the padding as needed */
+    padding-bottom: 45px;
 }
 
-.textNav{
+.textNav {
     text-decoration: none;
     color: #FAFAFA;
     text-align: center;
-    font-family: Inter;
+    font-family: 'Inter Bold', sans-serif;
     font-size: 40px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    margin-left: 10%;
-    padding-right: 50%;
+    padding-right: 100px;
+    -webkit-text-stroke: 1px #000;
 }
 
 .boutonNav {
@@ -89,15 +92,14 @@ body {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    margin-right:20%;
 }
 
 .carousel-container {
     z-index: 2;
     width: 100%;
-    height: 50%;
+    height: 75%;
     overflow: hidden;
-    }
+}
 
 .carousel {
     display: flex;
@@ -106,21 +108,60 @@ body {
     transition: transform 0.5s ease-in-out;
 }
 
+.carousel-pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.pagination-button {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin: 0 10px;
+    cursor: pointer;
+    background-color: #FAFAFA;
+}
+
+.pagination-button.active {
+    background-color: #BBEB86; /* Couleur verte pour le bouton actif */
+}
+
 .slide {
     min-width: 100%;
     height: 100%;
+    background-repeat:repeat;
+    background-size: 35%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.slide p {
+    width: 1026px;
+    height: 284px;
+    flex-shrink: 0;
+    color: #FAFAFA;
+    text-align: center;
+    font-family: 'Inter Black';
+    font-size: 96px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    -webkit-text-stroke: 2px #2D2D2D;
+    margin: 3% 7.5%;
 }
 
 .slide#slide1 {
-    background-image: url('/public/images/dantecMarket1.jpg');
+    background-image: url('/public/images/dantecMarket1.1.jpg');
 }
 
 .slide#slide2 {
-    background-image: url('/public/images/dantecMarket2.jpg');
+    background-image: url('/public/images/dantecMarket2.1.jpg');
 }
 
 .slide#slide3 {
-    background-image: url('/public/images/partenaires.jpg');
+    background-image: url('/public/images/partenaires.1.jpg');
 }
 
 .section2 {
@@ -293,7 +334,7 @@ body {
 
 footer {
     width: 100%;
-    height: 65%;
+    height: 50%;
     flex-shrink: 0;
     background: #2D2D2D;
     display: flex;
@@ -312,23 +353,31 @@ footer {
 }
 
 .container-foot {
-    width: 45%;
+    width: 50vh;
     height: 30%;
     margin-right: 50px;
     margin-bottom: 10px;
 }
 
-.container-foot p
+.container-foot p,
 .container-foot ul{
     width: 100%;
     height: 10%;
     flex-shrink: 0;
     color: #FAFAFA;
-    font-family: Inter;
     font-size: 20px;
     font-style: normal;
-    font-weight: 900;
     line-height: normal;
+}
+
+.container-foot p {
+    font-family: 'Inter Black', sans-serif;
+    font-weight: 900;
+}
+
+.container-foot ul {
+    font-family: Inter;
+    font-weight: 1001;
 }
 
 .container-foot ul {
@@ -338,4 +387,37 @@ footer {
 
 .container-foot ul li {
     margin-bottom: 5px;
+}
+
+.container-foot button {
+    width: 180px;
+    height: 50px;
+    border-radius: 50px;
+    margin-top: 10px;
+    background-size: cover; /* Ajuste la taille de l'image pour couvrir complètement le bouton */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    color: #FAFAFA;
+    font-family: 'Inter Black', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    border: none;
+    cursor: pointer;
+}
+
+.container-foot button#googlePlay {
+    background-image: url('/public/images/googlePlay.png');
+}
+
+.container-foot button#appStore {
+    background-image: url('/public/images/appStore.png');
+}
+
+.footer-container#deuxieme {
+    padding-bottom: 13%;
+}
+
+.container-foot#haut {
+    margin-bottom: 80px;
 }
