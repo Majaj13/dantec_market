@@ -181,19 +181,18 @@ body {
 .swiper {
     width:90%;
     height: 100%;
-  }
+}
  
-  .swiper-slide {
-    background-position: center;
+.swiper-slide {
     background-size: cover;
     width: 250px;
-  }
+}
  
-  .swiper-slide img {
+.swiper-slide img {
     display: block;
     width: 100%;
     -webkit-box-reflect: below 1px linear-gradient(transparent, transparent , #0002 , #0004);
-  }
+}
 
 .card-container {
     display: flex;
@@ -248,7 +247,7 @@ body {
 }
 
 .card1 {
-    width: 65vh;
+    width: 30%;
     height: 75vh;
     flex-shrink: 0;
     border: 5px solid #000;
@@ -490,4 +489,188 @@ footer {
 
 .container-foot#haut {
     margin-bottom: 80px;
+}
+
+
+
+
+
+@media screen and (min-width: 1920px) {
+    .navbar-left, .navbar-middle, .navbar-right {
+        padding-left: 5%;
+    }
+
+    .navbar-middle img {
+        width: 15vh;
+    }
+
+    .navbar-middle, .navbar-right {
+        padding-left: 10vh;
+    }
+
+    .textNav {
+        font-size: 24px;
+        padding-right: 50px;
+    }
+
+    .boutonNav {
+        width: 150px;
+        height: 50px;
+        font-size: 24px;
+    }
+
+    .slide p {
+        width: 70%;
+        font-size: 36px;
+    }
+
+    .pagination-button {
+        width: 15px;
+        height: 15px;
+        margin: 0 5px;
+    }
+
+    .card-container button {
+        width: 250px;
+        height: 65px;
+        font-size: 24px;
+    }
+
+    .card-container p {
+        width: 70%;
+        font-size: 36px;
+    }
+
+    .card-container .card1, .card-container .card2 {
+        width: 40vh;
+        height: 60vh;
+    }
+
+    .avis, .titre, .date {
+        font-size: 24px;
+    }
+
+    .etoiles p {
+        font-size: 30px;
+    }
+
+    footer {
+        height: 40%;
+    }
+
+    .container-foot {
+        width: 35vh;
+    }
+
+    .container-foot p, .container-foot ul {
+        font-size: 18px;
+    }
+
+    .container-foot button {
+        width: 120px;
+        height: 40px;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 1920px) {
+    /* Ajouter des styles adaptés aux résolutions inférieures si nécessaire */
+}
+
+/* Ajout de styles pour les résolutions spécifiques des téléphones */
+@media screen and (max-width: 767px) {
+    .navbar {
+        height: calc(7vh + 0px);
+    }
+
+    .navbar-left, .navbar-middle, .navbar-right {
+        width: 30%;
+        padding: 10px;
+    }
+
+    .navbar-middle img {
+        width: 25%;
+    }
+
+    .navbar-middle, .navbar-right {
+        padding: 0;
+    }
+
+    .textNav {
+        font-size: 18px;
+        padding: 0;
+    }
+
+    .boutonNav {
+        width: 120px;
+        height: 40px;
+        font-size: 14px;
+    }
+
+    .carousel-container {
+        width: 100%;
+        height: 17%;
+    }
+
+    .slide p {
+        width: 20%;
+        height: 10px;
+        font-size: 35px;
+        margin: 12.5vh 9.5vh;
+        -webkit-text-stroke: 1.2px #2D2D2D;
+    }
+
+    .carousel-pagination {
+        bottom: 715px;
+    }
+
+    .pagination-button {
+        width: 8px;
+        height: 8px;
+        margin: 0 3px;
+    }
+
+    .card-container button {
+        width: 180px;
+        height: 45px;
+        font-size: 18px;
+    }
+
+    .card-container p {
+        width: 90%;
+        font-size: 24px;
+    }
+
+    .card-container .card1, .card-container .card2 {
+        width: 80vw;
+        height: 40vh;
+    }
+
+    .avis, .titre, .date {
+        font-size: 16px;
+    }
+
+    .etoiles p {
+        font-size: 20px;
+    }
+
+    footer {
+        height: 60%;
+    }
+
+    .container-foot {
+        width: 80%;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .container-foot p, .container-foot ul {
+        font-size: 14px;
+    }
+
+    .container-foot button {
+        width: 100px;
+        height: 30px;
+        font-size: 12px;
+    }
 }

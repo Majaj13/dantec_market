@@ -1,23 +1,8 @@
-{% block stylesheets %}
-    {{ encore_entry_link_tags('test') }}
-{% endblock %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
 
-
-<div class="navbar">
-    <div class="navbar-left">
-        <a href="" class="textNav">Nos<br>produits</a>
-        <a href="" class="textNav">Nos<br>actualités</a>
-    </div>
-    <div class="navbar-middle">
-        <img src="/images/logo.jpg">
-    </div>
-    <div class="navbar-right">
-        <a href="" class="textNav">Contactez<br>nous</a>
-        <a href="" class="boutonNav">Profil</a>
-    </div>
-</div>
+{{ parent() }}
 
 <div class="carousel-container">
     <div class="carousel">
@@ -42,7 +27,7 @@
             <!-- Swiper Slides -->
             {% for i in 1..8 %}
                 <div class="swiper-slide">
-                    <a href="{{ path('app_test') }}">
+                    <a href="{{ path('app_acceuil') }}">
                         <img src="/images/{{ i }}.jpg" alt="">
                     </a>
                 </div>
@@ -116,38 +101,9 @@
     </div>
 </div>
 
-<footer>
-    <div class="footer-container" id="premiere">
-    <div class="container-foot" id="haut">
-        <p>Informations légales:</p>
-        <ul>
-            <li>Mentions légales</li>
-            <li>Cookies</li>
-            <li>CGV</li>
-            <li>Politique de protection des données personnelles</li>
-            <li>Mentions légales CGU</li>
-        </ul>
-    </div>
-    <div class="container-foot" id="bas">
-        <p>Téléchargez l’application Dantec Market:</p>
-        <button id="googlePlay"></button>
-        <button id="appStore"></button>
-    </div>
-    </div>
-    <div class="footer-container" id="deuxieme">
-    <div class="container-foot">
-        <p>Suivez nous:</p>
-        <ul>
-            <li>Facebook</li>
-            <li>Twitter</li>
-            <li>Instagram</li>
-        </ul>
-    </div>
-    </div>
-</footer>
-
-
-
+{% block footer %}
+    {{ parent() }}
+{% endblock %}
 
 <script>
         document.addEventListener("DOMContentLoaded", function () {
