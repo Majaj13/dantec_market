@@ -21,7 +21,7 @@ body {
 .navbar {
     z-index: 1;
     position: relative;
-    height: calc(7vh + 60px); /* 7vh + 30px top + 30px bottom */
+    height: calc(7vh + 6vh); /* 7vh + 30px top + 30px bottom */
     width: 100%;
     display: flex;
     align-items: center; /* Align items vertically in the middle */
@@ -36,7 +36,7 @@ body {
     height: 100%;
     flex-shrink: 0;
     padding-left: 20vh; /* Adjust the padding as needed */
-    padding-bottom: 45px;
+    padding-bottom: 4.5vh;
 }
 
 .navbar-middle {
@@ -46,7 +46,7 @@ body {
     height: 100%;
     flex-shrink: 0;
     padding-left: 22.5vh; /* Adjust the padding as needed */
-    padding-top: 140px;
+    padding-top: 14vh;
 }
 
 .navbar-middle img {
@@ -62,7 +62,7 @@ body {
     height: 100%;
     flex-shrink: 0;
     padding-left: 10vh; /* Adjust the padding as needed */
-    padding-bottom: 45px;
+    padding-bottom: 4.5vh;
 }
 
 .textNav {
@@ -70,17 +70,17 @@ body {
     color: #FAFAFA;
     text-align: center;
     font-family: 'Inter Bold', sans-serif;
-    font-size: 40px;
+    font-size: 4vh;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    padding-right: 100px;
-    -webkit-text-stroke: 1px #000;
+    padding-right: 10vh;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .boutonNav {
-    width: 184px;
-    height: 65px;
+    width: 18.4vh;
+    height: 6.5vh;
     flex-shrink: 0;
     background: linear-gradient(113deg, #DFBA61 34.85%, #F3E5AB 95.45%);
     box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.63);
@@ -88,7 +88,7 @@ body {
     color: #2D2D2D;
     text-align: center;
     font-family: Inter;
-    font-size: 44px;
+    font-size: 4.4vh;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -113,15 +113,15 @@ body {
     justify-content: center;
     align-items: flex-end;
     position: absolute;
-    bottom: 125px;
+    bottom: 12.5vh;
     width: 100%;
 }
 
 .pagination-button {
-    width: 20px;
-    height: 20px;
+    width: 2vh;
+    height: 2vh;
     border-radius: 50%;
-    margin: 0 10px;
+    margin: 0 1vh;
     border: #000;
     cursor: pointer;
     background-color: #FAFAFA;
@@ -142,17 +142,17 @@ body {
 }
 
 .slide p {
-    width: 1026px;
-    height: 284px;
+    width: 102.6vh;
+    height: 28.4vh;
     flex-shrink: 0;
     color: #FAFAFA;
     text-align: center;
     font-family: 'Inter Black';
-    font-size: 96px;
+    font-size: 9.6vh;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    -webkit-text-stroke: 2px #2D2D2D;
+    text-shadow: 0px 0.4vh 0.4vh rgba(0, 0, 0, 0.25);
     margin: 3% 7.5%;
 }
 
@@ -170,7 +170,7 @@ body {
 
 .section2 {
     width: 100%;
-    height: 605px;
+    height: 60.5vh;
     flex-shrink: 0;
     background: #2D2D2D;
     display: flex;
@@ -198,21 +198,19 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 2vh;
     flex-wrap: wrap; /* Permet aux cartes de passer à la ligne si l'espace est insuffisant */
 }
 
 .card-container button {
-    width: 375px;
-    height: 95px;
     flex-shrink: 0;
     background: linear-gradient(113deg, #DFBA61 34.85%, #F3E5AB 95.45%);
-    box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.63);
+    box-shadow: 0.6vh 0.6vh 0vh 0vh rgba(0, 0, 0, 0.63);
     text-decoration: none;
     color: #2D2D2D;
     text-align: center;
     font-family: Inter;
-    font-size: 44px;
+    font-size: 4.4vh;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -220,16 +218,14 @@ body {
 }
 
 .card-container p{
-    width: 501px;
-    height: 307px;
     flex-shrink: 0;
     color: #FAFAFA;
     font-family: 'Inter Black', sans-serif;
-    font-size: 65px;
+    font-size: 6.5vh;
     font-style: normal;
     font-weight: 900;
     line-height: normal;
-    -webkit-text-stroke: 3px #000;
+    text-shadow: 0px 0.4vh 0.4vh rgba(0, 0, 0, 0.25);
 }
 
 .card-container .card1 button {
@@ -237,6 +233,8 @@ body {
     top: 80%;
     left: 50%;
     transform: translateX(-50%);
+    width: 60%;
+    height: 15%;
 }
 
 .card-container .card1 p {
@@ -244,14 +242,16 @@ body {
     top: 0%;
     left: 50%;
     transform: translateX(-50%);
+    width: 95%;
+    height: 50%;
 }
 
 .card1 {
     width: 30%;
     height: 75vh;
     flex-shrink: 0;
-    border: 5px solid #000;
-    margin-right: 10px; 
+    margin-right: 1vh; 
+    box-shadow: 0vh 0.4vh 0.4vh rgba(0, 0, 0, 0.25);
 }
 
 .card1#application {
@@ -267,12 +267,12 @@ body {
 }
 
 .card2 {
-    width: 95vh;
+    width: 45.3%;
     height: 75vh;
     flex-shrink: 0;
-    border: 5px solid #000;
-    margin-right: 10px; /* Ajustez la marge selon vos besoins pour l'espace entre les cartes */
-    margin-bottom: 10px; 
+    margin-right: 1vh; /* Ajustez la marge selon vos besoins pour l'espace entre les cartes */
+    margin-bottom: 1vh; 
+    box-shadow: 0vh 0.4vh 0.4vh rgba(0, 0, 0, 0.25);
 }
 
 .card-container .card2 button {
@@ -280,6 +280,8 @@ body {
     top: 80%;
     left: 50%;
     transform: translateX(-50%);
+    width: 60%;
+    height: 15%;
 }
 
 .card-container .card2 p {
@@ -287,6 +289,9 @@ body {
     top: 0%;
     left: 50%;
     transform: translateX(-50%);
+    width: 95%;
+    height: 50%;
+    text-align: center;
 }
 
 .card2#catalogue {
@@ -302,7 +307,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap; /* Permet aux cartes d'avis de passer à la ligne si l'espace est insuffisant */
-    margin-top: 20px; /* Ajoutez une marge en haut pour l'espace entre les cartes d'avis et les autres conteneurs */
+    margin-top: 2vh; /* Ajoutez une marge en haut pour l'espace entre les cartes d'avis et les autres conteneurs */
 }
 
 .card-avis {
@@ -310,48 +315,48 @@ body {
     height: 50vh;
     flex-shrink: 0;
     background: #E3E3E3;
-    margin-right: 50px; /* Ajustez la marge selon vos besoins pour l'espace entre les cartes d'avis */
-    margin-bottom: 10px; /* Ajoutez une marge en bas pour l'espace entre les lignes */
+    margin-right: 5vh; /* Ajustez la marge selon vos besoins pour l'espace entre les cartes d'avis */
+    margin-bottom: 1vh; /* Ajoutez une marge en bas pour l'espace entre les lignes */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Ajuste l'espace entre les éléments à l'intérieur de la carte */
+    box-shadow: v 0.4vh 0.4vh rgba(0, 0, 0, 0.25);
 }
 
 .titre,
 .avis,
-.date {
+.date,
+.etoiles {
     width: 100%;
     font-family: Inter;
-    line-height: normal;
 }
 
 .titre {
-    font-size: 36px;
+    height: 15%; /* Ajuste la hauteur du titre à 15% de la carte */
+    font-size: 3.6vh;
     font-weight: 700;
     color: #000;
     text-align: center;
-    margin-top: 15%;
-    margin-bottom: 15%;
 }
 
 .avis {
-    font-size: 32px;
+    height: 60%; /* Ajuste la hauteur de l'avis à 60% de la carte */
+    font-size: 3.6vh;
     font-weight: 500;
     color: #000;
     text-align: center;
-    margin-top: 15%;
-    margin-bottom: 15%;
 }
 
 .date {
-    font-size: 20px;
+    height: 5%; /* Ajuste la hauteur de la date à 5% de la carte */
+    font-size: 2vh;
     font-weight: 500;
     color: #000;
-    margin-top: 10px; /* Ajout d'une marge entre l'avis et la date */
     text-align: right;
 }
 
 .etoiles {
-    width: 100px;
-    height: 49px;
-    flex-shrink: 0;
+    height: 20%; /* Ajuste la hauteur des étoiles à 20% de la carte */
     display: flex;
     position: relative;
 }
@@ -388,15 +393,15 @@ body {
 
 .etoiles p {
     color: #D9D9D9;
-    -webkit-text-stroke: 2px #2D2D2D;
+    -webkit-text-stroke: 0.2vh #2D2D2D;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     text-decoration: none;
-    font-size: 50px;
-    margin: 0 2px;
+    font-size: 5vh;
+    margin: 0 0.2vh;
 }
 
 .etoiles p:not(:first-child) {
-    margin-left: 5px; /* Ajustement de la marge à gauche pour les étoiles suivantes */
+    margin-left: 0.5vh; /* Ajustement de la marge à gauche pour les étoiles suivantes */
 }
 
 
@@ -418,14 +423,14 @@ footer {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    margin-top: 20px;
+    margin-top: 2vh;
 }
 
 .container-foot {
     width: 50vh;
     height: 30%;
-    margin-right: 50px;
-    margin-bottom: 10px;
+    margin-right: 5vh;
+    margin-bottom: 1vh;
 }
 
 .container-foot p,
@@ -434,7 +439,7 @@ footer {
     height: 10%;
     flex-shrink: 0;
     color: #FAFAFA;
-    font-size: 20px;
+    font-size: 2vh;
     font-style: normal;
     line-height: normal;
 }
@@ -455,19 +460,19 @@ footer {
 }
 
 .container-foot ul li {
-    margin-bottom: 5px;
+    margin-bottom: 0.5vh;
 }
 
 .container-foot button {
-    width: 180px;
-    height: 50px;
-    border-radius: 50px;
-    margin-top: 10px;
+    width: 18vh;
+    height: 5vh;
+    border-radius: 5vh;
+    margin-top: 1vh;
     background-size: cover; /* Ajuste la taille de l'image pour couvrir complètement le bouton */
     background-repeat: no-repeat; /* Empêche la répétition de l'image */
     color: #FAFAFA;
     font-family: 'Inter Black', sans-serif;
-    font-size: 16px;
+    font-size: 1.6vh;
     font-style: normal;
     font-weight: 900;
     line-height: normal;
@@ -488,7 +493,7 @@ footer {
 }
 
 .container-foot#haut {
-    margin-bottom: 80px;
+    margin-bottom: 8vh;
 }
 
 
@@ -509,36 +514,36 @@ footer {
     }
 
     .textNav {
-        font-size: 24px;
-        padding-right: 50px;
+        font-size: 2.4vh;
+        padding-right: 5vh;
     }
 
     .boutonNav {
-        width: 150px;
-        height: 50px;
-        font-size: 24px;
+        width: 15vh;
+        height: 5vh;
+        font-size: 2.4vh;
     }
 
     .slide p {
         width: 70%;
-        font-size: 36px;
+        font-size: 3.6vh;
     }
 
     .pagination-button {
-        width: 15px;
-        height: 15px;
-        margin: 0 5px;
+        width: 1.5vh;
+        height: 1.5vh;
+        margin: 0 0.5vh;
     }
 
     .card-container button {
-        width: 250px;
-        height: 65px;
-        font-size: 24px;
+        width: 25vh;
+        height: 6.5vh;
+        font-size: 2.4vh;
     }
 
     .card-container p {
         width: 70%;
-        font-size: 36px;
+        font-size: 3.6vh;
     }
 
     .card-container .card1, .card-container .card2 {
@@ -547,11 +552,11 @@ footer {
     }
 
     .avis, .titre, .date {
-        font-size: 24px;
+        font-size: 2.4vh;
     }
 
     .etoiles p {
-        font-size: 30px;
+        font-size: 3vh;
     }
 
     footer {
@@ -563,13 +568,13 @@ footer {
     }
 
     .container-foot p, .container-foot ul {
-        font-size: 18px;
+        font-size: 1.8vh;
     }
 
     .container-foot button {
-        width: 120px;
-        height: 40px;
-        font-size: 14px;
+        width: 12vh;
+        height: 4vh;
+        font-size: 1.4vh;
     }
 }
 
