@@ -6,7 +6,6 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Oswald', sans-serif;
     scroll-behavior: smooth;
 }
 .container{
@@ -311,6 +310,19 @@ body {
     margin-top: 2vh; /* Ajoutez une marge en haut pour l'espace entre les cartes d'avis et les autres conteneurs */
 }
 
+.avis-container p{
+    width: 100%;
+    -webkit-text-stroke: 1px #2D2D2D;
+    text-shadow: 0vh 0.4vh 0.4vh rgba(0, 0, 0, 0.25);
+    color: #FAFAFA;
+    font-size: 75px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-top: 8vh;
+    margin-bottom: 6vh;
+}
+
 .card-avis {
     width: 25%;
     height: 50vh;
@@ -405,6 +417,27 @@ body {
     margin-left: 0.5vh; /* Ajustement de la marge à gauche pour les étoiles suivantes */
 }
 
+.boutonAvis {
+    margin: 6vh 0vh;
+    align-items: center;
+}
+
+.boutonAvis button{
+    width: 64.6vh;
+    height: 15.2vh;
+    flex-shrink: 0;
+    background: linear-gradient(113deg, #DFBA61 34.85%, #F3E5AB 95.45%);
+    box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.63);
+    border-radius: 5vh;
+    text-decoration: none;
+    color: #2D2D2D;
+    text-align: center;
+    font-family: Inter;
+    font-size: 5.5vh;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
 
 
 footer {
