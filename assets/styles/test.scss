@@ -111,7 +111,10 @@ body {
 .carousel-pagination {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    align-items: flex-end;
+    position: absolute;
+    bottom: 125px;
+    width: 100%;
 }
 
 .pagination-button {
@@ -119,6 +122,7 @@ body {
     height: 20px;
     border-radius: 50%;
     margin: 0 10px;
+    border: #000;
     cursor: pointer;
     background-color: #FAFAFA;
 }
@@ -294,20 +298,12 @@ body {
     margin-bottom: 10px; /* Ajoutez une marge en bas pour l'espace entre les lignes */
 }
 
-.etoiles,
 .titre,
 .avis,
 .date {
     width: 100%;
     font-family: Inter;
     line-height: normal;
-}
-
-.etoiles {
-    font-size: 24px;
-    font-weight: 700;
-    text-align: left;
-    color: #FFD700; /* Couleur jaune pour les étoiles, ajustez selon vos besoins */
 }
 
 .titre {
@@ -331,6 +327,59 @@ body {
     margin-top: 10px; /* Ajout d'une marge entre l'avis et la date */
     text-align: right;
 }
+
+.etoiles {
+    width: 100px;
+    height: 49px;
+    flex-shrink: 0;
+    display: flex;
+    position: relative;
+}
+
+.etoiles[data-rating="5"] p[id="1"],
+.etoiles[data-rating="5"] p[id="2"],
+.etoiles[data-rating="5"] p[id="3"],
+.etoiles[data-rating="5"] p[id="4"],
+.etoiles[data-rating="5"] p[id="5"] {
+    color: #DFBA61;
+}
+
+.etoiles[data-rating="4"] p[id="1"],
+.etoiles[data-rating="4"] p[id="2"],
+.etoiles[data-rating="4"] p[id="3"],
+.etoiles[data-rating="4"] p[id="4"] {
+    color: #DFBA61;
+}
+
+.etoiles[data-rating="3"] p[id="1"],
+.etoiles[data-rating="3"] p[id="2"],
+.etoiles[data-rating="3"] p[id="3"] {
+    color: #DFBA61;
+}
+
+.etoiles[data-rating="2"] p[id="1"],
+.etoiles[data-rating="2"] p[id="2"] {
+    color: #DFBA61;
+}
+
+.etoiles[data-rating="1"] p[id="1"] {
+    color: #DFBA61;
+}
+
+.etoiles p {
+    color: #D9D9D9;
+    -webkit-text-stroke: 2px #2D2D2D;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    text-decoration: none;
+    font-size: 50px;
+    margin: 0 2px;
+}
+
+.etoiles p:not(:first-child) {
+    margin-left: 5px; /* Ajustement de la marge à gauche pour les étoiles suivantes */
+}
+
+
 
 footer {
     width: 100%;
