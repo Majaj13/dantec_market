@@ -21,19 +21,19 @@
 <div class="carousel-pagination" id="pagination"></div>
 
 
-<div class="section2">
-    <div class="swiper mySwiper">
-        <div class="swiper-wrapper">
-            <!-- Swiper Slides -->
-            {% for i in 1..8 %}
-                <div class="swiper-slide">
-                    <a href="{{ path('app_acceuil') }}">
-                        <img src="/images/{{ i }}.jpg" alt="">
-                    </a>
-                </div>
-            {% endfor %}
+ <div class="section2">
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <!-- Swiper Slides -->
+                {% for i in 1..8 %}
+                    <div class="swiper-slide">
+                        <a href="{{ path('app_test') }}">
+                            <img src="/images/{{ i }}.jpg" alt="">
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
-    </div>
 </div>
 
 <div class="card-container">
@@ -151,7 +151,7 @@
 </script>
 
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 
 
 <script>
