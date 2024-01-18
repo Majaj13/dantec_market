@@ -1,46 +1,56 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('test') }}
+{% endblock %}
 
-        {% block javascripts %}
+{% block head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% endblock %}
 
-        {% endblock %}
-    </head>
-    <body>
-    {% block navbar %}
-    <nav class="navbar">
-    <!-- Logo à gauche -->
-    <a href="/" class="navbar-logo">
-        <img src="/images/logo.jpg" alt="Logo DantecMarket">
-    </a>
+{% block body %}
 
-    <!-- Éléments du Menu -->
-    <ul class="navbar-menu">
-        <li><a href="/lien1">Menu 1</a></li>
-        <li><a href="/lien2">Menu 2</a></li>
-        <li><a href="/lien3">Menu 3</a></li>
-        <li><a href="/lien4">Menu 4</a></li>
-        <li><a href="/lien5">Menu 5</a></li>
-        <li><a href="/lien6">Menu 6</a></li>
-    </ul>
-
-    <!-- Zone de Recherche à droite -->
-    <div class="navbar-search">
-        <input type="text" placeholder="Rechercher...">
-        <button @click="search">
-            <i class="fa fa-search"></i> <!-- Utilisez Font Awesome pour l'icône de la loupe -->
-        </button>
+<div class="navbar">
+    <div class="navbar-left">
+        <a href="" class="textNav">Nos<br>produits</a>
+        <a href="" class="textNav">Nos<br>actualités</a>
     </div>
-</nav>
+    <div class="navbar-middle">
+        <img src="/images/logo.jpg">
+    </div>
+    <div class="navbar-right">
+        <a href="" class="textNav">Contactez<br>nous</a>
+        <a href="" class="boutonNav">Profil</a>
+    </div>
+</div>
 
-    {% endblock %}
+{% endblock %}
 
-        {% block body %}{% endblock %}
-    </body>
-</html>
+<footer>
+{% block footer %}{% endblock %}
+    <div class="footer-container" id="premiere">
+    <div class="container-foot" id="haut">
+        <p>Informations légales:</p>
+        <ul>
+            <li>Mentions légales</li>
+            <li>Cookies</li>
+            <li>CGV</li>
+            <li>Politique de protection des données personnelles</li>
+            <li>Mentions légales CGU</li>
+        </ul>
+    </div>
+    <div class="container-foot" id="bas">
+        <p>Téléchargez l’application Dantec Market:</p>
+        <button id="googlePlay"></button>
+        <button id="appStore"></button>
+    </div>
+    </div>
+    <div class="footer-container" id="deuxieme">
+    <div class="container-foot">
+        <p>Suivez nous:</p>
+        <ul>
+            <li>Facebook</li>
+            <li>Twitter</li>
+            <li>Instagram</li>
+        </ul>
+    </div>
+    </div>
+</footer>
