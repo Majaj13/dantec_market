@@ -1,11 +1,13 @@
 @import "~bootstrap/scss/bootstrap";
-body {
-    background-image: url('/public/images/fond.png'); /* Mettez à jour le chemin selon votre structure de dossier */
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* Pour que le fond soit fixe lors du défilement de la page */
 
+.image-register-login{
+    background-image: url("/public/images/Register.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 65%;
+    height: 812px;
 }
+
 .frame {
     border: 2px solid rgb(255, 255, 255);
     background-color: white;
@@ -14,52 +16,98 @@ body {
 }
 
 .navbar {
-    background-color: #000; /* Utilisation d'une couleur noire pour le fond */
-    height: 65px; /* Hauteur de la navbar */
+    z-index: 1;
+    position: relative;
+    height: calc(7vh + 60px); /* 7vh + 30px top + 30px bottom */
+    width: 100%;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-}
-.navbar-logo img {
-    height: 80px; /* Ajustez selon la taille souhaitée */
+    align-items: center; /* Align items vertically in the middle */
+    justify-content: center;
+    background-color: #2D2D2D;
 }
 
-.navbar-menu {
-    margin-left: auto; /* Cela pousse la liste du menu vers la droite */
-    list-style-type: none;
+.navbar-left {
     display: flex;
+    align-items: center; /* Align items vertically in the middle */
+    width: 30%;
+    height: 100%;
+    flex-shrink: 0;
+    padding-left: 20vh; /* Adjust the padding as needed */
+    padding-bottom: 45px;
 }
 
-.navbar-menu li a {
-    color: rgb(88, 85, 62); /* Texte doré */
+.navbar-middle {
+    display: flex;
+    align-items: center; /* Align items vertically in the middle */
+    width: 30%;
+    height: 100%;
+    flex-shrink: 0;
+    padding-left: 22.5vh; /* Adjust the padding as needed */
+    padding-top: 140px;
+}
+
+.navbar-middle img {
+    width: 30vh;
+    height: auto;
+    border-radius: 50%;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center; /* Align items vertically in the middle */
+    width: 40%;
+    height: 100%;
+    flex-shrink: 0;
+    padding-left: 10vh; /* Adjust the padding as needed */
+    padding-bottom: 45px;
+}
+
+.textNav {
     text-decoration: none;
-    padding: 10px;
-    display: block;
-    font-weight: bold; 
+    color: #FAFAFA;
+    text-align: center;
+    font-family: 'Inter Bold', sans-serif;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    padding-right: 100px;
+    -webkit-text-stroke: 1px #000;
 }
 
-.navbar-search {
-    display: flex;
-    align-items: center;
+.boutonNav {
+    width: 184px;
+    height: 65px;
+    flex-shrink: 0;
+    background: linear-gradient(113deg, #DFBA61 34.85%, #F3E5AB 95.45%);
+    box-shadow: 6px 6px 0px 0px rgba(0, 0, 0, 0.63);
+    text-decoration: none;
+    color: #2D2D2D;
+    text-align: center;
+    font-family: Inter;
+    font-size: 44px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
 }
 
-.navbar-search input {
-    padding: 5px;
-}
-
-.navbar-search button {
-    background: none;
-    border: none;
-    cursor: pointer;
-}
 .registration-frame {
+    float: right;
     background-color: white;
-    border: 2px solid #A52A2A; /* Marron */
-    border-radius: 15px;
     padding: 20px;
-    margin: 20px 200px; /* 20px en haut et en bas, 200px à gauche et à droite */
+    margin: 20px 0; /* 20px en haut et en bas, pas de marge à gauche et à droite */
+    box-shadow: 0 0 20px #DFBA61;
+    width: calc(50% - 20px); /* 50% de la largeur moins les marges de 20px */
+    box-sizing: border-box; /* Pour inclure la bordure et le rembourrage dans la largeur définie */
 }
+
+.flexrow{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+
+
 .form-group {
     margin-bottom: 15px;
 }
@@ -67,13 +115,17 @@ body {
     width: 100%;
     padding: 8px;
     border-radius: 4px;
-    border: 1px solid #ddd;
+    border: 2px solid #DFBA61;
 }
 .form-control:focus {
-    border-color: #A52A2A; /* Marron */
+    border-color: #DFBA61;
 }
+.form-check {
+    border-color: #DFBA61;
+}
+
 .btn-primary {
-    background-color: #A52A2A; /* Marron */
+    background-color: #DFBA61; 
     border-color: #ffffff;
     padding: 10px 15px;
     border-radius: 4px;
@@ -84,7 +136,7 @@ body {
     background-color: darken(#fbf7f7, 10%);
 }
 .container-body {
-    background-image: url('/public/images/fond.jpg');
+    background-image: url('/public/images/Register.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center; /* Centrer l'image dans le conteneur */
@@ -102,22 +154,22 @@ body {
     overflow: hidden;
     position: relative;
     margin: auto;
-  }
-  
-  .carousel {
+}
+
+.carousel {
     width: 100%;
     height: 100%;
     position: absolute;
     transform-style: preserve-3d;
     animation: rotate 20s infinite linear;
-  }
-  
-  @keyframes rotate {
+}
+
+@keyframes rotate {
     0% { transform: rotateY(0deg); }
     100% { transform: rotateY(360deg); }
-  }
-  
-  .carousel-item {
+}
+
+.carousel-item {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -125,8 +177,99 @@ body {
     opacity: 0.9;
     border: 1px solid #fff; /* Ajouter une bordure pour renforcer l'effet 3D */
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Ombres pour un effet de profondeur */
-  }
-  
+}
+
+footer {
+    width: 100%;
+    height: 50%;
+    flex-shrink: 0;
+    background: #2D2D2D;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: #FAFAFA;
+}
+
+.footer-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.container-foot {
+    width: 50vh;
+    height: 30%;
+    margin-right: 50px;
+    margin-bottom: 10px;
+}
+
+.container-foot p,
+.container-foot ul{
+    width: 100%;
+    height: 10%;
+    flex-shrink: 0;
+    color: #FAFAFA;
+    font-size: 20px;
+    font-style: normal;
+    line-height: normal;
+}
+
+.container-foot p {
+    font-family: 'Inter Black', sans-serif;
+    font-weight: 900;
+}
+
+.container-foot ul {
+    font-family: Inter;
+    font-weight: 1001;
+}
+
+.container-foot ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.container-foot ul li {
+    margin-bottom: 5px;
+}
+
+.container-foot button {
+    width: 180px;
+    height: 50px;
+    border-radius: 50px;
+    margin-top: 10px;
+    background-size: cover; /* Ajuste la taille de l'image pour couvrir complètement le bouton */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    color: #FAFAFA;
+    font-family: 'Inter Black', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: normal;
+    border: none;
+    cursor: pointer;
+}
+
+.container-foot button#googlePlay {
+    background-image: url('/public/images/googlePlay.png');
+}
+
+.container-foot button#appStore {
+    background-image: url('/public/images/appStore.png');
+}
+
+.footer-container#deuxieme {
+    padding-bottom: 13%;
+}
+
+.container-foot#haut {
+    margin-bottom: 80px;
+}
+
+
 
 .image1 { background-image: url('/public/images/image1.jpg'); transform: rotateY(0deg) translateZ(400px); }
 .image2 { background-image: url('/public/images/image2.jpg'); transform: rotateY(90deg) translateZ(400px); }

@@ -1,61 +1,101 @@
-{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
 
 {% block title %}Inscription{% endblock %}
 
 
 
 {% block body %}
-    <div class="registration-frame">
+
+<div class="flexrow">
+    <div class="image-register-login"></div>
+
+    <div class="navbar">
+    <div class="navbar-left">
+        <a href="" class="textNav">Nos<br>produits</a>
+        <a href="" class="textNav">Nos<br>actualités</a>
+    </div>
+    <div class="navbar-middle">
+        <img src="/images/logo.jpg">
+    </div>
+    <div class="navbar-right">
+        <a href="" class="textNav">Contactez<br>nous</a>
+        <a href="" class="boutonNav">Profil</a>
+    </div>
+</div>
+        <div class="registration-frame">
         <h1>Inscription</h1>
 
         {{ form_start(registrationForm, {'attr': {'class': 'form-horizontal'}}) }}
 
         <div class="form-group">
-            {{ form_label(registrationForm.nom) }}
-            {{ form_widget(registrationForm.nom, {'attr': {'class': 'form-control'}}) }}
-            {{ form_errors(registrationForm.nom) }}
+            {{ form_row(registrationForm.nom, {'attr': {'class': 'form-control'}}) }}
         </div>
 
         <div class="form-group">
-            {{ form_label(registrationForm.prenom) }}
-            {{ form_widget(registrationForm.prenom, {'attr': {'class': 'form-control'}}) }}
-            {{ form_errors(registrationForm.prenom) }}
+            {{ form_row(registrationForm.prenom, {'attr': {'class': 'form-control'}}) }}
         </div>
 
         <div class="form-group">
-            {{ form_label(registrationForm.telephone) }}
-            {{ form_widget(registrationForm.telephone, {'attr': {'class': 'form-control'}}) }}
-            {{ form_errors(registrationForm.telephone) }}
+            {{ form_row(registrationForm.telephone, {'attr': {'class': 'form-control'}}) }}
         </div>
 
         <div class="form-group">
-            {{ form_label(registrationForm.classe) }}
-            {{ form_widget(registrationForm.classe, {'attr': {'class': 'form-control'}}) }}
-            {{ form_errors(registrationForm.classe) }}
+            {{ form_row(registrationForm.classe, {'attr': {'class': 'form-control'}}) }}
         </div>
 
         <div class="form-group">
-            {{ form_label(registrationForm.email) }}
-            {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control', 'type': 'email'}}) }}
-            {{ form_errors(registrationForm.email) }}
+            {{ form_row(registrationForm.email, {'attr': {'class': 'form-control', 'type': 'email'}}) }}
         </div>
 
         <div class="form-group">
-            {{ form_label(registrationForm.agreeTerms) }}
-            {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check'}}) }}
-            {{ form_errors(registrationForm.agreeTerms) }}
+            {{ form_row(registrationForm.plainPassword, {'attr': {'class': 'form-control', 'type': 'password'}}) }}
         </div>
 
         <div class="form-group">
-            {{ form_label(registrationForm.plainPassword) }}
-            {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control', 'type': 'password'}}) }}
-            {{ form_errors(registrationForm.plainPassword) }}
+            {{ form_row(registrationForm.agreeTerms, {'attr': {'class': 'form-check'}}) }}
         </div>
 
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">S'inscrire</button>
+            <button type="submit" class="btn btn-primary">Créer mon compte</button>
         </div>
-
+            <a href="{{ path('app_login') }}">Vous avez déjà un compte ? Connectez-vous</a>
         {{ form_end(registrationForm) }}
     </div>
+
+</div>
+
+
+
+<footer>
+    <div class="footer-container" id="premiere">
+    <div class="container-foot" id="haut">
+        <p>Informations légales:</p>
+        <ul>
+            <li>Mentions légales</li>
+            <li>Cookies</li>
+            <li>CGV</li>
+            <li>Politique de protection des données personnelles</li>
+            <li>Mentions légales CGU</li>
+        </ul>
+    </div>
+    <div class="container-foot" id="bas">
+        <p>Téléchargez l’application Dantec Market:</p>
+        <button id="googlePlay"></button>
+        <button id="appStore"></button>
+    </div>
+    </div>
+    <div class="footer-container" id="deuxieme">
+    <div class="container-foot">
+        <p>Suivez nous:</p>
+        <ul>
+            <li>Facebook</li>
+            <li>Twitter</li>
+            <li>Instagram</li>
+        </ul>
+    </div>
+    </div>
+</footer>
+
 {% endblock %}
