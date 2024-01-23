@@ -21,7 +21,12 @@
 <div class="carousel-pagination" id="pagination"></div>
 
 
- <div class="section2">
+<div class="section2">
+    <p>Meilleures ventes du moment:</p>
+    <div class="swipeContainer">
+        <div class="swiper-button-left">
+            <button class="swiper-button-prev"></button>
+        </div>
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
                 <!-- Swiper Slides -->
@@ -34,35 +39,51 @@
                 {% endfor %}
             </div>
         </div>
+        <div class="swiper-button-right">
+            <button class="swiper-button-next"></button>
+        </div>
+    </div>
 </div>
+
 
 <div class="card-container">
     <div class="card1" id="application">
-        <button>Télécharger</button>
         <p>Téléchargez l’application Dantec Market</p>
+        <form action="{{ path('app_application') }}">
+            <button type="submit">Téléchager</button>
+        </form>
     </div>
     <div class="card1" id="produits">
-        <button>Commander</button>
         <p>Commandez nos meilleurs produits</p>
+        <form action="{{ path('app_les_produits') }}">
+            <button type="submit">Commander</button>
+        </form>
     </div>
     <div class="card1" id="actualité">
-        <button>Découvrir</button>
         <p>Découvrez  l’actualité sur le magasin</p>
+        <form action="{{ path('app_actualite') }}">
+            <button type="submit">Découvrir</button>
+        </form>
     </div>
 </div>
 
 <div class="card-container">
     <div class="card2" id="catalogue">
-        <button>Découvrir</button>
         <p>Découvrez les nouveautés de ce mois</p>
+        <form action="{{ path('app_catalogue') }}">
+            <button type="submit">Découvrir</button>
+        </form>
     </div>
     <div class="card2" id="partenaires">
-        <button>Découvrir</button>
         <p>Découvrez  nos partenaires</p>
+        <form action="{{ path('app_partenaire') }}">
+            <button type="submit">Découvrir</button>
+        </form>
     </div>
 </div>
 
 <div class="avis-container">
+    <p>Nos élèves sont ceux qui en parlent le mieux:</p>
     <div class="card-avis">
         <div class="etoiles" data-rating="5">
             <p id="1">★</p>
@@ -98,6 +119,9 @@
         <div class="titre">Titre de l'avis 3</div>
         <div class="avis">Un avis moyen. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
         <div class="date">2024-01-10</div>
+    </div>
+    <div class="boutonAvis">
+        <button>Voir tout les avis</button>
     </div>
 </div>
 
@@ -168,6 +192,11 @@
         slideShadows: true,
       },
       loop: true,
+
+      navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
     });
 </script>
 

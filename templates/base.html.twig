@@ -1,5 +1,7 @@
 {% block stylesheets %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
     {{ encore_entry_link_tags('test') }}
 {% endblock %}
 
@@ -11,8 +13,8 @@
 
 <div class="navbar">
     <div class="navbar-left">
-        <a href="" class="textNav">Nos<br>produits</a>
-        <a href="" class="textNav">Nos<br>actualités</a>
+        <a href="{{ path('app_les_produits') }}" class="textNav">Nos<br>produits</a>
+        <a href="{{ path('app_actualite') }}" class="textNav">Nos<br>actualités</a>
     </div>
     <div class="navbar-middle">
         <img src="/images/logo.jpg">
@@ -28,30 +30,39 @@
 <footer>
 {% block footer %}{% endblock %}
     <div class="footer-container" id="premiere">
-    <div class="container-foot" id="haut">
-        <p>Informations légales:</p>
-        <ul>
-            <li>Mentions légales</li>
-            <li>Cookies</li>
-            <li>CGV</li>
-            <li>Politique de protection des données personnelles</li>
-            <li>Mentions légales CGU</li>
-        </ul>
-    </div>
-    <div class="container-foot" id="bas">
-        <p>Téléchargez l’application Dantec Market:</p>
-        <button id="googlePlay"></button>
-        <button id="appStore"></button>
-    </div>
+        <div class="container-foot" id="haut">
+            <p>Informations légales:</p>
+            <ul>
+                <li>Mentions légales</li>
+                <li>Cookies</li>
+                <li>CGV</li>
+                <li>Politique de protection des données personnelles</li>
+                <li>Mentions légales CGU</li>
+            </ul>
+        </div>
+        <div class="container-foot" id="bas">
+            <p>Téléchargez l’application Dantec Market:</p>
+            <button id="googlePlay"></button>
+            <button id="appStore"></button>
+        </div>
     </div>
     <div class="footer-container" id="deuxieme">
-    <div class="container-foot">
-        <p>Suivez nous:</p>
-        <ul>
-            <li>Facebook</li>
-            <li>Twitter</li>
-            <li>Instagram</li>
-        </ul>
+        <div class="container-foot">
+            <p>Suivez nous:</p>
+            <a href="#" class="btn btn-social-icon btn-twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+
+            <a href="#" class="btn btn-social-icon btn-facebook">
+                <i class="fab fa-facebook"></i>
+            </a>
+
+            <a href="#" class="btn btn-social-icon btn-instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
     </div>
-    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </footer>
