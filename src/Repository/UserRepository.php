@@ -38,6 +38,20 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
     }
+    /**
+    * Used to upgrade (rehash) the user's password automatically over time.
+    */
+   public function findUserByNomAndPrenom($nom, $prenom)
+{
+   return $this->createQueryBuilder('u')
+       ->select('u.id', 'u.nom','u.prenom','u.password')
+       ->andWhere('u.nom = :nom')
+       ->andWhere('u.prenom = :prenom')
+       ->setParameter(':nom', $nom)
+       ->setParameter(':prenom', $prenom)
+       ->getQuery()
+       ->getOneOrNullResult();
+}
 
 //    /**
 //     * @return User[] Returns an array of User objects
