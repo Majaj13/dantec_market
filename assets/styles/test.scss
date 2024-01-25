@@ -65,6 +65,15 @@ body {
     padding-bottom: 4.5vh;
 }
 
+.navbar a:hover {
+    color: #FAFAFA;
+    text-decoration: none;
+}
+
+.navbar .boutonNav:hover {
+    color:#2D2D2D;
+}
+
 .textNav {
     text-decoration: none;
     color: #FAFAFA;
@@ -814,9 +823,50 @@ footer {
 // partie LesProduits
 
 .lesProduitsContainer {
-    width: 179.5vh;
-    height: 118.7vh;
-    flex-shrink: 0;
-    background: #2D2D2D;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
+    display: flex;
+  }
+
+  .sticky-container {
+    position: sticky;
+    top: 0;
+    padding: 20px;
+    width: 200px;
+    background-color: #f1f1f1;
+  }
+
+  .categories {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .category-item {
+    margin-bottom: 10px;
+  }
+
+  .main-container {
+    flex: 1;
+    padding: 20px;
+  }
+
+  .category-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .product-item {
+    flex: 0 0 calc(33.33% - 20px);
+    margin: 10px;
+    text-align: center;
+  }
+
+  .product-item img {
+    width: 100%;
+    height: auto;
+  }

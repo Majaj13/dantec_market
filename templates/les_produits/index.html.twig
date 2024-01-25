@@ -3,6 +3,46 @@
 {% block body %}
 {{ parent() }}
 
+<div class="lesProduitsContainer">
+  <div class="sticky-container">
+    <ul class="categories">
+      <li class="category-item">Objet 1</li>
+      <li class="category-item">Objet 2</li>
+      <li class="category-item">Objet 3</li>
+      <li class="category-item">Nourriture 1</li>
+      <li class="category-item">Nourriture 2</li>
+      <li class="category-item">Nourriture 3</li>
+    </ul>
+  </div>
+
+  <div class="main-container">
+    <div class="category">
+      <p class="category-title">Objet 1</p>
+      <div class="product-list">
+        {% for i in 1..8 %}
+            <div class="product-item">
+                <a href="#">
+                    <img src="/images/{{ i }}.jpg" alt="">
+                </a>
+            </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="category">
+      <h2 class="category-title">Nourriture 1</h2>
+      <div class="product-list">
+        {% for i in 1..8 %}
+            <div class="product-item">
+                <a href="#">
+                    <img src="/images/{{ i }}.jpg" alt="">
+                </a>
+            </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
 
 {% block footer %}
     {{ parent() }}
