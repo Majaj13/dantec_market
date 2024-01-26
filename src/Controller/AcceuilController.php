@@ -6,18 +6,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ProduitsRepository;
+use App\Repository\CommentairesRepository;
 
 class AcceuilController extends AbstractController
 {
     #[Route('/', name: 'app_acceuil')]
-    public function index(ProduitsRepository $produitRepository): Response
+    public function index(ProduitsRepository $produitRepository,CommentairesRepository $commentaireRepository): Response
     {
         $topVendus = $produitRepository->findTopVendusLastWeek();
 
-        dd($topVendus);
+        $latestComments = $commentaireRepository->findLatestComments();
 
         return $this->render('acceuil/index.html.twig', [
-            'controller_name' => 'AcceuilController',
+            'topventes' => $topVendus,'dernierscommentaires' =>  $latestComments,
         ]);
     }
 }

@@ -21,7 +21,10 @@
     </div>
     <div class="navbar-right">
         <a href="" class="textNav">Contactez<br>nous</a>
-        <a href="{{ path('app_login') }}" class="boutonNav">Profil</a>
+       <a href="{{ is_granted('ROLE_USER') ? path('app_logout') : path('app_login') }}" class="boutonNav">
+    {{ is_granted('ROLE_USER') ? 'Logout' : 'Login' }}
+</a>
+
     </div>
 </div>
 

@@ -29,16 +29,17 @@ class ProduitsRepository extends ServiceEntityRepository
 
         // Création du Query Builder
         $qb = $this->createQueryBuilder('p')
-            ->select('p.nomProduit, SUM(c.quantite) as quantite_vendue')
-            ->join('App\Entity\Commander', 'c', Join::WITH, 'p.id = c.leProduit')
-            ->join('App\Entity\Commandes', 'co', Join::WITH, 'c.laCommande = co.id')
-            ->where('co.dateCommande > :dateIlYaUneSemaine')
-            ->setParameter('dateIlYaUneSemaine', $dateIlYaUneSemaine)
-            ->groupBy('p.id')
-            ->orderBy('quantite_vendue', 'DESC')
-            ->setMaxResults(20);
+        ->select('p.id,p.nomProduit, p.prix, SUM(c.quantite) as quantite_vendue, MIN(i.url) as imageUrl')
+        ->join('App\Entity\Commander', 'c', Join::WITH, 'p.id = c.leProduit')
+        ->join('App\Entity\Commandes', 'co', Join::WITH, 'c.laCommande = co.id')
+        ->leftJoin('p.lesImages', 'i') // Modifié ici
+        ->where('co.dateCommande > :dateIlYaUneSemaine')
+        ->setParameter('dateIlYaUneSemaine', $dateIlYaUneSemaine)
+        ->groupBy('p.id')
+        ->orderBy('quantite_vendue', 'DESC')
+        ->setMaxResults(20);
 
-        return $qb->getQuery()->getResult();
+    return $qb->getQuery()->getResult();
     }
 
 //    /**

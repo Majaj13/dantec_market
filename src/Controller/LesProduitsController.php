@@ -15,4 +15,13 @@ class LesProduitsController extends AbstractController
             'controller_name' => 'LesProduitsController',
         ]);
     }
+
+    #[Route('/lesProduits/voirproduit', name: 'app_voir_produit')]
+    public function voirproduit(): Response
+    {
+        return $this->render('les_produits/index.html.twig', [
+           
+        ]);
+    }
+    
 }

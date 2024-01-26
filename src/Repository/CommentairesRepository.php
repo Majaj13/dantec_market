@@ -21,6 +21,16 @@ class CommentairesRepository extends ServiceEntityRepository
         parent::__construct($registry, Commentaires::class);
     }
 
+    public function findLatestComments($limit = 3)
+{
+    return $this->createQueryBuilder('c')
+        ->orderBy('c.dateCommentaire', 'DESC')
+        ->setMaxResults($limit)
+        ->getQuery()
+        ->getResult();
+}
+
+
 //    /**
 //     * @return Commentaires[] Returns an array of Commentaires objects
 //     */
