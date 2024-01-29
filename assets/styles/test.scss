@@ -828,9 +828,9 @@ footer {
   .sticky-container {
     position: sticky;
     top: 0;
-    padding: 20px;
-    width: 200px;
-    background-color: #f1f1f1;
+    padding: 2vh;
+    width: 20vh;
+    height: 10vh;
   }
 
   .categories {
@@ -839,19 +839,25 @@ footer {
     margin: 0;
   }
 
+  .categories a {
+    color: #FAFAFA;
+    text-decoration: none;
+  }
+
   .category-item {
-    margin-bottom: 10px;
+    margin-bottom: 1vh;
   }
 
   .main-container {
     flex: 1;
-    padding: 20px;
+    padding: 2vh;
   }
 
   .category-title {
-    font-size: 24px;
+    font-size: 5.4vh;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin: 5vh 1vh;
+    padding-left: 8vh;
   }
 
   .product-list {
@@ -860,12 +866,32 @@ footer {
   }
 
   .product-item {
-    flex: 0 0 calc(33.33% - 20px);
-    margin: 10px;
+    flex: 0 0 calc(33.33% - 2vh);
+    margin: 3vh 1vh;
     text-align: center;
   }
 
   .product-item img {
-    width: 100%;
-    height: auto;
+    width: 41.3vh;
+    height: 41.3vh;
+    flex-shrink: 0;
+    border: 0.5vh solid #DFBA61;
+  }
+
+  .subcategory {
+    display: none;
+    padding-left: 2vh;
+}
+
+.subcategory-item {
+    list-style-type: none;
+}
+
+.category-item:hover .subcategory {
+    display: block;
+}
+
+  body.black-background {
+    background-color: #292929;
+    color: #FAFAFA; /* Définissez la couleur du texte en fonction de la lisibilité */
   }

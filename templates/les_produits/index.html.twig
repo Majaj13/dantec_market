@@ -2,50 +2,167 @@
 
 {% block body %}
 {{ parent() }}
-
+<body class="black-background">
 <div class="lesProduitsContainer">
-  <div class="sticky-container">
-    <ul class="categories">
-      <li class="category-item">Objet 1</li>
-      <li class="category-item">Objet 2</li>
-      <li class="category-item">Objet 3</li>
-      <li class="category-item">Nourriture 1</li>
-      <li class="category-item">Nourriture 2</li>
-      <li class="category-item">Nourriture 3</li>
-    </ul>
-  </div>
-
-  <div class="main-container">
-    <div class="category">
-      <p class="category-title">Objet 1</p>
-      <div class="product-list">
-        {% for i in 1..8 %}
-            <div class="product-item">
-                <a href="#">
-                    <img src="/images/{{ i }}.jpg" alt="">
-                </a>
-            </div>
-        {% endfor %}
-      </div>
+    <div class="sticky-container">
+        <ul class="categories">
+            <li class="category-item"><a href="#Alimentaires">Alimentaires</a>
+                <ul class="subcategory">
+                    <li class="subcategory-item"><a href="#EpicerieSucree">Épicerie sucrée</a></li>
+                    <li class="subcategory-item"><a href="#EpicerieSalee">Épicerie salée</a></li>
+                    <li class="subcategory-item"><a href="#ProduitsBio">Produits bio</a></li>
+                </ul>
+            </li>
+            <li class="category-item"><a href="#ThesEtCafes">Thés et Cafés</a></li>
+            <li class="category-item"><a href="#BeauteEsthetique">Beauté/Esthétique</a></li>
+            <li class="category-item"><a href="#Papeterie">Papeterie</a></li>
+            <li class="category-item"><a href="#Decoration">Décoration</a></li>
+            <li class="category-item"><a href="#Bijoux">Bijoux</a></li>
+            <li class="category-item"><a href="#Textile">Textile</a></li>
+            <li class="category-item"><a href="#Librairie">Librairie</a></li>
+            <li class="category-item"><a href="#Promotion">Promotion</a></li>
+            <li class="category-item"><a href="#Accessoires">Accessoires</a></li>
+            <li class="category-item"><a href="#Animalerie">Animalerie</a></li>
+        </ul>
     </div>
-
-    <div class="category">
-      <h2 class="category-title">Nourriture 1</h2>
-      <div class="product-list">
-        {% for i in 1..8 %}
-            <div class="product-item">
-                <a href="#">
-                    <img src="/images/{{ i }}.jpg" alt="">
-                </a>
+    <div class="main-container">
+        <div class="category" id="Alimentaires">
+            <p class="category-title">Alimentaires</p>
+            <div class="product-list">
+                {% for i in 1..8 %}
+                    <div class="product-item">
+                        <a href="#">
+                            <img src="/images/{{ i }}.jpg" alt="">
+                        </a>
+                    </div>
+                {% endfor %}
             </div>
-        {% endfor %}
-      </div>
+        </div>
+        <div class="category" id="ThesEtCafes">
+            <p class="category-title">Thés et Cafés</p>
+            <div class="product-list">
+                {% for i in 1..8 %}
+                    <div class="product-item">
+                        <a href="#">
+                            <img src="/images/{{ i }}.jpg" alt="">
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="category" id="BeauteEsthetique">
+            <p class="category-title">Beauté/Esthétique</p>
+            <div class="product-list">
+                {% for i in 1..8 %}
+                    <div class="product-item">
+                        <a href="#">
+                            <img src="/images/{{ i }}.jpg" alt="">
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="category" id="Papeterie">
+            <p class="category-title">Papeterie</p>
+            <div class="product-list">
+                {% for i in 1..8 %}
+                    <div class="product-item">
+                        <a href="#">
+                            <img src="/images/{{ i }}.jpg" alt="">
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="category" id="Decoration">
+            <p class="category-title">Décoration</p>
+            <div class="product-list">
+                {% for i in 1..8 %}
+                    <div class="product-item">
+                        <a href="#">
+                            <img src="/images/{{ i }}.jpg" alt="">
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="category" id="Bijoux">
+            <p class="category-title">Bijoux</p>
+            <div class="product-list">
+                {% for i in 1..8 %}
+                    <div class="product-item">
+                        <a href="#">
+                            <img src="/images/{{ i }}.jpg" alt="">
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="category" id="Textile">
+            <p class="category-title">Textile</p>
+            <div class="product-list">
+                {% for i in 1..8 %}
+                    <div class="product-item">
+                        <a href="#">
+                            <img src="/images/{{ i }}.jpg" alt="">
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="category" id="Librairie">
+            <p class="category-title">Librairie</p>
+            <div class="product-list">
+                {% for i in 1..8 %}
+                    <div class="product-item">
+                        <a href="#">
+                            <img src="/images/{{ i }}.jpg" alt="">
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="category" id="Promotion">
+            <p class="category-title">Promotion</p>
+            <div class="product-list">
+                {% for i in 1..8 %}
+                    <div class="product-item">
+                        <a href="#">
+                            <img src="/images/{{ i }}.jpg" alt="">
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="category" id="Accessoires">
+            <p class="category-title">Accessoires</p>
+            <div class="product-list">
+                {% for i in 1..8 %}
+                    <div class="product-item">
+                        <a href="#">
+                            <img src="/images/{{ i }}.jpg" alt="">
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="category" id="Animalerie">
+            <p class="category-title">Animalerie</p>
+            <div class="product-list">
+                {% for i in 1..8 %}
+                    <div class="product-item">
+                        <a href="#">
+                            <img src="/images/{{ i }}.jpg" alt="">
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 {% block footer %}
     {{ parent() }}
 {% endblock %}
-
+</body>
 {% endblock %}
