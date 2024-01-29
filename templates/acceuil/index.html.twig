@@ -30,10 +30,13 @@
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
                 <!-- Swiper Slides -->
-                {% for i in 1..8 %}
-                    <div class="swiper-slide">
-                        <a href="{{ path('app_test') }}">
-                            <img src="/images/{{ i }}.jpg" alt="">
+                {% for produit in topventes %}
+                    <div class="swiper-slide" style="background-image: url('{{ produit.imageUrl }}');">
+                        <a href="{{ path('app_voir_produit', {'id': produit.id}) }}" class="swiper-link">
+                            <div class="slide-content">
+                                <span class="nom-produit">{{ produit.nomProduit }}</span>
+                                <span class="prix-produit">{{ produit.prix }} â‚¬</span>
+                            </div>
                         </a>
                     </div>
                 {% endfor %}
@@ -83,47 +86,25 @@
 </div>
 
 <div class="avis-container">
-    <p>Nos élèves sont ceux qui en parlent le mieux:</p>
-    <div class="card-avis">
-        <div class="etoiles" data-rating="5">
-            <p id="1">★</p>
-            <p id="2">★</p>
-            <p id="3">★</p>
-            <p id="4">★</p>
-            <p id="5">★</p>
+    <p>Nos Ã©lÃ¨ves sont ceux qui en parlent le mieux:</p>
+    {% for comment in dernierscommentaires %}
+        <div class="card-avis">
+            <div class="etoiles" data-rating="{{ comment.note }}">
+            
+                {% for i in 1..5 %}
+                    <p id="{{ i }}">â˜…</p>
+                {% endfor %}
+            </div>
+            <div class="titre">{{ comment.commentaire }}</div>
+            <div class="avis">{{ comment.texteAvis | default('Pas de texte disponible') }}</div>
+            <div class="date">{{ comment.dateCommentaire | date('Y-m-d') }}</div>
         </div>
-        <div class="titre">Titre de l'avis 1</div>
-        <div class="avis">C'est un avis fantastique. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-        <div class="date">2024-01-01</div>
-    </div>
-    <div class="card-avis">
-        <div class="etoiles" data-rating="4">
-            <p id="1">★</p>
-            <p id="2">★</p>
-            <p id="3">★</p>
-            <p id="4">★</p>
-            <p id="5">★</p>
-        </div>
-        <div class="titre">Titre de l'avis 2</div>
-        <div class="avis">Un autre avis intéressant. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</div>
-        <div class="date">2024-01-05</div>
-    </div>
-    <div class="card-avis">
-        <div class="etoiles" data-rating="3">
-            <p id="1">★</p>
-            <p id="2">★</p>
-            <p id="3">★</p>
-            <p id="4">★</p>
-            <p id="5">★</p>
-        </div>
-        <div class="titre">Titre de l'avis 3</div>
-        <div class="avis">Un avis moyen. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-        <div class="date">2024-01-10</div>
-    </div>
+    {% endfor %}
     <div class="boutonAvis">
         <button>Voir tout les avis</button>
     </div>
 </div>
+
 
 {% block footer %}
     {{ parent() }}
