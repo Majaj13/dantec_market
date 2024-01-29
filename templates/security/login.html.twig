@@ -1,8 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
+
+{% block title %}Connexion{% endblock %}
 
 {% block body %}
+
+{{ parent() }}
+
+
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -10,22 +22,38 @@
 
     {% if app.user %}
         <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+            Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+<div class="flexrow">
+        <div class="image-register-login"></div>
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
+        <div class="registration-frame">
+        
+            <p>Se Connecter</p>
+            <label for="inputEmail">Email</label>
+            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+            
+            
+            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+            <label for="inputPassword">Mot de Passe
+            <div class="password-icon">
+                    <i data-feather="eye"></i>
+                    <i data-feather="eye-off"></i>
+                </div>
+            </label>
+            <input type="hidden" name="_csrf_token"value="{{ csrf_token('authenticate') }}">
+
+            <button type="submit" class="registerButton">Se Connecter</button>
+            <a href="{{ path('app_register') }}">Pas encore de compte ? S'inscrire</a>
+        </form>
+    </div>
+</div>
+<!-- ICON SCRIPT -->
+<script src="https://unpkg.com/feather-icons"></script>
+<script>
+feather.replace();
+</script>
 {% endblock %}
