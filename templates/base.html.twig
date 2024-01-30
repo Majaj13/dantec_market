@@ -21,7 +21,10 @@
     </div>
     <div class="navbar-right">
         <a href="" class="textNav">Contactez<br>nous</a>
-        <a href="{{ path('app_login') }}" class="boutonNav">Profil</a>
+       <a href="{{ is_granted('ROLE_USER') ? path('app_logout') : path('app_login') }}" class="boutonNav">
+    {{ is_granted('ROLE_USER') ? 'Logout' : 'Login' }}
+</a>
+
     </div>
 </div>
 
@@ -41,7 +44,7 @@
             </ul>
         </div>
         <div class="container-foot" id="bas">
-            <p>Téléchargez l’application Dantec Market:</p>
+            <p>Téléchargez l'application Dantec Market:</p>
             <button id="googlePlay"></button>
             <button id="appStore"></button>
         </div>
@@ -62,6 +65,9 @@
             </a>
         </div>
     </div>
+     {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

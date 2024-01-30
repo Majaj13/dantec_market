@@ -1,7 +1,7 @@
 <template>
   <div class="lesProduitsContainer">
     <div class="sticky-container">
-      <div class="notre-offre-title">Notre offre</div> <!-- Ajout du titre ici -->
+      <div class="notre-offre-title">Notre offre</div>
       <ul class="categories">
         <li class="category-item" v-for="parentCategory in parentCategories" :key="parentCategory.id">
           {{ parentCategory.nom }}
@@ -16,31 +16,30 @@
       </ul>
     </div>
     <div class="main-container">
-    <div v-if="loading">Chargement...</div>
+      <div v-if="loading">Chargement...</div>
       <div v-else-if="error">Erreur de chargement des données.</div>
-        <div v-else>
-          <div class="product-list">
-            <div v-for="product in products" :key="product.id" class="product-item">
-  <a :href="`/lesProduits/voirleproduit/${product.id}`">
-    <div class="product-info">
-      <span class="product-nom">{{ product.nomProduit }}</span>
-      <img :src="product.image" :alt="product.nomProduit">
-
-      <span class="product-promo" v-if="product.nomCategoriePromo" :class="getPromoClass(product.nomCategoriePromo)">
-        {{ product.nomCategoriePromo }}
-      </span>
-      <span v-else class="product-promo"> Prix</span>
-      
-      <span class="product-price">
-        {{ product.nomCategoriePromo ? product.prixpromo : product.prix }} €
-      </span>
-    </div>
-  </a>
-</div>
-
+      <div v-else>
+        <div class="product-list">
+          <div v-for="product in products" :key="product.id" class="product-item">
+            <a :href="`/lesProduits/voirleproduit/${product.id}`">
+              <div class="product-info">
+                <img :src="product.image" :alt="product.nomProduit">
+                <div class="overlay">
+                  <span class="product-nom">{{ product.nomProduit }}</span>
+                  <span class="product-description"><p>suiiiiiiiiiiiiiiiiiiiiiiiiii</p></span>
+                  <div class="bottom-section">
+                    <span class="product-price">{{ product.nomCategoriePromo ? product.prixpromo : product.prix }} €</span>
+                    <div class="button-container">
+                      <button class="add-to-cart-button"><img src="images/panier2.png" alt="Ajouter au panier"></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -130,23 +129,25 @@ const loadProductsByCategory = async (category) => {
 
 .main-container {
     flex: 1;
-    padding-top: 100px;
-    padding-bottom: 10px;
-    padding-right: 30px;
-    padding-left: 30px;
+    padding-top: 10vh;
+    padding-bottom: 1vh;
+    padding-right: 3vh;
+    padding-left: 3vh;
   }
 .product-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr); /* Trois colonnes de taille égale */
-  grid-gap: 80px; /* Espace entre les colonnes et les lignes */
-  margin-top: 30px;
-  margin-right: 10px;
+  grid-gap: 8vh; /* Espace entre les colonnes et les lignes */
+  margin-top: 3vh;
+  margin-right: 1vh;
 }
 
 .product-item {
-background-color: #fff;
-border-top-left-radius: 10px;
-border-top-right-radius: 10px;
+  position: relative;
+  background-color: #fff;
+  border-top-left-radius: 1vh;
+  border-top-right-radius: 1vh;
+  overflow: hidden;
 }
 
 .product-item a {
@@ -157,50 +158,130 @@ border-top-right-radius: 10px;
 }
 
 .product-item img {
-  width: 100%;
-  height: auto;
-
+  width: 100%;  /* Fait en sorte que l'image occupe 100% de la largeur du conteneur parent */
+  height: 50vh;  /* Hauteur initiale à 0 (sera ajustée avec la propriété de ratio) */
+  padding-bottom: 0%;  /* Définit le ratio d'aspect à 1:1 pour rendre l'image carrée */
+  object-fit: cover;  /* Redimensionne l'image pour couvrir l'intégralité du conteneur sans déformation */
 }
+
 .product-info {
-  
+  position: relative;
   display: flex;
   flex-direction: column;
-  height: 100%; /* Assurez-vous que le conteneur occupe toute la hauteur de la cellule de la grille */
-}
-.product-nom {
-color: white;
-  font-size: 4vh;
-  font-weight: bold;
-  text-align: center;
-  background-color: rgba(195, 195, 125, 0.5);  padding: 5px;
-  border-top-left-radius: 10px;  /* Rayon pour le coin supérieur gauche */
-  border-top-right-radius: 10px;
 }
 
-
-.product-price {
-  color: white;
-  font-size: 4vh; /* Taille de la police en fonction de la hauteur de la fenêtre */
-  font-weight: bold; /* Rend le texte en gras */
-  text-align: center; /* Centre le texte horizontalement */
-  background-color: rgb(47, 103, 61);
-  padding: 5px; /* Ajout de padding pour un meilleur rendu */
-}
-
-.product-item .product-info::after {
-  content: ""; /* Nécessaire pour générer l'élément */
+.overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Couleur noire avec 50% d'opacité */
-  opacity: 0; /* Commencez avec une opacité de 0 */
-  transition: opacity 0.3s; /* Transition douce pour l'opacité */
+  background: linear-gradient(180deg, rgba(243, 229, 171, 0.42) 0.11%, rgba(223, 186, 97, 0.75) 73.46%);
+  opacity: 0;
+  border-bottom-left-radius: 1vh;
+  border-bottom-right-radius: 1vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1vh;
+  box-sizing: border-box;
+  transition: opacity 0.3s;
+  z-index: 1;
+}
+
+.product-item:hover .overlay {
+  opacity: 1;
+}
+
+.product-nom {
+  color: #2D2D2D;
+  text-align: center;
+  font-family: Inter;
+  font-size: 6.25vh;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 2;
+}
+
+.product-description {
+  color: #2D2D2D;
+  text-align: center;
+  font-family: Inter;
+  font-size: 4vh;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 2;
+}
+
+.bottom-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.product-price {
+  color: #2D2D2D;
+  font-family: Inter;
+  font-size: 7vh;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 2;
+  margin-right: 10vh;
+}
+
+.button-container {
+  margin-left: auto;
+  margin-right: 1vh;
+}
+
+.add-to-cart-button {
+  color: #2d2d2d;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 2;
+}
+
+.add-to-cart-button img {
+  margin-right: 0.5vh;
+  height: 10vh;
+  border: none; /* Ajout de cette ligne pour supprimer la bordure */
+  background-color: transparent;
+}
+
+.product-item .product-info::after {
+  content: "";
+  position: absolute;
+  bottom: 0;  /* Changement de 'top' à 'bottom' */
+  left: 0;
+  width: 100%;
+  height: 0;  /* Modification de la hauteur à 0 pour commencer */
+  background: linear-gradient(180deg, rgba(243, 229, 171, 0.42) 0.11%, rgba(223, 186, 97, 0.75) 73.46%);
+  opacity: 0;
+  border-bottom-left-radius: 1vh;  /* Reproduire le rayon du coin inférieur gauche du .product-item */
+  border-bottom-right-radius: 1vh;  /* Reproduire le rayon du coin inférieur droit du .product-item */
+  transition: opacity 0.3s, height 0.3s;  /* Ajout de la transition pour la hauteur */
 }
 
 .product-item:hover .product-info::after {
-  opacity: 1; /* Opacité totale au survol */
+  height: 100%;  /* Ajuster la hauteur à 100% au survol */
+  opacity: 1;
+}
+
+.product-item:hover .product-nom,
+.product-item:hover .product-price,
+.product-item:hover .product-description,
+.product-item:hover .add-to-cart-button {
+  opacity: 1;
 }
 
 .lesProduitsContainer {
@@ -211,9 +292,10 @@ color: white;
   .sticky-container {
     position: sticky;
     top: 0;
-    padding-left: 20px;
-    padding-right: 20px;
-    width: 200px;
+    padding-left: 2vh;
+    padding-right: 2vh;
+    width: 20vh;
+    height: auto;
     background-color: #000000;
     margin-top: 8vh;
   }
@@ -233,22 +315,20 @@ color: white;
 }
 
   .category-item {
-    margin-bottom: 10px;
-    border-bottom: 2px solid green; /* Ajoute un séparateur en bas de chaque élément de catégorie */
-
-    
+    margin-bottom: 1vh;
+    border-bottom: 0.2vh solid #DFBA61; /* Ajoute un séparateur en bas de chaque élément de catégorie */
   }
 
   .category-title {
-    font-size: 24px;
+    font-size: 2.4vh;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 1vh;
   }
 
   .sub-categories {
     display: none; /* Cache les sous-catégories par défaut */
     list-style: none; /* Optionnel: supprime les puces */
-    padding-left: 20px; /* Optionnel: espace pour les sous-catégories */
+    padding-left: 2vh; /* Optionnel: espace pour les sous-catégories */
 }
 .sub-category-item a {
     text-decoration: none; /* Supprime le soulignement du lien */
@@ -257,7 +337,7 @@ color: white;
 }
 
 .sub-category-item a:hover {
-    text-decoration: underline; /* Optionnel: ajoute un soulignement au survol pour une meilleure indication de lien cliquable */
+    text-decoration: underline 0.2vh solid #DFBA61; /* Optionnel: ajoute un soulignement au survol pour une meilleure indication de lien cliquable */
 }
 
 
@@ -266,12 +346,12 @@ color: white;
 }
 
 .notre-offre-title {
-  font-size: 24px; /* Taille de la police */
+  font-size: 2.4vh; /* Taille de la police */
   font-weight: bold; /* Rend le texte en gras */
   color: #fff; /* Couleur du texte */
-  padding-bottom: 10px; /* Espacement en dessous du titre */
+  padding-bottom: 1vh; /* Espacement en dessous du titre */
   text-align: left; /* Centrer le texte */
-  margin-bottom: 20px; /* Marge en dessous du titre */
+  margin-bottom: 2vh; /* Marge en dessous du titre */
 }
 .product-promo {
   font-size: 4vh; /* Taille de la police */
@@ -280,10 +360,10 @@ color: white;
   background-color: rgb(255, 255, 255);
   margin-right: 20%;
   margin-left: 5%;
-  margin-bottom: 5px;
-  padding: 5px;
+  margin-bottom: 0.5vh;
+  padding: 0.5vh;
   font-size: 3vh;
-  border-radius: 10px;
+  border-radius: 1vh;
     /* Autres styles selon votre design */
 }
 
@@ -295,10 +375,10 @@ color: white;
   margin-right: 60%;
   text-align: center;
   margin-left: 5%;
-  margin-bottom: 5px;
-  padding: 5px;
+  margin-bottom: 0.5vh;
+  padding: 0.5vh;
   font-size: 3vh;
-  border-radius: 10px;
+  border-radius: 1vh;
     /* Autres styles selon votre design */
 }
 .promo-vert {
@@ -309,10 +389,10 @@ color: white;
   text-align: center;
   margin-right: 70%;
   margin-left: 5%;
-  margin-bottom: 5px;
-  padding: 5px;
+  margin-bottom: 0.5vh;
+  padding: 0.5vh;
   font-size: 3vh;
-  border-radius: 10px;
+  border-radius: 1vh;
 }
 .promo-jaune {
   font-size: 4vh; /* Taille de la police */
@@ -322,10 +402,10 @@ color: white;
   text-align: center;
   margin-right: 70%;
   margin-left: 5%;
-  margin-bottom: 5px;
-  padding: 5px;
+  margin-bottom: 0.5vh;
+  padding: 0.5vh;
   font-size: 3vh;
-  border-radius: 10px;
+  border-radius: 1vh;
 }
 .promo-default {
   color: white;

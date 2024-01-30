@@ -30,3 +30,4 @@ class LesProduitsController extends AbstractController
     }
     
 }
+
