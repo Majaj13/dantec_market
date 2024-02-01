@@ -26,11 +26,13 @@
                 <img :src="product.image" :alt="product.nomProduit">
                 <div class="overlay">
                   <span class="product-nom">{{ product.nomProduit }}</span>
-                  <span class="product-description"><p>suiiiiiiiiiiiiiiiiiiiiiiiiii</p></span>
+                  <span class="product-description"><p>{{ descriptionTronquee }}</p></span>
                   <div class="bottom-section">
                     <span class="product-price">{{ product.nomCategoriePromo ? product.prixpromo : product.prix }} €</span>
                     <div class="button-container">
-                      <button class="add-to-cart-button"><img src="images/panier2.png" alt="Ajouter au panier"></button>
+                      <a href="/chemin-vers-le-panier" class="icon-panier">
+                        <i class="fa fa-shopping-cart"></i>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -145,8 +147,7 @@ const loadProductsByCategory = async (category) => {
 .product-item {
   position: relative;
   background-color: #fff;
-  border-top-left-radius: 1vh;
-  border-top-right-radius: 1vh;
+  border-radius: 5vh;
   overflow: hidden;
 }
 
@@ -317,6 +318,7 @@ const loadProductsByCategory = async (category) => {
   .category-item {
     margin-bottom: 1vh;
     border-bottom: 0.2vh solid #DFBA61; /* Ajoute un séparateur en bas de chaque élément de catégorie */
+    overflow: hidden; /* Ajoutez overflow: hidden pour masquer les sous-catégories par défaut */
   }
 
   .category-title {
@@ -329,6 +331,9 @@ const loadProductsByCategory = async (category) => {
     display: none; /* Cache les sous-catégories par défaut */
     list-style: none; /* Optionnel: supprime les puces */
     padding-left: 2vh; /* Optionnel: espace pour les sous-catégories */
+    max-height: 0; /* Ajoutez max-height: 0 pour cacher les sous-catégories par défaut */
+    overflow: hidden; /* Ajoutez overflow: hidden pour masquer le contenu qui dépasse la hauteur maximale */
+    transition: max-height 0.3s ease-in-out;
 }
 .sub-category-item a {
     text-decoration: none; /* Supprime le soulignement du lien */
@@ -343,6 +348,7 @@ const loadProductsByCategory = async (category) => {
 
 .category-item:hover .sub-categories {
     display: block; /* Affiche les sous-catégories au survol */
+    max-height: 100vh; /* Définissez la hauteur maximale pour révéler les sous-catégories avec l'animation */
 }
 
 .notre-offre-title {
@@ -409,6 +415,12 @@ const loadProductsByCategory = async (category) => {
 }
 .promo-default {
   color: white;
+}
+
+.icon-panier {
+  color: rgb(255, 255, 255); /* Rouge pour une quantitÃ© infÃ©rieure Ã  5 */
+  font-size: 6.6vh;
+
 }
 
 </style>

@@ -69,4 +69,26 @@ class ApiController extends AbstractController
     return $response->GetJsonResponse($request, $var,$tab);
     }
 
+    #[Route('/api/mobile/getProduit', name: 'app_api_mobile_getProduit')]
+    public function getProduit(Request $request,ProduitsRepository $produitsRepository)
+    {
+        $postdata = json_decode($request->getContent());
+       
+        $var =  $produitsRepository->find($postdata->id);
+       
+        $response = new Utils;
+        $tab = ["lesCommandes","leProduit","lesProduits","lacategorieParent","leUser"];
+    return $response->GetJsonResponse($request, $var,$tab);
+    }
+
+    #[Route('/api/mobile/GetPromo', name: 'app_api_mobile_GetPromo')]
+    public function GetPromo(Request $request, ProduitsRepository $produitsRepository)
+    {
+        $postdata = json_decode($request->getContent());
+        $var =  $produitsRepository->getProduitPromo($postdata->id);
+       
+        $response = new Utils;
+        return $response->GetJsonResponse($request, $var);
+    }
+
 }

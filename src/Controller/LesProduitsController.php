@@ -24,10 +24,9 @@ class LesProduitsController extends AbstractController
     #[Route('/lesProduits/voirleproduit/{id}', name: 'app_voir_produit')]
     public function voirleproduit(Produits $leproduit ): Response
     {
-        return $this->render('les_produits/fiche.html.twig', [
+        return $this->render('les_produits/fiche.html.twig', ['product' => $leproduit->getId()
            
         ]);
     }
     
 }
-

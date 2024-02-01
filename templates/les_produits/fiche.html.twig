@@ -3,7 +3,11 @@
 {% block body %}
 {{ parent() }}
 
-    <div id="app"></div> <!-- Assurez-vous que c'est le point de montage de Vue.js -->
+<script>
+    var produitData = {{ product | json_encode | raw }};
+</script>
+
+<div id="app2"></div>
 
 {% block footer %}
     {{ parent() }}
