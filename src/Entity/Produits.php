@@ -18,7 +18,7 @@ class Produits
     #[ORM\Column(length: 255)]
     private ?string $nomProduit = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: "text", nullable: true)]
     private ?string $description = null;
 
     #[ORM\Column]
@@ -41,6 +41,9 @@ class Produits
 
     #[ORM\ManyToOne(inversedBy: 'lesProduits')]
     private ?Categorie $laCategorie = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $descriptioncourte = null;
 
     public function __construct()
     {
@@ -225,6 +228,18 @@ class Produits
     public function setLaCategorie(?Categorie $laCategorie): static
     {
         $this->laCategorie = $laCategorie;
+
+        return $this;
+    }
+
+    public function getDescriptioncourte(): ?string
+    {
+        return $this->descriptioncourte;
+    }
+
+    public function setDescriptioncourte(string $descriptioncourte): static
+    {
+        $this->descriptioncourte = $descriptioncourte;
 
         return $this;
     }

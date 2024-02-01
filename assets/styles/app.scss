@@ -1,97 +1,162 @@
-@import "~bootstrap/scss/bootstrap";
-body {
-    background-image: url('/public/images/dantecMarket1.jpg'); /* Mettez à jour le chemin selon votre structure de dossier */
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* Pour que le fond soit fixe lors du défilement de la page */
-
+label {
+    position: relative;
 }
+
+label .password-icon {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 60%;
+    right: 20px;
+    transform: translateY(-50%);
+    width: 20px;
+    color: #DFBA61;
+    transition: all 0.2s;
+}
+
+label .password-icon:hover {
+    cursor: pointer;
+    color: #000000;
+}
+
+label .password-icon .feather-eye-off {
+    display: none;
+}
+
+.image-register-login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("/public/images/Register.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 60%;
+    height: auto;
+}
+
 .frame {
-    border: 2px solid black;
+    border: 2px solid rgb(255, 255, 255);
     background-color: white;
     border-radius: 10px;
     height: 200px;
 }
 
-.navbar {
-    background-color: #000; /* Utilisation d'une couleur noire pour le fond */
-    height: 65px; /* Hauteur de la navbar */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-}
-.navbar-logo img {
-    height: 80px; /* Ajustez selon la taille souhaitée */
-}
-
-.navbar-menu {
-    margin-left: auto; /* Cela pousse la liste du menu vers la droite */
-    list-style-type: none;
-    display: flex;
-}
-
-.navbar-menu li a {
-    color: rgb(88, 85, 62); /* Texte doré */
-    text-decoration: none;
-    padding: 10px;
-    display: block;
-    font-weight: bold; 
-}
-
-.navbar-search {
-    display: flex;
-    align-items: center;
-}
-
-.navbar-search input {
-    padding: 5px;
-}
-
-.navbar-search button {
-    background: none;
-    border: none;
-    cursor: pointer;
-}
 .registration-frame {
+    float: right;
     background-color: white;
-    border: 2px solid #A52A2A; /* Marron */
-    border-radius: 15px;
-    padding: 20px;
-    margin: 20px; /* 20px en haut et en bas, 200px à gauche et à droite */
+    padding: 80px;
+     /* 20px en haut et en bas, pas de marge à gauche et à droite */
+    box-shadow: 0 0 20px #DFBA61;
+    width: calc(60% - 2vh); /* 50% de la largeur moins les marges de 20px */
+    box-sizing: border-box; /* Pour inclure la bordure et le rembourrage dans la largeur définie */
 }
+
+.registration-frame p {
+    color: #2D2D2D;
+    text-align: center;
+    font-family: Inter;
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.registration-frame a {
+    color: #2D2D2D;
+    text-align: center;
+    text-decoration: none;
+    font-style: normal;
+    line-height: normal;
+    font-weight: bold;
+}
+
+.flexrow{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+
+
 .form-group {
     margin-bottom: 15px;
+    font-weight: bold;
 }
+
+.form-group a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 .form-control {
     width: 100%;
     padding: 8px;
     border-radius: 4px;
-    border: 1px solid #ddd;
+    border: 2px solid #DFBA61;
 }
 .form-control:focus {
-    border-color: #A52A2A; /* Marron */
+    border-color: #DFBA61;
+    outline-color: #DFBA61;
 }
-.btn-primary {
-    background-color: #A52A2A; /* Marron */
-    border-color: #A52A2A;
-    padding: 10px 15px;
-    border-radius: 4px;
-    color: white;
-    cursor: pointer;
-}
-.btn-primary:hover {
-    background-color: darken(#A52A2A, 10%);
-}
-.container-body {
-    background-image: url('/public/images/fond.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center; /* Centrer l'image dans le conteneur */
-    margin-top: 10px;
-    padding: 20px;
-    width: 100%; /* Assurez-vous que le conteneur prend toute la largeur */
-    min-height: 400px; /* Ajustez en fonction de la taille de votre image et du contenu */
-    margin-bottom: 20px;
+.form-group input:focus {
+    border-color: #DFBA61;
 }
 
+.registerButton {
+    background: linear-gradient(113deg, #DFBA61 34.85%, #F3E5AB 95.45%);
+    border-color: #ffffff;
+    padding: 20px 30vh;
+    border-radius: 20px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    justify-content: center;
+    display: flex;
+    cursor: pointer;
+    margin: 0  auto;
+    
+}
+.registerButton:hover {
+    border-radius: 20px;
+    border-color: #DFBA61;
+    
+}
+
+.registerButton:focus {
+    outline-color: #DFBA61;
+}
+
+
+.registerButton:active {
+    background-color: #DFBA61;
+}
+
+
+@keyframes rotate {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
+}
+
+
+.agreeTerms:active {
+    background-color: #DFBA61; /* Couleur de fond plus foncée lors du clic */
+}
+
+
+.agreeTerms {
+    display: flex;
+    align-items: center;
+    height: 20px;
+    width: 20px;
+    user-select: none;
+    border: 2px solid #DFBA61;
+    border-radius: 5px; 
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+
+.agreeTerms:active {
+    background-color: #DFBA61; /* Couleur de fond plus foncée lors du clic */
+}

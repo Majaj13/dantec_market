@@ -228,12 +228,6 @@
 
 }
 
-.carousel-container {
-  margin-right: 20px; /* Ajoute une marge droite de 50px */
-    margin-top: 20px; /* Espacement de 20px entre l'image et le carrousel */
-
-}
-
 .swiper img{
   cursor: pointer;
 

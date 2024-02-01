@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Repository;
-
+use App\Entity\User;
 use App\Entity\Commandes;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -19,6 +19,27 @@ class CommandesRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Commandes::class);
+    }
+
+    /**
+     * Récupère la dernière commande non validée de l'utilisateur donné.
+     *
+     * @param User $user
+     * @return Commandes|null
+     */
+    public function findDerniereNonValideeByUser(User $user): ?Commandes
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.valider = :val')
+            ->andWhere('c.leUser = :user')
+            ->setParameters([
+                'val' => false,
+                'user' => $user
+            ])
+            ->orderBy('c.dateCommande', 'DESC') // Tri par date de commande, du plus récent au plus ancien
+            ->setMaxResults(1) // Limite les résultats à un seul
+            ->getQuery()
+            ->getOneOrNullResult(); // Récupère un seul résultat ou null si aucun résultat
     }
 
 //    /**
