@@ -21,8 +21,7 @@ class CommandesController extends AbstractController
     {
         return $this->render('commandes/voirpanier.html.twig');
     }
-
-    #[Route('/commandes/profil', name: 'app_commandes_profil')]
+    #[Route('/commandes/profil', name: 'app_profil')]
     public function profil(): Response
     {
         return $this->render('commandes/profil.html.twig');

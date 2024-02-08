@@ -13,34 +13,21 @@
 
 <div class="navbar">
     <div class="navbar-left">
-        <a href="{{ path('app_les_produits') }}" class="textNav">Nos produits</a>
-        <a href="{{ path('app_actualite') }}" class="textNav">Nos actualités</a>
+        <a href="{{ path('app_les_produits') }}" class="textNav">Nos<br>produits</a>
+        <a href="{{ path('app_actualite') }}" class="textNav">Nos<br>actualités</a>
     </div>
     <div class="navbar-middle">
-        <a href="{{ path('app_acceuil') }}"><img src="/images/logo.jpg"></img></a>
+        <img src="/images/logo.jpg">
     </div>
     <div class="navbar-right">
-        <a href="" class="textNav">Contacteznous</a>
+        <a href="" class="textNav">Contactez<br>nous</a>
        <a href="{{ is_granted('ROLE_USER') ? path('app_logout') : path('app_login') }}" class="boutonNav">
     {{ is_granted('ROLE_USER') ? 'Logout' : 'Login' }}
 </a>
-  {% if is_granted('ROLE_USER') %}
-        <a href="/commandes/voirpanier" class="iconPanier">
-            <i class="fa fa-shopping-cart" style="color: white; font-size: 24px;"></i>
-        </a>
-    {% endif %}
+
     </div>
-
-
-<!-- Barre de recherche à droite de la page -->
-<div class="search-bar-container">
-    <form class="form-inline" action="/lesProduits/rechercher" method="GET">
-        <input class="form-control" type="search" placeholder="Rechercher" aria-label="Rechercher" name="query">
-        <button class="btn btn-outline-success" type="submit">Rechercher</button>
-    </form>
-
 </div>
-</div>
+
 {% endblock %}
 
 <footer>
@@ -69,18 +56,15 @@
                 <i class="fab fa-twitter"></i>
             </a>
 
-            <a href="https://www.facebook.com/felix.ledantec.7?locale=fr_FR" class="btn btn-social-icon btn-facebook">
+            <a href="#" class="btn btn-social-icon btn-facebook">
                 <i class="fab fa-facebook"></i>
             </a>
 
-            <a href="https://www.instagram.com/dantec.market?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="btn btn-social-icon btn-instagram">
+            <a href="#" class="btn btn-social-icon btn-instagram">
                 <i class="fab fa-instagram"></i>
             </a>
         </div>
     </div>
-     {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

@@ -10,7 +10,7 @@
             <p>Bienvenue sur dantec market</p>
         </div>
         <div class="slide" id="slide2">
-            <p>Ma pizza va être super bonne</p>
+            <p>Ici on test le texte</p>
         </div>
         <div class="slide" id="slide3">
             <p>Frédéric fait de belle maquette register</p> 
@@ -30,16 +30,16 @@
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
                 <!-- Swiper Slides -->
-                {% for produit in topventes %}
-                    <div class="swiper-slide" style="background-image: url('{{ produit.imageUrl }}');">
-                        <a href="{{ path('app_voir_produit', {'id': produit.id}) }}" class="swiper-link">
-                            <div class="slide-content">
-                                <span class="nom-produit">{{ produit.nomProduit }}</span>
-                                <span class="prix-produit">{{ produit.prix }} €</span>
-                            </div>
-                        </a>
+                 {% for produit in topventes %}
+            <div class="swiper-slide" style="background-image: url('{{ produit.imageUrl }}');">
+                <a href="{{ path('app_voir_produit', {'id': produit.id}) }}" class="swiper-link">
+                    <div class="slide-content">
+                        <span class="nom-produit">{{ produit.nomProduit }}</span>
+                        <span class="prix-produit">{{ produit.prix }} €</span>
                     </div>
-                {% endfor %}
+                </a>
+            </div>
+        {% endfor %}
             </div>
         </div>
         <div class="swiper-button-right">
@@ -48,28 +48,30 @@
     </div>
 </div>
 
-
+<div class="titre-container">
+    <p>Devenez nos meilleurs ambassadeurs ...</p></div>
 <div class="card-container">
     <div class="card1" id="application">
         <p>Téléchargez l’application Dantec Market</p>
         <form action="{{ path('app_application') }}">
-            <button type="submit">Téléchager</button>
+            <button type="submit">Télécharger</button>
         </form>
     </div>
     <div class="card1" id="produits">
-        <p>Commandez nos meilleurs produits</p>
+        <p>Nos meilleurs produits vous attendent</p>
         <form action="{{ path('app_les_produits') }}">
             <button type="submit">Commander</button>
         </form>
     </div>
     <div class="card1" id="actualité">
-        <p>Découvrez  l’actualité sur le magasin</p>
+        <p>L’actualité de votre magasin</p>
         <form action="{{ path('app_actualite') }}">
             <button type="submit">Découvrir</button>
         </form>
     </div>
 </div>
-
+<div class="titre-container">
+    <p>Nos plus belles découvertes</p></div>
 <div class="card-container">
     <div class="card2" id="catalogue">
         <p>Découvrez les nouveautés de ce mois</p>

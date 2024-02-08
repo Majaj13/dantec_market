@@ -42,6 +42,61 @@ class ProduitsRepository extends ServiceEntityRepository
     return $qb->getQuery()->getResult();
     }
 
+    function getProduitInfoByCategorie($nomCategorie) {
+        $qb = $this->createQueryBuilder('p')
+            ->select('p.id', 'p.nomProduit', 'p.prix', 'MIN(i.url) as image', 'pr.prix as prixpromo', 'cp.nom as nomCategoriePromo')
+            ->leftJoin('p.laCategorie', 'c')
+            ->leftJoin('p.lesImages', 'i')
+            ->leftJoin('p.lesPromos', 'pr', 'WITH', 'pr.dateDebut <= CURRENT_DATE() AND pr.dateFin >= CURRENT_DATE() OR pr.id IS NULL')
+            ->leftJoin('pr.laCategoriePromo', 'cp')
+            ->where('c.id = :categorie')
+            ->orderBy('p.id')
+            ->groupBy('p.id', 'p.nomProduit', 'p.prix', 'cp.nom')
+            ->setParameter('categorie', $nomCategorie);
+    
+        $query = $qb->getQuery();
+        $result = $query->getResult();
+    
+        return $result;
+    }
+    
+
+    function getProduitPromo($nomCategorie) {
+        $qb = $this->createQueryBuilder('p')
+            ->select('p.id', 'p.nomProduit', 'pr.prix as prixpromo', 'pr.dateFin as fin', 'cp.nom as nomCategoriePromo')
+            ->leftJoin('p.lesPromos', 'pr', 'WITH', 'pr.dateDebut <= CURRENT_TIMESTAMP() AND pr.dateFin >= CURRENT_TIMESTAMP() OR pr.id IS NULL')
+            ->leftJoin('pr.laCategoriePromo', 'cp')
+            ->where('p.id = :nomcategorie')
+            ->orderBy('p.id')
+            ->groupBy('p.id', 'p.nomProduit')
+            ->setParameter('nomcategorie', $nomCategorie);
+    
+        $query = $qb->getQuery();
+        $result = $query->getResult();
+    
+        return $result;
+    }
+    
+    function getProduitInfoByMotCle($motCle) {
+        $qb = $this->createQueryBuilder('p')
+            ->select('p.id', 'p.nomProduit', 'p.prix', 'MIN(i.url) as image', 'pr.prix as prixpromo', 'cp.nom as nomCategoriePromo')
+            ->leftJoin('p.laCategorie', 'c')
+            ->leftJoin('p.lesImages', 'i')
+            ->leftJoin('p.lesPromos', 'pr', 'WITH', 'pr.dateDebut <= CURRENT_DATE() AND pr.dateFin >= CURRENT_DATE()')
+            ->leftJoin('pr.laCategoriePromo', 'cp')
+            ->where('p.nomProduit LIKE :motCle')
+            ->orderBy('p.id')
+            ->groupBy('p.id', 'p.nomProduit', 'p.prix', 'cp.nom')
+            ->setParameter('motCle', '%'.$motCle.'%');
+    
+        $query = $qb->getQuery();
+        $result = $query->getResult();
+    
+        return $result;
+    }
+    
+    
+
 //    /**
 //     * @return Produits[] Returns an array of Produits objects
 //     */

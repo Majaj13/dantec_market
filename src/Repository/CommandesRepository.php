@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Repository;
-
+use App\Entity\User;
 use App\Entity\Commandes;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -20,6 +20,47 @@ class CommandesRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Commandes::class);
     }
+
+    /**
+     * Récupère la dernière commande non validée de l'utilisateur donné.
+     *
+     * @param User $user
+     * @return Commandes|null
+     */
+    public function findDerniereNonValideeByUser(User $user): ?Commandes
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.valider = :val')
+            ->andWhere('c.leUser = :user')
+            ->setParameters([
+                'val' => false,
+                'user' => $user
+            ])
+            ->orderBy('c.dateCommande', 'DESC') // Tri par date de commande, du plus récent au plus ancien
+            ->setMaxResults(1) // Limite les résultats à un seul
+            ->getQuery()
+            ->getOneOrNullResult(); // Récupère un seul résultat ou null si aucun résultat
+    }
+
+    public function getNonValidatedCommandesDetails(User $user)
+{
+    $qb = $this->createQueryBuilder('c')
+        ->select('c.id','p.nomProduit', 'cmd.quantite', 'cmd.prixretenu', 
+                 'cmd.quantite * cmd.prixretenu AS total',
+                 'MIN(i.url) AS imageUrl')
+        ->leftJoin('c.lesCommandes', 'cmd')
+        ->leftJoin('cmd.leProduit', 'p')
+        ->leftJoin('p.lesImages', 'i')
+        ->where('c.valider = :valider')
+        ->andWhere('c.leUser = :user')
+        ->setParameter('valider', false)
+        ->setParameter('user', $user)
+        ->groupBy('cmd.id') // Assurez-vous que cela correspond à vos besoins
+        ->orderBy('c.dateCommande', 'ASC'); // ou un autre critère de tri si nécessaire
+
+    return $qb->getQuery()->getResult();
+}
+
 
 //    /**
 //     * @return Commandes[] Returns an array of Commandes objects

@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_link_tags('test') }}
 {% endblock %}
 
 {% block javascripts %}
@@ -27,7 +27,7 @@
     {% endif %}
 
 <div class="flexrow">
-        <div class="image-register-login"></div>
+    <div class="image-register-login"></div>
 
 
         <div class="registration-frame">
@@ -36,21 +36,24 @@
             <label for="inputEmail">Email</label>
             <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
             
-            
+             <label for="inputPassword">Mot de Passe</label>
             <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-            <label for="inputPassword">Mot de Passe
+           
             <div class="password-icon">
                     <i data-feather="eye"></i>
                     <i data-feather="eye-off"></i>
-                </div>
-            </label>
+            </div>
+            
             <input type="hidden" name="_csrf_token"value="{{ csrf_token('authenticate') }}">
 
             <button type="submit" class="registerButton">Se Connecter</button>
             <a href="{{ path('app_register') }}">Pas encore de compte ? S'inscrire</a>
-        </form>
+       
+        </div>
     </div>
-</div>
+</div>  
+
+ </form>
 <!-- ICON SCRIPT -->
 <script src="https://unpkg.com/feather-icons"></script>
 <script>

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{{ parent() }}
+
+<script>
+    var produitData = {{ product | json_encode | raw }};
+   
+</script>
+<div id="app2">
+   
+</div>
+
+
+
+{% endblock %}
