@@ -141,6 +141,7 @@ class ApiController extends AbstractController
                         $manager->persist($commander);
                         $commande->setMontantTotal($MontantTotalActuel + $postdata->prix);
                         $commande->setValider(false);
+                        $commande->setEtat('-');
                         $manager->persist($commande);
                     } else {
                         // Produit pas encore dans la commande, l'ajouter
@@ -153,6 +154,7 @@ class ApiController extends AbstractController
                         $manager->persist($commander);
                         $commande->setMontantTotal($MontantTotalActuel + $postdata->prix);
                         $commande->setValider(false);
+                        $commande->setEtat('-');
                         $manager->persist($commande);
                     }
                 } else {
@@ -300,6 +302,7 @@ public function getUserInfo(): Response
         $reservation->setLeUser($user);
         $reservation->setLaCommande($commande); // Association de la commande trouvée à la réservation
         $commande->setValider(true);
+        $commande->setEtat('A confirmer');
         $entityManager->persist($commande);
         $entityManager->persist($reservation);
         $entityManager->flush();
@@ -386,4 +389,41 @@ public function getcompteuser(Request $request, UserRepository $userRepository)
     $tab = ["lesFavoris","lesCommandes","lesReservations","lesCommentaires","password"];
     return $response->GetJsonResponse($request, $var,$tab);
 }
+#[Route('/api/mobile/GetLesCommandes', name: 'app_api_GetLesCommandes')]
+public function GetLesCommandes(Request $request, CommandesRepository $commandesRepository)
+{
+    $postdata = json_decode($request->getContent());
+    $user = $this->getUser();
+    $var = $commandesRepository->findValidatedOrdersByUser($user);
+
+    
+    $response = new Utils;
+    $tab = ["lesCommandes","lesReservations","laCategorie","lesCommentaires","leUser"];
+    return $response->GetJsonResponse($request, $var,$tab);
 }
+#[Route('/api/mobile/detailcommande', name: 'api_detailcommande')]
+
+    public function getDetailCommandeId(Request $request, CommandesRepository $commandesRepository): Response
+    {
+        $postdata = json_decode($request->getContent());
+
+        // Vous pouvez récupérer l'utilisateur par son ID ou un autre attribut
+        $user = $this->getUser();
+      
+        if (!$user) {
+           
+            // Gérer le cas où l'utilisateur n'est pas trouvé
+            $response = new Utils;
+            return $response->GetJsonResponse($request, ['error' => 'User not found']);
+            
+        }
+        
+        $commandesDetails = $commandesRepository->getValidatedCommandesDetails( $postdata->Id);
+
+        $response = new Utils;
+        return $response->GetJsonResponse($request, $commandesDetails);
+    }
+}
+
+
+

@@ -60,7 +60,38 @@ class CommandesRepository extends ServiceEntityRepository
 
     return $qb->getQuery()->getResult();
 }
+public function findValidatedOrdersByUser(User $user)
+    {
+        $qb = $this->createQueryBuilder('c');
 
+        $qb->where('c.leUser = :user')
+           ->andWhere('c.valider = :validated')
+           ->setParameter('user', $user)
+           ->setParameter('validated', true)
+           ->orderBy('c.dateCommande', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getValidatedCommandesDetails(int $id)
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->select('c.id', 'p.nomProduit', 'cmd.quantite', 'cmd.prixretenu', 
+                     'cmd.quantite * cmd.prixretenu AS total',
+                     'MIN(i.url) AS imageUrl')
+            ->leftJoin('c.lesCommandes', 'cmd')
+            ->leftJoin('cmd.leProduit', 'p')
+            ->leftJoin('p.lesImages', 'i')
+            ->where('c.valider = :valider')
+            ->andWhere('c.id = :id')
+            ->setParameter('valider', true) // Changé en true pour sélectionner les commandes validées
+            ->setParameter('id', $id)
+            ->groupBy('cmd.id') // Assurez-vous que cela correspond à vos besoins
+            ->orderBy('c.dateCommande', 'ASC'); // ou un autre critère de tri si nécessaire
+    
+        return $qb->getQuery()->getResult();
+    }
+    
 
 //    /**
 //     * @return Commandes[] Returns an array of Commandes objects
