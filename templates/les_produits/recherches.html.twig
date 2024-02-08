@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{{ parent() }}
+
+<script>
+    var marecherche = {{ query | json_encode | raw }};
+   
+</script>
+
+        <div id="app4"></div> <!-- Assurez-vous que c'est le point de montage de Vue.js -->
+
+{% endblock %}
