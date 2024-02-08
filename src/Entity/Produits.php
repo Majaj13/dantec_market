@@ -45,12 +45,16 @@ class Produits
     #[ORM\Column(length: 255)]
     private ?string $descriptioncourte = null;
 
+    #[ORM\OneToMany(mappedBy: 'leProduit', targetEntity: Favoris::class)]
+    private Collection $lesFavoris;
+
     public function __construct()
     {
         $this->lesCommandes = new ArrayCollection();
         $this->lesCommentaires = new ArrayCollection();
         $this->lesPromos = new ArrayCollection();
         $this->lesImages = new ArrayCollection();
+        $this->lesFavoris = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -240,6 +244,36 @@ class Produits
     public function setDescriptioncourte(string $descriptioncourte): static
     {
         $this->descriptioncourte = $descriptioncourte;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Favoris>
+     */
+    public function getLesFavoris(): Collection
+    {
+        return $this->lesFavoris;
+    }
+
+    public function addLesFavori(Favoris $lesFavori): static
+    {
+        if (!$this->lesFavoris->contains($lesFavori)) {
+            $this->lesFavoris->add($lesFavori);
+            $lesFavori->setLeProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLesFavori(Favoris $lesFavori): static
+    {
+        if ($this->lesFavoris->removeElement($lesFavori)) {
+            // set the owning side to null (unless already changed)
+            if ($lesFavori->getLeProduit() === $this) {
+                $lesFavori->setLeProduit(null);
+            }
+        }
 
         return $this;
     }

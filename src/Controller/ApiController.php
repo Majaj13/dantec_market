@@ -89,7 +89,7 @@ class ApiController extends AbstractController
         $var =  $produitsRepository->find($postdata->id);
        
         $response = new Utils;
-        $tab = ["lesCommandes","leProduit","lesProduits","lacategorieParent","leUser","lesPromos"];
+        $tab = ["laCategorie","lesFavoris","lesCommandes","leProduit","lesProduits","lacategorieParent","leUser","lesPromos"];
     return $response->GetJsonResponse($request, $var,$tab);
     }
 
@@ -344,5 +344,46 @@ public function Ajoutfavori(Request $request, EntityManagerInterface $entityMana
 
     // Si un favori existe déjà, retourner un message sans créer de doublon
     return $this->json(['message' => 'Le favori existe déjà.'], Response::HTTP_OK);
+}
+
+#[Route('/api/mobile/modifieruser', name: 'api_modifieruser')]
+public function modifieruser(Request $request, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
+{
+    $postdata = json_decode($request->getContent());
+    $user = $this->getUser();
+    $user = $userRepository->find($user->getId());
+
+    if (!$user) {
+        return $this->json(['message' => 'Produit introuvable.'], Response::HTTP_NOT_FOUND);
+    }
+
+    // Mettez à jour les propriétés de l'utilisateur
+    $user->setNom($postdata->nom);
+    $user->setPrenom($postdata->prenom);
+    $user->setEmail($postdata->email);
+    $user->setTelephone($postdata->telephone);
+    $user->setClasse($postdata->classe);
+
+    // Persistez les changements
+    $entityManager->persist($user);
+    $entityManager->flush();
+
+    // Retournez une réponse ou redirigez l'utilisateur
+    return new Response('User updated successfully');
+}
+
+#[Route('/api/mobile/compteuser', name: 'app_api_compteuser')]
+public function getcompteuser(Request $request, UserRepository $userRepository)
+{
+    $postdata = json_decode($request->getContent());
+    $user = $this->getUser();
+    $var = $userRepository->find($user->getId());
+
+    if (!$user) {
+        return $this->json(['message' => 'user introuvable.'], Response::HTTP_NOT_FOUND);
+    }
+    $response = new Utils;
+    $tab = ["lesFavoris","lesCommandes","lesReservations","lesCommentaires","password"];
+    return $response->GetJsonResponse($request, $var,$tab);
 }
 }

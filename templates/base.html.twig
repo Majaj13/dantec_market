@@ -20,7 +20,7 @@
         <a href="{{ path('app_acceuil') }}"><img src="/images/logo.jpg"></img></a>
     </div>
     <div class="navbar-right">
-        <a href="" class="textNav">Contacteznous</a>
+        <a href="" class="textNav">Contactez nous</a>
        <a href="{{ is_granted('ROLE_USER') ? path('app_logout') : path('app_login') }}" class="boutonNav">
     {{ is_granted('ROLE_USER') ? 'Logout' : 'Login' }}
 </a>
@@ -28,6 +28,9 @@
         <a href="/commandes/voirpanier" class="iconPanier">
             <i class="fa fa-shopping-cart" style="color: white; font-size: 24px;"></i>
         </a>
+        <a href="/commandes/profil" class="iconProfil">
+        <i class="fa fa-user-circle" style="color: white; font-size: 24px;"></i>
+    </a>
     {% endif %}
     </div>
 
