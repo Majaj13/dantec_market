@@ -15,9 +15,11 @@
         
            <div class="titre-favori-container">
               <h1>{{ product.nomProduit }}</h1>
-              <i class="fa fa-heart" @click="ajouterAuxFavoris(product.id)"></i>
+              <span class="coeur" v-if="messageStatus">{{ messageStatus }}</span>
+              <i class="fa fa-heart" :class="{ 'coeur-rouge': estDansLesFavoris, 'coeur-blanc': !estDansLesFavoris }" @click="ajouterAuxFavoris(product.id)"></i>
+
            </div>
-           <p v-if="messageStatus">{{ messageStatus }}</p>
+           
        
         <p v-if="promo.prixpromo">
            Prix Promo: {{ promo.prixpromo }}€
@@ -64,7 +66,7 @@
   </div>
 </template>
 <script>
-  import { ref, onMounted } from 'vue';
+  import { ref,watch, onMounted } from 'vue';
   import { Swiper, SwiperSlide } from 'swiper/vue';
   import 'swiper/css';
   
@@ -84,6 +86,31 @@
       const selectedImage = ref('');
       const messagePanier = ref('');
       const utilisateurAuthentifie = ref(false);
+      const estDansLesFavoris = ref(false); // Pour stocker l'état de favori
+      
+
+      //gestion du coeur
+      const verifierSiFavori = async (produitId) => {
+    try {
+        const reponse = await fetch('/api/mobile/versverifierfavoris', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: produitId }),
+        });
+        if (reponse.ok) {
+            const data = await reponse.json();
+            estDansLesFavoris.value = data.estFavori;
+        } else {
+            console.error('Erreur lors de la vérification des favoris');
+            estDansLesFavoris.value = false;
+        }
+    } catch (erreur) {
+        console.error('Erreur lors de la communication avec l\'API', erreur);
+        estDansLesFavoris.value = false;
+    }
+};
   
   //gestion du favoris
   const ajouterAuxFavoris = async (produitId) => {
@@ -228,15 +255,25 @@
   
       return `${jours} jours, ${heures} heures, ${minutes} minutes, ${secondes} secondes`;
     };
+
+    watch(() => product.value, (nouveauProduit) => {
+      if (nouveauProduit && nouveauProduit.id) {
+        verifierSiFavori(nouveauProduit.id);
+        if (nouveauProduit.lesImages.length > 0) {
+          selectedImage.value = '/' + nouveauProduit.lesImages[0].url;
+        }
+      }
+    }, { immediate: true });
   
       onMounted(() => {
         fetchProductDetails();
         fetchPromoDetails();
         verifierAuthentification();
+        verifierSiFavori(product.value.id);
         
       });
   
-      return { ajouterAuxFavoris, messageStatus ,product,formatDate,ajouterAuPanier,utilisateurAuthentifie, messagePanier  , promo ,loading, error,calculerTempsRestant,isPromoActive ,selectImage, selectedImage, onSwiper, onSlideChange,};
+      return {estDansLesFavoris, ajouterAuxFavoris, messageStatus ,product,formatDate,ajouterAuPanier,utilisateurAuthentifie, messagePanier  , promo ,loading, error,calculerTempsRestant,isPromoActive ,selectImage, selectedImage, onSwiper, onSlideChange,};
     },
     computed: {
     quantiteClass() {
@@ -260,6 +297,9 @@
   };
 </script>
 <style>
+.coeur{
+  margin-left: auto;
+}
   .carousel-container{
   margin-top: 10px;
   }
@@ -292,6 +332,11 @@
   .product-details * {
   text-align: justify; /* Justifie le texte des paragraphes */
   max-width: 80%; /* Limite la largeur maximale du contenu textuel à 60% de la section */
+  }
+  .swiper-slide img {
+    display: block;
+    width: 60%;
+    -webkit-box-reflect: below 1px linear-gradient(transparent, transparent , #0002 , #0004);
   }
   .swiper img{
   cursor: pointer;
@@ -493,4 +538,11 @@
   font-weight: 700;
   line-height: normal;
   }
+  .coeur-rouge {
+    color: red;
+}
+
+.coeur-blanc {
+    color: white;
+}
 </style>

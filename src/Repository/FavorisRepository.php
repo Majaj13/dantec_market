@@ -21,6 +21,22 @@ class FavorisRepository extends ServiceEntityRepository
         parent::__construct($registry, Favoris::class);
     }
 
+    public function getListeFavoris($user)
+    {
+        // Création du QueryBuilder
+        $qb = $this->createQueryBuilder('f')
+            ->select('p.id', 'p.nomProduit', 'p.prix', 'MIN(i.url) AS imageUrl')
+            ->innerJoin('f.leProduit', 'p')
+            ->leftJoin('p.lesImages', 'i')
+            ->where('f.leUser = :user')
+            ->setParameter('user', $user)
+            ->groupBy('p.id')
+            ->orderBy('p.id', 'ASC');
+
+        // Exécution de la requête et retour des résultats
+        return $qb->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Favoris[] Returns an array of Favoris objects
 //     */

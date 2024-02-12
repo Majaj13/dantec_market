@@ -8,6 +8,7 @@ use App\Repository\CategorieParentRepository;
 use App\Repository\CommandesRepository;
 use App\Repository\PlanningRepository;
 use App\Repository\FavorisRepository;
+use App\Repository\PartenairesRepository;
 use App\Entity\User;
 use App\Entity\Réserver;
 use App\Entity\Commandes;
@@ -59,7 +60,8 @@ class ApiController extends AbstractController
         }
 
         $response = new Utils;
-        return $response->GetJsonResponse($request, $user);
+        $tab = ["lesReservations","lesCommandes","lesCommentaires","lesFavoris"];
+        return $response->GetJsonResponse($request, $user,$tab);
     }
     #[Route('/api/mobile/GetListeProduitParCategorie', name: 'app_api_mobile_GetListeProduitParCategorie')]
     public function GetListeProduitParCategorie(Request $request, ProduitsRepository $produitsRepository)
@@ -98,6 +100,16 @@ class ApiController extends AbstractController
     {
         $postdata = json_decode($request->getContent());
         $var =  $produitsRepository->getProduitPromo($postdata->id);
+       
+        $response = new Utils;
+        return $response->GetJsonResponse($request, $var);
+    }
+
+    #[Route('/api/mobile/produitdujour', name: 'app_api_mobile_GetPromoduJour')]
+    public function GetPromoduJour(Request $request, ProduitsRepository $produitsRepository)
+    {
+        $postdata = json_decode($request->getContent());
+        $var =  $produitsRepository->getProduitPromoDuJour($postdata->jour);
        
         $response = new Utils;
         return $response->GetJsonResponse($request, $var);
@@ -423,6 +435,66 @@ public function GetLesCommandes(Request $request, CommandesRepository $commandes
         $response = new Utils;
         return $response->GetJsonResponse($request, $commandesDetails);
     }
+    
+    #[Route('/api/mobile/getListe', name: 'api_mobile_getListe')]
+    public function getListe(Request $request, EntityManagerInterface $entityManager,UserRepository $userRepository ,FavorisRepository $favorisRepository): Response
+    {
+        $postdata = json_decode($request->getContent());
+        $user = $this->getUser();
+        $user = $userRepository->find($user->getId());
+        $var = $favorisRepository->getListeFavoris($user); 
+
+        $response = new Utils;
+        return $response->GetJsonResponse($request, $var);
+    }
+
+    #[Route('/api/mobile/supprimerfavoris', name: 'api_mobile_supprimerfavoris', methods: ['POST'])]
+    public function supprimerFavoris(Request $request, EntityManagerInterface $entityManager,ProduitsRepository $produitRepository,UserRepository $userRepository, FavorisRepository $favorisRepository): Response
+    {
+        $postdata = json_decode($request->getContent(), true);
+
+        if (!isset($postdata['id'])) {
+            return $this->json(['message' => 'ID du favori non fourni'], Response::HTTP_BAD_REQUEST);
+        }
+        $user = $this->getUser();
+        $user = $userRepository->find($user->getId());
+        $produit = $produitRepository->find($postdata['id']);
+
+        $favori = $favorisRepository->findOneBy(['leProduit' => $postdata['id'], 'leUser' => $user]);
+
+        if (!$favori) {
+            return $this->json(['message' => 'Favori non trouvé'], Response::HTTP_NOT_FOUND);
+        }
+
+        $entityManager->remove($favori);
+        $entityManager->flush();
+
+        $response = new Utils; // Utilisez votre méthode de réponse JSON
+        return $response->GetJsonResponse($request, ['message' => 'Favori supprimé avec succès']);
+    }
+
+    #[Route('/api/mobile/getPartenaires', name: 'api_mobile_getPartenaires')]
+    public function getPartenaires(Request $request, EntityManagerInterface $entityManager,PartenairesRepository $partenairesRepository): Response
+    {
+        $postdata = json_decode($request->getContent());
+        $var = $partenairesRepository->findAll(); 
+        $response = new Utils;
+        return $response->GetJsonResponse($request, $var);
+    }
+    #[Route('/api/mobile/versverifierfavoris', name: 'api_mobile_versverifierfavoris')]
+    public function getversverifierfavoris(Request $request, EntityManagerInterface $entityManager,ProduitsRepository $produitRepository,UserRepository $userRepository,FavorisRepository $FavorisRepository): Response
+    {
+        $postdata = json_decode($request->getContent());
+        $user = $this->getUser();
+        $user = $userRepository->find(1);
+        $produit = $produitRepository->find($postdata->id);
+        $var = $FavorisRepository->findOneBy(['leProduit' => $produit,'leUser' => $user]); 
+        $estFavori = $var !== null; // true si trouvé, false sinon
+
+        // Renvoie une réponse JSON avec true ou false
+        return $this->json(['estFavori' => $estFavori]);
+    }
+
 }
 
 

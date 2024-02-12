@@ -1,6 +1,6 @@
 {% block stylesheets %}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
     {{ encore_entry_link_tags('test') }}
 {% endblock %}
@@ -46,7 +46,7 @@
 </div>
 {% endblock %}
 
-<footer>
+
 {% block footer %}{% endblock %}
     <div class="footer-container" id="premiere">
         <div class="container-foot" id="haut">
@@ -82,9 +82,73 @@
         </div>
     </div>
      {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+            {{ encore_entry_script_tags('test') }}
+               <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</footer>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+            <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let currentIndex = 0;
+            const totalSlides = document.querySelectorAll(".slide").length;
+            const paginationContainer = document.getElementById("pagination");
+
+            function updateCarousel() {
+                const carousel = document.querySelector(".carousel");
+                const slideWidth = document.querySelector(".slide").clientWidth;
+                carousel.style.transform = `translateX(${-currentIndex * slideWidth}px)`;
+
+                // Met à jour l'état actif du bouton de pagination
+                const paginationButtons = document.querySelectorAll(".pagination-button");
+                paginationButtons.forEach((button, index) => {
+                    button.classList.toggle("active", index === currentIndex);
+                });
+            }
+
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                updateCarousel();
+            }
+
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                updateCarousel();
+            }
+
+            // Crée les boutons de pagination
+            for (let i = 0; i < totalSlides; i++) {
+                const button = document.createElement("button");
+                button.className = "pagination-button";
+                button.addEventListener("click", () => {
+                    currentIndex = i;
+                    updateCarousel();
+                });
+                paginationContainer.appendChild(button);
+            }
+
+            updateCarousel(); // Initialise l'état initial du carrousel
+
+            setInterval(nextSlide, 8000); // Change de diapositive toutes les 8 secondes
+        });
+</script>
+
+<script>
+    var swiper = new Swiper(".mySwiper", {
+      effect: "coverflow",
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: "auto",
+      coverflowEffect: {
+        rotate: 15,
+        stretch: 0,
+        depth: 300,
+        modifier: 1,
+        slideShadows: true,
+      },
+      loop: true,
+    });
+    </script>
+   
+     {% endblock %}
+

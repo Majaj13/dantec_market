@@ -26,14 +26,10 @@
                 <img :src="product.image" :alt="product.nomProduit">
                 <div class="overlay">
                   <span class="product-nom">{{ product.nomProduit }}</span>
-                  <span class="product-description"><p>{{ descriptionTronquee }}</p></span>
+                  <span class="product-description"><p>{{ product.descriptioncourte }}</p></span>
                   <div class="bottom-section">
-                    <span class="product-price">{{ product.nomCategoriePromo ? product.prixpromo : product.prix }} €</span>
-                    <div class="button-container">
-                      <a href="/chemin-vers-le-panier" class="icon-panier">
-                        <i class="fa fa-shopping-cart"></i>
-                      </a>
-                    </div>
+                    <span class="product-price">Prix : {{ product.nomCategoriePromo ? product.prixpromo : product.prix }} €</span>
+                    
                   </div>
                 </div>
               </div>
@@ -116,6 +112,7 @@ const loadProductsByCategory = async (category) => {
 };
 
 
+
     onMounted(() => {
       fetchCategories();
       fetchProducts();
@@ -131,7 +128,7 @@ const loadProductsByCategory = async (category) => {
 
 .main-container {
     flex: 1;
-    padding-top: 10vh;
+    padding-top: 16vh;
     padding-bottom: 1vh;
     padding-right: 3vh;
     padding-left: 3vh;
@@ -177,14 +174,15 @@ const loadProductsByCategory = async (category) => {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, rgba(243, 229, 171, 0.42) 0.11%, rgba(223, 186, 97, 0.75) 73.46%);
+  background: linear-gradient(180deg, rgba(243, 229, 171, 0.42) 0.11%, rgba(9, 67, 39, 0.75) 73.46%);
   opacity: 0;
   border-bottom-left-radius: 1vh;
   border-bottom-right-radius: 1vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  
   padding: 1vh;
   box-sizing: border-box;
   transition: opacity 0.3s;
@@ -196,25 +194,29 @@ const loadProductsByCategory = async (category) => {
 }
 
 .product-nom {
-  color: #2D2D2D;
-  text-align: center;
-  font-family: Inter;
-  font-size: 6.25vh;
+  color: #0f5607;
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 5vh;
   font-style: normal;
-  font-weight: 800;
+  font-weight: 600;
   line-height: normal;
   opacity: 0;
   transition: opacity 0.3s;
   z-index: 2;
+ display: block; /* Rend le span comporté comme un bloc, ce qui peut aider à l'alignement */
+  width: 100%; /* Assure que le span prend toute la largeur disponible, donnant de l'espace pour l'alignement à gauche */
+  margin-right: auto; /* Alignement à gauche en poussant tout espace supplémentaire vers la droite */
+
 }
 
 .product-description {
   color: #2D2D2D;
-  text-align: center;
+  text-align: left;
   font-family: Inter;
-  font-size: 4vh;
+  font-size: 2vh;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 300;
   line-height: normal;
   opacity: 0;
   transition: opacity 0.3s;
@@ -224,20 +226,23 @@ const loadProductsByCategory = async (category) => {
 .bottom-section {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
+  width: 100%; /* Assure que le conteneur s'étend à la largeur complète de son parent */
+
 }
 
 .product-price {
-  color: #2D2D2D;
+  color: #ffffff;
   font-family: Inter;
-  font-size: 7vh;
+  font-size: 4vh;
   font-style: normal;
   font-weight: 900;
   line-height: normal;
   opacity: 0;
   transition: opacity 0.3s;
   z-index: 2;
-  margin-right: 10vh;
+  margin-left: auto; /* Pousse le prix à droite */
+
 }
 
 .button-container {

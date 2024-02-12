@@ -44,7 +44,7 @@ class ProduitsRepository extends ServiceEntityRepository
 
     function getProduitInfoByCategorie($nomCategorie) {
         $qb = $this->createQueryBuilder('p')
-            ->select('p.id', 'p.nomProduit', 'p.prix', 'MIN(i.url) as image', 'pr.prix as prixpromo', 'cp.nom as nomCategoriePromo')
+            ->select('p.id', 'p.nomProduit','p.descriptioncourte', 'p.prix', 'MIN(i.url) as image', 'pr.prix as prixpromo', 'cp.nom as nomCategoriePromo')
             ->leftJoin('p.laCategorie', 'c')
             ->leftJoin('p.lesImages', 'i')
             ->leftJoin('p.lesPromos', 'pr', 'WITH', 'pr.dateDebut <= CURRENT_DATE() AND pr.dateFin >= CURRENT_DATE() OR pr.id IS NULL')
@@ -59,6 +59,25 @@ class ProduitsRepository extends ServiceEntityRepository
     
         return $result;
     }
+
+    
+    function getProduitPromoduJour($nomCategorie) {
+        $qb = $this->createQueryBuilder('p')
+            ->select('p.id', 'p.nomProduit', 'pr.prix as prixpromo', 'pr.dateFin as fin', 'cp.nom as nomCategoriePromo')
+            ->leftJoin('p.lesPromos', 'pr', 'WITH', 'pr.dateDebut <= CURRENT_TIMESTAMP() AND pr.dateFin >= CURRENT_TIMESTAMP() OR pr.id IS NULL')
+            ->leftJoin('pr.laCategoriePromo', 'cp')
+            ->where('cp.nom = :nomcategorie')
+            ->orderBy('p.id')
+            ->groupBy('p.id', 'p.nomProduit')
+            ->setParameter('nomcategorie', $nomCategorie)
+            ->setMaxResults(1); // Limite les résultats à un seul produit
+    
+        $query = $qb->getQuery();
+        $result = $query->getOneOrNullResult(); // Utilisez getOneOrNullResult() pour obtenir un seul résultat ou null si aucun n'est trouvé
+    
+        return $result;
+    }
+    
     
 
     function getProduitPromo($nomCategorie) {

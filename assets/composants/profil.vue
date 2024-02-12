@@ -1,4 +1,7 @@
 <template>
+  <div class="bande-image">
+  <img src="/images/fond.png" alt="Image descriptive">
+</div>
     <div class="capsules">
        <div class="capsule" @click="loadContentData('compte')">Compte</div>
        <div class="capsule" @click="loadContentData('commandes')">Commandes</div>
@@ -66,30 +69,43 @@
           </div>
        </div>
        <div v-if="activeContent === 'liste'">
-          <!-- Affichez les données du service client -->
-          <ul>
-             <li v-for="(item, index) in listeData" :key="index">{{ item }}</li>
-          </ul>
-       </div>
-       <div v-if="activeContent === 'fidelite'">
-          <!-- Affichez les données du service client -->
-          <ul>
-             <li v-for="(item, index) in fideliteData" :key="index">{{ item }}</li>
-          </ul>
-       </div>
+        <div>
+        <div class="table-container">
+           <div v-for="(liste, index) in listeData" :key="index" class="commande-group">
+              <!-- Informations de la commande -->
+              <div class="liste-info">
+                 <span><img :src="'/' +  liste.imageUrl " class="photo-liste" /></span>
+                 <span>{{ liste.nomProduit }}</span>
+                 <span class="montant-total">{{ liste.prix }} €</span>
+                 <button class="details-button" @click="enleverFavoris(liste, index)">Supprimer</button>
+                 <button class="details-button" @click="voirProduit (liste, index)">Voir Produit</button>
+              </div>
+           </div>
+        </div>
+     </div>
+</div>
+
+<div v-if="activeContent === 'fidelite'">
+  <div class="points-fidelite">Vous avez {{ compteData.fidelite }} points</div>
+    <div class="carte-fidelite">
+      <div v-for="n in nombreImages" :key="n" class="case-fidelite">
+        <img src="/images/p1.jpg" alt="Point de fidélité">
+      </div>
+    </div>
+    
+  </div>
     </div>
  </template>
   
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted,computed } from 'vue';
 
 export default {
   setup() {
-    
+      
     // État pour gérer le contenu actif
     const activeContent = ref('');
-
     // Simule les données pour chaque section. Dans une application réelle, ces données pourraient être chargées depuis une API
     const compteData = ref({
   nom: '',
@@ -102,6 +118,9 @@ export default {
     const commandesData = ref([]);
     const listeData = ref([]);
     const fideliteData = ref([]);
+
+    const nombreImages = computed(() => Math.floor(compteData.value.fidelite / 10));
+
     // modifier le user
     const modifierUtilisateur = async () => {
   try {
@@ -180,25 +199,71 @@ export default {
     commandesData.value[index].showDetails = !commandesData.value[index].showDetails;
   }
 };
+
+const chargerLaListeDesFavoris = async () => {
+  try {
+    const reponse = await fetch('/api/mobile/getListe');
+    if (!reponse.ok) {
+      throw new Error('Erreur lors du chargement de la liste des favoris');
+    }
+    const data = await reponse.json();
+    listeData.value = data;
+  } catch (error) {
+    console.error("Erreur lors du chargement de la liste des favoris:", error);
+    // Gérer l'erreur appropriée ici, par exemple, en affichant un message à l'utilisateur
+  }
+};
+
+
+// Fonction pour enlever un produit des favoris
+const enleverFavoris = async (liste, index) => {
+  try {
+    // Préparer le corps de la requête. Assurez-vous que l'ID est correctement extrait de l'objet 'liste'.
+    const body = JSON.stringify({ id: liste.id });
+
+    const response = await fetch('/api/mobile/supprimerfavoris', {
+      method: 'POST', // ou 'DELETE', selon ce que votre API attend
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: body,
+    });
+
+    if (!response.ok) {
+      // Gérer les réponses d'erreur de l'API
+      throw new Error('Erreur lors de la suppression du favori');
+    }
+
+    // Traiter la réponse
+    const result = await response.json(); // ou une autre action selon la réponse de votre API
+
+    // Optionnel : Mettre à jour l'état pour refléter la suppression sans recharger la page
+    listeData.value.splice(index, 1); // Supprime l'élément de l'array 'listeData'
+
+    alert('Favori supprimé avec succès');
+  } catch (error) {
+    console.error('Erreur lors de la suppression du favori:', error);
+    alert('Erreur lors de la suppression du favori');
+  }
+};
+
+
+// Fonction pour voir un produit
+const voirProduit = (liste) => {
+  window.location.href = `/lesProduits/voirleproduit/${liste.id}`;
+};
     // Fonction pour charger les données associées à chaque capsule
     const loadContentData = async (contentType) => {
       // Ici, vous pouvez ajouter votre logique pour charger les données spécifiques à chaque type de contenu
       // Par exemple, charger les commandes de l'utilisateur si contentType est 'commandes'
       switch (contentType) {
         case 'compte':
-          // Simule le chargement des données du compte
-         
           break;
         case 'commandes':
-          // Simule le chargement des données de commandes
           break;
         case 'liste':
-          // Simule le chargement des données de service client
-          listeData.value = ['Question 1', 'Réponse 1', 'Question 2', 'Réponse 2'];
           break;
           case 'fidelite':
-          // Simule le chargement des données de service client
-          fideliteData.value = ['Question 1', 'Réponse 1', 'Question 2', 'Réponse 2'];
           break;
       }
       // Définit le contenu actif pour afficher le composant approprié
@@ -208,10 +273,11 @@ export default {
     onMounted(() => {
   chargerLesCommandes();
   chargerDonneesCompte();
+  chargerLaListeDesFavoris();
 });
 
     // Expose les variables et fonctions au template
-    return {modifierUtilisateur,commandesData, voirDetails, activeContent, compteData, commandesData, listeData, fideliteData, loadContentData };
+    return {nombreImages,enleverFavoris,voirProduit,modifierUtilisateur,commandesData, voirDetails, activeContent, compteData, commandesData, listeData, fideliteData, loadContentData };
   }
 };
 
@@ -222,7 +288,7 @@ export default {
   display: flex;
   justify-content: space-around;
   padding: 10px;
-  margin-top: 200px; /* Positionne l'ensemble à 100px du haut */
+  margin-top: 50px; /* Positionne l'ensemble à 100px du haut */
 }
 
 .capsule {
@@ -259,6 +325,7 @@ export default {
 /*tableau des commandes*/
 .content{
     margin-top: 20px;
+    margin-bottom: 20px;;
 }
 .table-container {
   width: 60%;
@@ -312,6 +379,16 @@ export default {
 }
 
 .commande-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  color: white;
+  background-color: #000000; /* Légère couleur de fond */
+  border-bottom: 1px solid #ddd; /* Séparateur visuel */
+}
+
+.liste-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -375,6 +452,13 @@ export default {
   margin: 10px;
 }
 
+.photo-liste {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .photo-profil {
   width: 100px;
   height: 100px;
@@ -417,6 +501,62 @@ export default {
 
 .info-utilisateur button:hover {
   background-color: #39cd4d; /* Couleur de fond au survol */
+}
+
+.carte-fidelite {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 500px; /* Ajustez selon vos besoins */
+  gap: 10px; /* Espace entre les cases */
+  border: 1px solid #ffffff; /* Bordure noire de 1px */
+  border-radius: 10px; /* Rayon de bordure pour les coins arrondis */
+  padding: 10px; /* Espace intérieur autour des éléments */
+  margin: auto; /* Centrer la carte horizontalement */
+  box-sizing: border-box; /* Inclut la bordure et le padding dans la largeur totale */
+}
+
+.case-fidelite {
+  flex-basis: calc(20% - 10px); /* Ajustez pour 5 images par ligne avec un peu d'espace */
+  text-align: center;
+}
+
+.case-fidelite img {
+  width: 100%; /* Ajustez selon la taille de vos images */
+  height: auto;
+  border-radius: 10px;
+}
+
+.points-fidelite {
+  text-align: center; /* Centre le texte des points de fidélité */
+  margin-top: 10px; /* Espace au-dessus du texte des points de fidélité */
+}
+
+/* Ajoutez cette classe pour centrer verticalement la carte de fidélité */
+.conteneur-fidelite {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Hauteur totale de la vue pour centrer verticalement */
+}
+.points-fidelite {
+  color: white; /* Texte en blanc */
+  font-weight: bold; /* Texte en gras */
+  font-size: 3vh; /* Taille de la police basée sur la hauteur de la vue */
+  text-align: center; /* Centre le texte */
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Exemple de police moderne */
+  margin-top: 10px; /* Espace au-dessus du texte des points de fidélité, ajustez selon besoin */
+}
+
+.bande-image {
+  height: 15vw; /* Hauteur fixe pour la bande */
+  width: 100vw; /* Largeur basée sur la largeur de la fenêtre */
+  overflow: hidden; /* Cache tout contenu qui dépasse de la bande */
+}
+
+.bande-image img {
+  width: 100%; /* Assure que l'image s'étend sur toute la largeur */
+  height: 100%; /* Assure que la hauteur de l'image remplit la bande */
+  object-fit: cover; /* Assure que l'image couvre la zone sans être déformée */
 }
 
 </style>

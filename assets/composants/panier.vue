@@ -285,6 +285,7 @@ const continuerAchats = () => {
   display: flex;
   flex-direction: column;
   background: #000000; /* Couleur de fond */
+  
 }
 
 .message-de-succes {
@@ -316,6 +317,12 @@ padding-right: 10px;
   width: 100%; /* Assure que le panier et le tableau prennent toute la largeur du conteneur */
   display: flex;
   flex-direction: column;
+  border: 1px solid #ffffff; /* Bordure noire de 1px */
+  border-radius: 10px; /* Rayon de bordure pour les coins arrondis */
+  padding: 30px; /* Espace intérieur autour des éléments */
+  
+  margin: auto; /* Centrer la carte horizontalement */
+  box-sizing: border-box; /* Inclut la bordure et le padding dans la largeur totale */
   
 }
 

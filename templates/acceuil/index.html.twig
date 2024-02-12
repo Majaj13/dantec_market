@@ -24,9 +24,7 @@
 <div class="section2">
     <p>Meilleures ventes du moment:</p>
     <div class="swipeContainer">
-        <div class="swiper-button-left">
-            <button class="swiper-button-prev"></button>
-        </div>
+
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
                 <!-- Swiper Slides -->
@@ -53,7 +51,7 @@
     <div class="card1" id="application">
         <p>Téléchargez l’application Dantec Market</p>
         <form action="{{ path('app_application') }}">
-            <button type="submit">Téléchager</button>
+            <button type="submit">Télécharger</button>
         </form>
     </div>
     <div class="card1" id="produits">
@@ -70,6 +68,21 @@
     </div>
 </div>
 
+<div class="flex-container">
+  <div class="col col1">
+    <div class="cell cell1"></div>
+    <div class="cell cell2">Image 2</div>
+  </div>
+  <div class="col col2">
+    <div id="app7" class="cell cell3"></div>
+  </div>
+  <div class="col col3">
+    <div class="cell cell4">Image 4</div>
+    <div class="cell cell5">Image 5</div>
+  </div>
+</div>
+
+
 <div class="card-container">
     <div class="card2" id="catalogue">
         <p>Découvrez les nouveautés de ce mois</p>
@@ -79,7 +92,7 @@
     </div>
     <div class="card2" id="partenaires">
         <p>Découvrez  nos partenaires</p>
-        <form action="{{ path('app_partenaire') }}">
+        <form action="{{ path('app_partenaires_liste') }}">
             <button type="submit">Découvrir</button>
         </form>
     </div>
@@ -110,75 +123,6 @@
     {{ parent() }}
 {% endblock %}
 
-<script>
-        document.addEventListener("DOMContentLoaded", function () {
-            let currentIndex = 0;
-            const totalSlides = document.querySelectorAll(".slide").length;
-            const paginationContainer = document.getElementById("pagination");
 
-            function updateCarousel() {
-                const carousel = document.querySelector(".carousel");
-                const slideWidth = document.querySelector(".slide").clientWidth;
-                carousel.style.transform = `translateX(${-currentIndex * slideWidth}px)`;
-
-                // Met à jour l'état actif du bouton de pagination
-                const paginationButtons = document.querySelectorAll(".pagination-button");
-                paginationButtons.forEach((button, index) => {
-                    button.classList.toggle("active", index === currentIndex);
-                });
-            }
-
-            function nextSlide() {
-                currentIndex = (currentIndex + 1) % totalSlides;
-                updateCarousel();
-            }
-
-            function prevSlide() {
-                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-                updateCarousel();
-            }
-
-            // Crée les boutons de pagination
-            for (let i = 0; i < totalSlides; i++) {
-                const button = document.createElement("button");
-                button.className = "pagination-button";
-                button.addEventListener("click", () => {
-                    currentIndex = i;
-                    updateCarousel();
-                });
-                paginationContainer.appendChild(button);
-            }
-
-            updateCarousel(); // Initialise l'état initial du carrousel
-
-            setInterval(nextSlide, 8000); // Change de diapositive toutes les 8 secondes
-        });
-</script>
-
-
- <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-
-
-<script>
- var swiper = new Swiper(".mySwiper", {
-      effect: "coverflow",
-      grabCursor: true,
-      centeredSlides: true,
-      slidesPerView: "auto",
-      coverflowEffect: {
-        rotate: 15,
-        stretch: 0,
-        depth: 300,
-        modifier: 1,
-        slideShadows: true,
-      },
-      loop: true,
-
-      navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
-    });
-</script>
 
 {% endblock %}
