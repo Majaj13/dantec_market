@@ -8,19 +8,13 @@ body {
     box-sizing: border-box;
     scroll-behavior: smooth;
 }
-.container{
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    height: 100vh;
-    width: 100%;
-}
 
-/* Default styles for navbar */
+// Début navBar
+
 .navbar {
     z-index: 1;
     position: relative;
-    height: calc(7vh + 6vh); /* 7vh + 30px top + 30px bottom */
+    height: calc(4vh + 6vh); /* 7vh + 30px top + 30px bottom */
     width: 100%;
     display: flex;
     align-items: center; /* Align items vertically in the middle */
@@ -78,10 +72,10 @@ body {
     text-decoration: none;
     color: #FAFAFA;
     text-align: center;
-    font-family: 'Inter Bold', sans-serif;
-    font-size: 4vh;
+    font-family: 'Inter', sans-serif;
+    font-size: 3.5vh;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 530;
     line-height: normal;
     padding-right: 10vh;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -89,19 +83,29 @@ body {
 
 .boutonNav {
     width: 18.4vh;
-    height: 6.5vh;
+    height: 5.5vh;
     flex-shrink: 0;
     background: #DFBA61;
-    border-radius: 50px;
+    border-radius: 5vh;
     text-decoration: none;
     color: #2D2D2D;
     text-align: center;
     font-family: Inter;
-    font-size: 4.4vh;
+    font-size: 3.5vh;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    cursor:pointer;
 }
+
+// fin navBar
+
+// Début Page D'accueil
+
+// Début du Carousel 
 
 .carousel-container {
     z-index: 2;
@@ -122,7 +126,7 @@ body {
     justify-content: center;
     align-items: flex-end;
     position: absolute;
-    bottom: 12.5vh;
+    bottom: 16.5vh;
     width: 100%;
 }
 
@@ -166,18 +170,22 @@ body {
 
 .slide#slide1 {
     background-image: url('/public/images/dantecMarket1.1.jpg');
-    background-size: 150%;
+    background-size: cover;
 }
 
 .slide#slide2 {
     background-image: url('/public/images/dantecMarket2.1.jpg');
-    background-size: 100%;
+    background-size: cover;
 }
 
 .slide#slide3 {
     background-image: url('/public/images/partenaires.1.jpg');
-    background-size: 100%;
+    background-size: cover;
 }
+
+// Fin du Carousel 
+
+// Début du container du carousel swipe
 
 .section2 {
     width: 100%;
@@ -295,6 +303,36 @@ body {
     -webkit-box-reflect: below 1px linear-gradient(transparent, transparent , #0002 , #0004);
 }
 
+.nom-produit {
+    font-size: 3vh;
+    color: #000;
+    text-decoration: none;
+}
+
+.nom-produit:hover {
+    text-decoration:none;
+}
+
+.prix-produit {
+    font-size: 3vh;
+    color: #000;
+    text-decoration: none;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 11vh;
+}
+
+.prix-produit:hover {
+    text-decoration:none;
+}
+
+.swiper-link a:hover {
+    text-decoration: none !important;
+}
+
+// Fin du container du carousel swipe
+
+// Début des Cards containers
 
 .card-container {
     display: flex;
@@ -404,6 +442,10 @@ body {
 .card2#partenaires {
     background-image: url('/public/images/partenaires.jpg');
 }
+
+// Fin des Cards containers
+
+// Début de Avis containers
 
 .avis-container {
     display: flex;
@@ -540,6 +582,11 @@ body {
     line-height: normal;
 }
 
+// Fin du Avis Container
+
+// Fin de la Page D'accueil
+
+// Début Footer
 
 footer {
     width: 100%;
@@ -636,7 +683,7 @@ footer {
     color: rgba(223, 186, 97, 0.80);
 }
 
-
+// Fin Footer
 
 
 
@@ -818,4 +865,9 @@ footer {
         height: 30px;
         font-size: 12px;
     }
+}
+
+body.page-actualite {
+    background-color: #292929;
+    color: #fff; /* Couleur du texte à l'intérieur des conteneurs */
 }

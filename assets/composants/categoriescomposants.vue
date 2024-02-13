@@ -26,11 +26,11 @@
                 <img :src="product.image" :alt="product.nomProduit">
                 <div class="overlay">
                   <span class="product-nom">{{ product.nomProduit }}</span>
-                  <span class="product-description"><p>{{ descriptionTronquee }}</p></span>
+                  <span class="product-description"><p>{{ product.descriptioncourte }}</p></span>
                   <div class="bottom-section">
                     <span class="product-price">{{ product.nomCategoriePromo ? product.prixpromo : product.prix }} €</span>
                     <div class="button-container">
-                      <a href="/chemin-vers-le-panier" class="icon-panier">
+                      <a href="/commandes/voirpanier" class="icon-panier">
                         <i class="fa fa-shopping-cart"></i>
                       </a>
                     </div>
@@ -210,7 +210,7 @@ const loadProductsByCategory = async (category) => {
 
 .product-description {
   color: #2D2D2D;
-  text-align: center;
+  text-align: justify; /* alignement du texte justifié */
   font-family: Inter;
   font-size: 4vh;
   font-style: normal;
@@ -219,6 +219,11 @@ const loadProductsByCategory = async (category) => {
   opacity: 0;
   transition: opacity 0.3s;
   z-index: 2;
+  overflow: hidden; /* Cache le texte dépassant de la zone */
+  text-overflow: ellipsis; /* Affiche des points de suspension si le texte dépasse */
+  display: -webkit-box; /* Affiche le texte en tant que boîte flexible */
+  -webkit-line-clamp: 3; /* Limite le texte à 3 lignes */
+  -webkit-box-orient: vertical; /* Oriente la boîte flexible verticalement */
 }
 
 .bottom-section {
@@ -289,6 +294,8 @@ const loadProductsByCategory = async (category) => {
     display: flex;
     background-color: #000000;
   }
+
+  
 
   .sticky-container {
     position: sticky;
@@ -418,9 +425,8 @@ const loadProductsByCategory = async (category) => {
 }
 
 .icon-panier {
-  color: rgb(255, 255, 255); /* Rouge pour une quantitÃ© infÃ©rieure Ã  5 */
+  color: rgb(0, 0, 0);
   font-size: 6.6vh;
-
 }
 
 </style>

@@ -225,7 +225,6 @@
 .product-details * {
   text-align: justify; /* Justifie le texte des paragraphes */
   max-width: 80%; /* Limite la largeur maximale du contenu textuel à 60% de la section */
-
 }
 
 .swiper img{
@@ -312,7 +311,7 @@ margin-left: 5vh;
 
 .avis-container {
   margin-left: 0px;
-  background-color: #000;
+  background-color: #292929;
     display: flex;
     justify-content: center;
     align-items: center;

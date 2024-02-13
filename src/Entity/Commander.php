@@ -22,6 +22,9 @@ class Commander
     #[ORM\ManyToOne(inversedBy: 'lesCommandes')]
     private ?Produits $leProduit = null;
 
+    #[ORM\Column]
+    private ?float $prixretenu = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +62,18 @@ class Commander
     public function setLeProduit(?Produits $leProduit): static
     {
         $this->leProduit = $leProduit;
+
+        return $this;
+    }
+
+    public function getPrixretenu(): ?float
+    {
+        return $this->prixretenu;
+    }
+
+    public function setPrixretenu(float $prixretenu): static
+    {
+        $this->prixretenu = $prixretenu;
 
         return $this;
     }

@@ -52,11 +52,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'leUser', targetEntity: Commentaires::class)]
     private Collection $lesCommentaires;
 
+    #[ORM\OneToMany(mappedBy: 'leUser', targetEntity: Favoris::class)]
+    private Collection $lesFavoris;
+
+    #[ORM\Column]
+    private ?int $fidelite = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $photoUrl = null;
+
     public function __construct()
     {
         $this->lesReservations = new ArrayCollection();
         $this->lesCommandes = new ArrayCollection();
         $this->lesCommentaires = new ArrayCollection();
+        $this->lesFavoris = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -263,6 +273,60 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $lesCommentaire->setLeUser(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Favoris>
+     */
+    public function getLesFavoris(): Collection
+    {
+        return $this->lesFavoris;
+    }
+
+    public function addLesFavori(Favoris $lesFavori): static
+    {
+        if (!$this->lesFavoris->contains($lesFavori)) {
+            $this->lesFavoris->add($lesFavori);
+            $lesFavori->setLeUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLesFavori(Favoris $lesFavori): static
+    {
+        if ($this->lesFavoris->removeElement($lesFavori)) {
+            // set the owning side to null (unless already changed)
+            if ($lesFavori->getLeUser() === $this) {
+                $lesFavori->setLeUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getFidelite(): ?int
+    {
+        return $this->fidelite;
+    }
+
+    public function setFidelite(int $fidelite): static
+    {
+        $this->fidelite = $fidelite;
+
+        return $this;
+    }
+
+    public function getPhotoUrl(): ?string
+    {
+        return $this->photoUrl;
+    }
+
+    public function setPhotoUrl(?string $photoUrl): static
+    {
+        $this->photoUrl = $photoUrl;
 
         return $this;
     }

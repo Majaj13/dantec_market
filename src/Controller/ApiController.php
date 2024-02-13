@@ -5,11 +5,12 @@ namespace App\Controller;
 use App\Repository\UserRepository;
 use App\Repository\ProduitsRepository;
 use App\Repository\CategorieParentRepository;
-use App\Repository\CommandesRepository;;
+use App\Repository\CommandesRepository;
 use App\Entity\User;
 use App\Entity\Commandes;
 use App\Entity\Commander;
 use App\Entity\Categorie;
+use App\Repository\ActualiteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
@@ -151,6 +152,17 @@ class ApiController extends AbstractController
         }
     
         return new Response("Utilisateur non authentifié", Response::HTTP_FORBIDDEN);
+    }
+
+    #[Route('/api/mobile/getLesActualites', name: 'app_api_mobile_getLesActualites')]
+    public function getActualites(Request $request, ActualiteRepository $actualiteRepository)
+    {
+        $actualites = $actualiteRepository->findAll();
+   
+        $response = new Utils;
+        $tab = ["titre","texte","lesImages"];
+        return $response->GetJsonResponse($request, $actualites, $tab);
+
     }
     
 

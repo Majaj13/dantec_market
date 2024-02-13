@@ -34,6 +34,9 @@ class Commandes
     #[ORM\Column]
     private ?bool $valider = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $etat = null;
+
     public function __construct()
     {
         $this->lesReservations = new ArrayCollection();
@@ -149,6 +152,18 @@ class Commandes
     public function setValider(bool $valider): static
     {
         $this->valider = $valider;
+
+        return $this;
+    }
+
+    public function getEtat(): ?string
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(string $etat): static
+    {
+        $this->etat = $etat;
 
         return $this;
     }
