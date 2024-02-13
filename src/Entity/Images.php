@@ -21,6 +21,9 @@ class Images
     #[ORM\ManyToMany(targetEntity: Produits::class, mappedBy: 'lesImages')]
     private Collection $lesProduits;
 
+    #[ORM\ManyToOne(inversedBy: 'lesimages')]
+    private ?Actualite $laActualite = null;
+
     public function __construct()
     {
         $this->lesProduits = new ArrayCollection();
@@ -66,6 +69,18 @@ class Images
         if ($this->lesProduits->removeElement($lesProduit)) {
             $lesProduit->removeLesImage($this);
         }
+
+        return $this;
+    }
+
+    public function getLaActualite(): ?Actualite
+    {
+        return $this->laActualite;
+    }
+
+    public function setLaActualite(?Actualite $laActualite): static
+    {
+        $this->laActualite = $laActualite;
 
         return $this;
     }

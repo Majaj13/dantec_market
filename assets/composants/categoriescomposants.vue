@@ -196,7 +196,7 @@ const loadProductsByCategory = async (category) => {
 .product-nom {
   color: #0f5607;
   text-align: left;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 5vh;
   font-style: normal;
   font-weight: 600;
@@ -213,7 +213,7 @@ const loadProductsByCategory = async (category) => {
 .product-description {
   color: #2D2D2D;
   text-align: left;
-  font-family: Inter;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 2vh;
   font-style: normal;
   font-weight: 300;
@@ -233,7 +233,7 @@ const loadProductsByCategory = async (category) => {
 
 .product-price {
   color: #ffffff;
-  font-family: Inter;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 4vh;
   font-style: normal;
   font-weight: 900;

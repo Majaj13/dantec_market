@@ -9,6 +9,7 @@ use App\Repository\CommandesRepository;
 use App\Repository\PlanningRepository;
 use App\Repository\FavorisRepository;
 use App\Repository\PartenairesRepository;
+use App\Repository\ActualiteRepository;
 use App\Entity\User;
 use App\Entity\Réserver;
 use App\Entity\Commandes;
@@ -110,6 +111,25 @@ class ApiController extends AbstractController
     {
         $postdata = json_decode($request->getContent());
         $var =  $produitsRepository->getProduitPromoDuJour($postdata->jour);
+       
+        $response = new Utils;
+        return $response->GetJsonResponse($request, $var);
+    }
+
+    #[Route('/api/mobile/produitType', name: 'app_api_mobile_GetproduitType')]
+    public function GetproduitType(Request $request, ProduitsRepository $produitsRepository)
+    {
+        $postdata = json_decode($request->getContent());
+        $var =  $produitsRepository->getProduitPromoDuJour($postdata->promo);
+       
+        $response = new Utils;
+        return $response->GetJsonResponse($request, $var);
+    }
+
+    #[Route('/api/mobile/produitmoinsvendu', name: 'app_api_mobile_Getproduitmoinsvendu')]
+    public function Getproduitmoinsvendu(Request $request, ProduitsRepository $produitsRepository)
+    {
+        $var =  $produitsRepository->findLeastSoldLastWeek();
        
         $response = new Utils;
         return $response->GetJsonResponse($request, $var);
@@ -481,6 +501,17 @@ public function GetLesCommandes(Request $request, CommandesRepository $commandes
         $response = new Utils;
         return $response->GetJsonResponse($request, $var);
     }
+
+    #[Route('/api/mobile/getLesActualites', name: 'api_mobile_getLesActualites')]
+    public function getLesActualites(Request $request, EntityManagerInterface $entityManager,ActualiteRepository $actualiteRepository): Response
+    {
+        $postdata = json_decode($request->getContent());
+        $var = $actualiteRepository->findAll(); 
+        $response = new Utils;
+        return $response->GetJsonResponse($request, $var);
+    }
+
+    
     #[Route('/api/mobile/versverifierfavoris', name: 'api_mobile_versverifierfavoris')]
     public function getversverifierfavoris(Request $request, EntityManagerInterface $entityManager,ProduitsRepository $produitRepository,UserRepository $userRepository,FavorisRepository $FavorisRepository): Response
     {

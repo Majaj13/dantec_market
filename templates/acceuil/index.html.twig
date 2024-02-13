@@ -32,8 +32,8 @@
                     <div class="swiper-slide" style="background-image: url('{{ produit.imageUrl }}');">
                         <a href="{{ path('app_voir_produit', {'id': produit.id}) }}" class="swiper-link">
                             <div class="slide-content">
-                                <span class="nom-produit">{{ produit.nomProduit }}</span>
-                                <span class="prix-produit">{{ produit.prix }} €</span>
+                                <div class="nom-produit">{{ produit.nomProduit }}</div>
+                                <div class="prix-produit">{{ produit.prix }} €</div>
                             </div>
                         </a>
                     </div>
@@ -70,15 +70,15 @@
 
 <div class="flex-container">
   <div class="col col1">
-    <div class="cell cell1"></div>
-    <div class="cell cell2">Image 2</div>
+    <div id="app8" class="cell cell1"></div>
+    <div id="app9" class="cell cell1"></div>
   </div>
   <div class="col col2">
     <div id="app7" class="cell cell3"></div>
   </div>
   <div class="col col3">
-    <div class="cell cell4">Image 4</div>
-    <div class="cell cell5">Image 5</div>
+    <div id="app10" class="cell cell1"></div>
+    <div id="app11" class="cell cell1"></div>
   </div>
 </div>
 

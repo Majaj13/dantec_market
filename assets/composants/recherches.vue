@@ -9,9 +9,7 @@
                  <div class="product-info">
                    
                     <img :src="'/' +product.image" :alt="product.nomProduit">
-                    <span class="product-promo" v-if="product.nomCategoriePromo" :class="getPromoClass(product.nomCategoriePromo)">
-                    {{ product.nomCategoriePromo }}
-                    </span>
+                   
                     <span class="product-nom">{{ product.nomProduit }}</span>
                     
                     
@@ -72,6 +70,7 @@
   };
 </script>
 <style scoped>
+
   .main-container {
   flex: 1;
   padding-top: 200px;
@@ -88,8 +87,8 @@
   }
   .product-item {
   background-color: #fff;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+
+
   }
   .product-item a {
   text-decoration: none;
@@ -100,8 +99,10 @@
   .product-item img {
   width: 100%;
   height: auto;
+
   }
   .product-info {
+
   display: flex;
   flex-direction: column;
   height: 100%; /* Assurez-vous que le conteneur occupe toute la hauteur de la cellule de la grille */
@@ -109,7 +110,7 @@
   .product-nom {
   color: white;
   font-size: 4vh;
-  font-weight: bold;
+ 
   text-align: center;
   background-color: rgba(0, 0, 0, 1);  padding: 5px;
   

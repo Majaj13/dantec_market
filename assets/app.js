@@ -18,6 +18,13 @@ import RecherchesComposants from './composants/recherches.vue';
 import ProfilComposants from './composants/profil.vue';
 import PartenairesComposants from './composants/partenaires.vue';
 import TodayComponent from './composants/TodayComponent.vue';
+import MoinsVendusComponent from './composants/moinsvendus.vue';
+import NouveauteComponent from './composants/nouveaute.vue';
+import TendanceComponent from './composants/tendance.vue';
+import FlashComponent from './composants/flash.vue';
+import ActualiteComponent from './composants/actualite.vue';
+
+
 
 
 const appCategoriesComposants = createApp(CategoriesComposants);
@@ -27,6 +34,12 @@ const appRecherchesComposants = createApp(RecherchesComposants);
 const appProfilComposants = createApp(ProfilComposants);
 const appPartenairesComposants = createApp(PartenairesComposants);
 const appTodayComponentComposants = createApp(TodayComponent);
+const appMoinsVendusComponentComposants = createApp(MoinsVendusComponent);
+const appNouveauteComponentComposants = createApp(NouveauteComponent);
+const appTendanceComponentComposants = createApp(TendanceComponent);
+const appFlashComponentComposants = createApp(FlashComponent);
+const appActualiteComponentComposants = createApp(ActualiteComponent);
+
 
 appCategoriesComposants.mount('#app');
 appFicheProduitComposants.mount('#app2');
@@ -35,6 +48,11 @@ appRecherchesComposants.mount('#app4');
 appProfilComposants.mount('#app5');
 appPartenairesComposants.mount('#app6');
 appTodayComponentComposants.mount('#app7');
+appMoinsVendusComponentComposants.mount('#app8');
+appNouveauteComponentComposants.mount('#app9');
+appFlashComponentComposants.mount('#app10');
+appTendanceComponentComposants.mount('#app11');
+appActualiteComponentComposants.mount('#app12');
 
 
 

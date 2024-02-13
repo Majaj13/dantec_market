@@ -455,7 +455,7 @@
   .date,
   .etoiles {
   width: 100%;
-  font-family: Inter;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   }
   .titre {
   height: 15%;
@@ -532,7 +532,7 @@
   text-decoration: none;
   color: #2D2D2D;
   text-align: center;
-  font-family: Inter;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 5.5vh;
   font-style: normal;
   font-weight: 700;
