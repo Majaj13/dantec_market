@@ -195,17 +195,20 @@ body {
 
 .slide#slide1 {
     background-image: url('/public/images/dantecMarket1.1.jpg');
-    background-size: 150%;
+    background-size: cover; /* Assure que l'image de fond couvre le conteneur */
+    background-position: center; /* Centre l'image de fond */
 }
 
 .slide#slide2 {
     background-image: url('/public/images/dantecMarket2.1.jpg');
-    background-size: 100%;
+   background-size: cover; /* Assure que l'image de fond couvre le conteneur */
+    background-position: center; /* Centre l'image de fond */
 }
 
 .slide#slide3 {
     background-image: url('/public/images/partenaires.1.jpg');
-    background-size: 100%;
+    background-size: cover; /* Assure que l'image de fond couvre le conteneur */
+    background-position: center; /* Centre l'image de fond */
 }
 
 .section2 {
@@ -278,7 +281,7 @@ body {
   }
   
   .col .cell {
-    color: black;
+    color: rgb(255, 255, 255);
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
     font-size: 2em;
 
@@ -303,7 +306,7 @@ body {
   }
   
   /* Exemples d'images de fond pour chaque cellule */
-  .cell1 { background-color: rgba(199, 93, 35, 0.5); }
+  .cell1 {  background-image: url('/public/images/vagues.jpg'); }
   .cell2 { background-color: rgba(180, 178, 160, 0.5); }
   .cell3 { background-color: rgba(180, 178, 160, 0.5); }
   .cell4 { background-color: rgba(172, 226, 204, 0.5); }
@@ -433,14 +436,20 @@ body {
 
 .card1#application {
     background-image: url('/public/images/application.jpg');
+    background-size: cover; /* Assure que l'image de fond couvre le conteneur */
+    background-position: center; /* Centre l'image de fond */
 }
 
 .card1#produits {
     background-image: url('/public/images/produits.jpg');
+    background-size: cover; /* Assure que l'image de fond couvre le conteneur */
+    background-position: center; /* Centre l'image de fond */
 }
 
 .card1#actualité {
-    background-image: url('/public/images/dantecMarket1.jpg');
+    background-image: url('/public/images/actualites1.jpg');
+    background-size: cover; /* Assure que l'image de fond couvre le conteneur */
+    background-position: center; /* Centre l'image de fond */
 }
 
 .card2 {
@@ -476,10 +485,14 @@ body {
 
 .card2#catalogue {
     background-image: url('/public/images/catalogue.jpg');
+    background-size: cover; /* Assure que l'image de fond couvre le conteneur */
+    background-position: center; /* Centre l'image de fond */
 }
 
 .card2#partenaires {
     background-image: url('/public/images/partenaires.jpg');
+    background-size: cover; /* Assure que l'image de fond couvre le conteneur */
+    background-position: center; /* Centre l'image de fond */
 }
 
 .avis-container {

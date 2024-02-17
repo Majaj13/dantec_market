@@ -292,7 +292,7 @@ const loadProductsByCategory = async (category) => {
 
 .lesProduitsContainer {
     display: flex;
-    background-color: #000000;
+    background-color: #2D2D2D;
   }
 
   
@@ -304,7 +304,7 @@ const loadProductsByCategory = async (category) => {
     padding-right: 2vh;
     width: 20vh;
     height: auto;
-    background-color: #000000;
+    background-color: #2D2D2D;
     margin-top: 8vh;
   }
 

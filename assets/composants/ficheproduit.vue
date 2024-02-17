@@ -12,15 +12,11 @@
         </div>
      </div>
      <div class="product-details">
-        
-           <div class="titre-favori-container">
-              <h1>{{ product.nomProduit }}</h1>
-              <span class="coeur" v-if="messageStatus">{{ messageStatus }}</span>
-              <i class="fa fa-heart" :class="{ 'coeur-rouge': estDansLesFavoris, 'coeur-blanc': !estDansLesFavoris }" @click="ajouterAuxFavoris(product.id)"></i>
-
-           </div>
-           
-       
+        <div class="titre-favori-container">
+           <h1>{{ product.nomProduit }}</h1>
+           <span class="coeur" v-if="messageStatus">{{ messageStatus }}</span>
+           <i class="fa fa-heart" :class="{ 'coeur-rouge': estDansLesFavoris, 'coeur-blanc': !estDansLesFavoris }" @click="ajouterAuxFavoris(product.id)"></i>
+        </div>
         <p v-if="promo.prixpromo">
            Prix Promo: {{ promo.prixpromo }}€
            <span v-if="utilisateurAuthentifie">
@@ -42,13 +38,18 @@
         <p :class="quantiteClass">{{ product.quantiteDisponible }} article(s) en stock</p>
         <div class="promo-container" v-if="product">
            <!-- ... autres éléments du produit ... -->
-           <div v-if="promo.nomCategoriePromo" :class="['promo-capsule', {'flash': promo.nomCategoriePromo === 'Flash', 'promo': promo.nomCategoriePromo === 'Promo'}]">
+           <div v-if="promo.nomCategoriePromo" :class="['promo-capsule', {'nouveaute': promo.nomCategoriePromo === 'Nouveaute','flash': promo.nomCategoriePromo === 'Flash', 'promo': promo.nomCategoriePromo === 'Promo'}]">
               {{ promo.nomCategoriePromo }}
            </div>
            <!-- Afficher le temps restant en dehors de la capsule de promotion -->
            <div v-if="promo.fin" class="temps-restant">
               Il vous reste : {{ calculerTempsRestant(promo.fin) }}
            </div>
+        </div>
+        <div class="rating"> Avis : 
+           <span v-for="star in 5" :key="star" class="star"> 
+           <i class="fa fa-star" :class="{'is-active': star <= product.etoiles}"></i>
+           </span>
         </div>
         <p>Description :</p>
         <p>{{ descriptionTronquee }}</p>
@@ -88,7 +89,7 @@
       const utilisateurAuthentifie = ref(false);
       const estDansLesFavoris = ref(false); // Pour stocker l'état de favori
       
-
+  
       //gestion du coeur
       const verifierSiFavori = async (produitId) => {
     try {
@@ -110,7 +111,7 @@
         console.error('Erreur lors de la communication avec l\'API', erreur);
         estDansLesFavoris.value = false;
     }
-};
+  };
   
   //gestion du favoris
   const ajouterAuxFavoris = async (produitId) => {
@@ -255,7 +256,7 @@
   
       return `${jours} jours, ${heures} heures, ${minutes} minutes, ${secondes} secondes`;
     };
-
+  
     watch(() => product.value, (nouveauProduit) => {
       if (nouveauProduit && nouveauProduit.id) {
         verifierSiFavori(nouveauProduit.id);
@@ -297,9 +298,25 @@
   };
 </script>
 <style>
-.coeur{
+  .rating .fa-star {
+  font-size: 1em; /* Définit la taille des étoiles à 10px */
+  }
+  .rating span.star {
+  margin-right: 3px; /* Réduit l'espace à droite de chaque étoile */
+  }
+  .star i {
+  color: gray; /* Couleur par défaut des étoiles */
+  }
+  .star i.is-active {
+  color: gold; /* Couleur des étoiles sélectionnées */
+  }
+  .star.disabled {
+  pointer-events: none; /* Désactive les événements de souris */
+  opacity: 0.5; /* Rend l'étoile semi-transparente */
+  }
+  .coeur{
   margin-left: auto;
-}
+  }
   .carousel-container{
   margin-top: 10px;
   }
@@ -314,7 +331,7 @@
   display: flex;
   background-color: black;
   color: white;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   }
   .product-image {
   width: 40%; /* Modifiez la largeur à 40% pour l'image */
@@ -334,9 +351,9 @@
   max-width: 80%; /* Limite la largeur maximale du contenu textuel à 60% de la section */
   }
   .swiper-slide img {
-    display: block;
-    width: 60%;
-    -webkit-box-reflect: below 1px linear-gradient(transparent, transparent , #0002 , #0004);
+  display: block;
+  width: 60%;
+  -webkit-box-reflect: below 1px linear-gradient(transparent, transparent , #0002 , #0004);
   }
   .swiper img{
   cursor: pointer;
@@ -396,6 +413,9 @@
   }
   .promo {
   background-color: rgb(209, 26, 26);
+  }
+  .nouveaute{
+  background-color: rgb(38, 20, 168);
   }
   .titre-favori-container {
   display: flex;
@@ -539,10 +559,9 @@
   line-height: normal;
   }
   .coeur-rouge {
-    color: red;
-}
-
-.coeur-blanc {
-    color: white;
-}
+  color: red;
+  }
+  .coeur-blanc {
+  color: white;
+  }
 </style>

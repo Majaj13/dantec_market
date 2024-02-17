@@ -25,6 +25,9 @@ class Commander
     #[ORM\Column]
     private ?float $prixretenu = null;
 
+    #[ORM\Column]
+    private ?bool $noteDonnee = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,18 @@ class Commander
     public function setPrixretenu(float $prixretenu): static
     {
         $this->prixretenu = $prixretenu;
+
+        return $this;
+    }
+
+    public function isNoteDonnee(): ?bool
+    {
+        return $this->noteDonnee;
+    }
+
+    public function setNoteDonnee(bool $noteDonnee): static
+    {
+        $this->noteDonnee = $noteDonnee;
 
         return $this;
     }

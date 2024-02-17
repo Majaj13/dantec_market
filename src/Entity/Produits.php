@@ -48,6 +48,15 @@ class Produits
     #[ORM\OneToMany(mappedBy: 'leProduit', targetEntity: Favoris::class)]
     private Collection $lesFavoris;
 
+    #[ORM\Column]
+    private ?int $etoiles = null;
+
+    #[ORM\Column]
+    private ?int $nbvotes = null;
+
+    #[ORM\Column]
+    private ?int $nbAvis = null;
+
     public function __construct()
     {
         $this->lesCommandes = new ArrayCollection();
@@ -274,6 +283,42 @@ class Produits
                 $lesFavori->setLeProduit(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEtoiles(): ?int
+    {
+        return $this->etoiles;
+    }
+
+    public function setEtoiles(int $etoiles): static
+    {
+        $this->etoiles = $etoiles;
+
+        return $this;
+    }
+
+    public function getNbvotes(): ?int
+    {
+        return $this->nbvotes;
+    }
+
+    public function setNbvotes(int $nbvotes): static
+    {
+        $this->nbvotes = $nbvotes;
+
+        return $this;
+    }
+
+    public function getNbAvis(): ?int
+    {
+        return $this->nbAvis;
+    }
+
+    public function setNbAvis(int $nbAvis): static
+    {
+        $this->nbAvis = $nbAvis;
 
         return $this;
     }

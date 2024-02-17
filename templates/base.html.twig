@@ -1,154 +1,137 @@
 {% block stylesheets %}
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
-    {{ encore_entry_link_tags('test') }}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+{{ encore_entry_link_tags('test') }}
 {% endblock %}
-
 {% block head %}
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 {% endblock %}
-
 {% block body %}
-
+{% block navbar %}
 <div class="navbar">
-    <div class="navbar-left">
-        <a href="{{ path('app_les_produits') }}" class="textNav">Nos produits</a>
-        <a href="{{ path('app_actualite') }}" class="textNav">Nos actualités</a>
-    </div>
-    <div class="navbar-middle">
-        <a href="{{ path('app_acceuil') }}"><img src="/images/logo.jpg"></img></a>
-    </div>
-    <div class="navbar-right">
-        <a href="" class="textNav">Contactez nous</a>
-       <a href="{{ is_granted('ROLE_USER') ? path('app_logout') : path('app_login') }}" class="boutonNav">
-    {{ is_granted('ROLE_USER') ? 'Logout' : 'Login' }}
-</a>
-  {% if is_granted('ROLE_USER') %}
-        <a href="/commandes/voirpanier" class="iconPanier">
-            <i class="fa fa-shopping-cart" style="color: white; font-size: 24px;"></i>
-        </a>
-        <a href="/commandes/profil" class="iconProfil">
-        <i class="fa fa-user-circle" style="color: white; font-size: 24px;"></i>
-    </a>
-    {% endif %}
-    </div>
-
-
-<!-- Barre de recherche à droite de la page -->
-<div class="search-bar-container">
-    <form class="form-inline" action="/lesProduits/rechercher" method="GET">
-        <input class="form-control" type="search" placeholder="Rechercher" aria-label="Rechercher" name="query">
-        <button class="btn btn-outline-success" type="submit">Rechercher</button>
-    </form>
-
-</div>
+   <div class="navbar-left">
+      <a href="{{ path('app_les_produits') }}" class="textNav">Nos produits</a>
+      <a href="{{ path('app_actualite') }}" class="textNav">Nos actualités</a>
+   </div>
+   <div class="navbar-middle">
+      <a href="{{ path('app_acceuil') }}"><img src="/images/logo.jpg"></img></a>
+   </div>
+   <div class="navbar-right">
+      <a href="" class="textNav">Contactez nous</a>
+      <a href="{{ is_granted('ROLE_USER') ? path('app_logout') : path('app_login') }}" class="boutonNav">
+      {{ is_granted('ROLE_USER') ? 'Logout' : 'Login' }}
+      </a>
+      {% if is_granted('ROLE_USER') %}
+      <a href="/commandes/voirpanier" class="iconPanier">
+      <i class="fa fa-shopping-cart" style="color: white; font-size: 24px;"></i>
+      </a>
+      <a href="/commandes/profil" class="iconProfil">
+      <i class="fa fa-user-circle" style="color: white; font-size: 24px;"></i>
+      </a>
+      {% endif %}
+   </div>
+   <!-- Barre de recherche à droite de la page -->
+   
 </div>
 {% endblock %}
-
-
+{% endblock %}
 {% block footer %}{% endblock %}
-    <div class="footer-container" id="premiere">
-        <div class="container-foot" id="haut">
-            <p>Informations légales:</p>
-            <ul>
-                <li>Mentions légales</li>
-                <li>Cookies</li>
-                <li>CGV</li>
-                <li>Politique de protection des données personnelles</li>
-                <li>Mentions légales CGU</li>
-            </ul>
-        </div>
-        <div class="container-foot" id="bas">
-            <p>Téléchargez l’application Dantec Market:</p>
-            <button id="googlePlay"></button>
-            <button id="appStore"></button>
-        </div>
-    </div>
-    <div class="footer-container" id="deuxieme">
-        <div class="container-foot">
-            <p>Suivez nous:</p>
-            <a href="#" class="btn btn-social-icon btn-twitter">
-                <i class="fab fa-twitter"></i>
-            </a>
-
-            <a href="https://www.facebook.com/felix.ledantec.7?locale=fr_FR" class="btn btn-social-icon btn-facebook">
-                <i class="fab fa-facebook"></i>
-            </a>
-
-            <a href="https://www.instagram.com/dantec.market?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="btn btn-social-icon btn-instagram">
-                <i class="fab fa-instagram"></i>
-            </a>
-        </div>
-    </div>
-     {% block javascripts %}
-            {{ encore_entry_script_tags('test') }}
-               <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<div class="footer-container" id="premiere">
+   <div class="container-foot" id="haut">
+      <p>Informations légales:</p>
+      <ul>
+         <li>Mentions légales</li>
+         <li>Cookies</li>
+         <li>CGV</li>
+         <li>Politique de protection des données personnelles</li>
+         <li>Mentions légales CGU</li>
+      </ul>
+   </div>
+   <div class="container-foot" id="bas">
+      <p>Téléchargez l’application Dantec Market:</p>
+      <button id="googlePlay"></button>
+      <button id="appStore"></button>
+   </div>
+</div>
+<div class="footer-container" id="deuxieme">
+   <div class="container-foot">
+      <p>Suivez nous:</p>
+      <a href="#" class="btn btn-social-icon btn-twitter">
+      <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://www.facebook.com/felix.ledantec.7?locale=fr_FR" class="btn btn-social-icon btn-facebook">
+      <i class="fab fa-facebook"></i>
+      </a>
+      <a href="https://www.instagram.com/dantec.market?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="btn btn-social-icon btn-instagram">
+      <i class="fab fa-instagram"></i>
+      </a>
+   </div>
+</div>
+{% block javascripts %}
+{{ encore_entry_script_tags('test') }}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-            <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            let currentIndex = 0;
-            const totalSlides = document.querySelectorAll(".slide").length;
-            const paginationContainer = document.getElementById("pagination");
-
-            function updateCarousel() {
-                const carousel = document.querySelector(".carousel");
-                const slideWidth = document.querySelector(".slide").clientWidth;
-                carousel.style.transform = `translateX(${-currentIndex * slideWidth}px)`;
-
-                // Met à jour l'état actif du bouton de pagination
-                const paginationButtons = document.querySelectorAll(".pagination-button");
-                paginationButtons.forEach((button, index) => {
-                    button.classList.toggle("active", index === currentIndex);
-                });
-            }
-
-            function nextSlide() {
-                currentIndex = (currentIndex + 1) % totalSlides;
-                updateCarousel();
-            }
-
-            function prevSlide() {
-                currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-                updateCarousel();
-            }
-
-            // Crée les boutons de pagination
-            for (let i = 0; i < totalSlides; i++) {
-                const button = document.createElement("button");
-                button.className = "pagination-button";
-                button.addEventListener("click", () => {
-                    currentIndex = i;
-                    updateCarousel();
-                });
-                paginationContainer.appendChild(button);
-            }
-
-            updateCarousel(); // Initialise l'état initial du carrousel
-
-            setInterval(nextSlide, 8000); // Change de diapositive toutes les 8 secondes
-        });
-</script>
-
 <script>
-    var swiper = new Swiper(".mySwiper", {
-      effect: "coverflow",
-      grabCursor: true,
-      centeredSlides: true,
-      slidesPerView: "auto",
-      coverflowEffect: {
-        rotate: 15,
-        stretch: 0,
-        depth: 300,
-        modifier: 1,
-        slideShadows: true,
-      },
-      loop: true,
-    });
-    </script>
+   document.addEventListener("DOMContentLoaded", function () {
+       let currentIndex = 0;
+       const totalSlides = document.querySelectorAll(".slide").length;
+       const paginationContainer = document.getElementById("pagination");
    
-     {% endblock %}
-
+       function updateCarousel() {
+           const carousel = document.querySelector(".carousel");
+           const slideWidth = document.querySelector(".slide").clientWidth;
+           carousel.style.transform = `translateX(${-currentIndex * slideWidth}px)`;
+   
+           // Met à jour l'état actif du bouton de pagination
+           const paginationButtons = document.querySelectorAll(".pagination-button");
+           paginationButtons.forEach((button, index) => {
+               button.classList.toggle("active", index === currentIndex);
+           });
+       }
+   
+       function nextSlide() {
+           currentIndex = (currentIndex + 1) % totalSlides;
+           updateCarousel();
+       }
+   
+       function prevSlide() {
+           currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+           updateCarousel();
+       }
+   
+       // Crée les boutons de pagination
+       for (let i = 0; i < totalSlides; i++) {
+           const button = document.createElement("button");
+           button.className = "pagination-button";
+           button.addEventListener("click", () => {
+               currentIndex = i;
+               updateCarousel();
+           });
+           paginationContainer.appendChild(button);
+       }
+   
+       updateCarousel(); // Initialise l'état initial du carrousel
+   
+       setInterval(nextSlide, 8000); // Change de diapositive toutes les 8 secondes
+   });
+</script>
+<script>
+   var swiper = new Swiper(".mySwiper", {
+     effect: "coverflow",
+     grabCursor: true,
+     centeredSlides: true,
+     slidesPerView: "auto",
+     coverflowEffect: {
+       rotate: 15,
+       stretch: 0,
+       depth: 300,
+       modifier: 1,
+       slideShadows: true,
+     },
+     loop: true,
+   });
+</script>
+{% endblock %}
