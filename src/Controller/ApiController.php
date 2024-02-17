@@ -447,7 +447,8 @@ if (!$commander) {
 
 // Mettez à jour les propriétés de l'utilisateur
 $produit->setNbvotes($produit->getNbvotes()+1);
-$produit->setEtoiles((($produit->getNbvotes()-1)*$produit->getEtoiles()+$postdata->nombreEtoiles)/$produit->getNbvotes());
+$produit->setNbAvis($produit->getNbAvis()+$postdata->nombreEtoiles);
+$produit->setEtoiles($produit->getNbvotes()/$produit->getNbAvis());
 
 $commander->setNoteDonnee(1);
 

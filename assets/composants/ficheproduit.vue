@@ -49,7 +49,7 @@
         <div class="rating"> Avis : 
            <span v-for="star in 5" :key="star" class="star"> 
            <i class="fa fa-star" :class="{'is-active': star <= product.etoiles}"></i>
-           </span>
+           </span>sur {{ product.nbAvis }} avis
         </div>
         <p>Description :</p>
         <p>{{ descriptionTronquee }}</p>
