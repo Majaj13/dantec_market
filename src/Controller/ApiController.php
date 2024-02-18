@@ -10,6 +10,7 @@ use App\Repository\PartenairesRepository;
 use App\Repository\ActualiteRepository;
 use App\Repository\CommentairesRepository;
 use App\Repository\CommanderRepository;
+use App\Repository\MessagesRepository;
 use App\Entity\User;
 use App\Entity\Réserver;
 use App\Entity\Commandes;
@@ -17,6 +18,7 @@ use App\Entity\Commander;
 use App\Entity\Categorie;
 use App\Entity\Favoris;
 use App\Entity\Commentaires;
+use App\Entity\Messages;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
@@ -459,4 +461,27 @@ $entityManager->flush();
 // Retournez une réponse ou redirigez l'utilisateur
 return new Response('commentaire updated successfully');
 }
+
+
+#[Route('/api/mobile/creermessage', name: 'api_Getcreermessage')]
+public function getCreermessage(Request $request, MessagesRepository $messageRepository, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
+{
+    $postdata = json_decode($request->getContent());
+    $user = $this->getUser();
+    $user = $userRepository->find($user->getId());
+
+    $message = new Messages();
+    $message->setMessage($postdata->message);
+    $message->setDateMessage(new \DateTime());
+    $message->setEtat('A traiter');
+    $message->setReponse('-');
+
+// Persistez les changements
+$entityManager->persist($message);
+$entityManager->flush();
+
+    return new Response('commentaire created successfully');
+
+}
+
 }

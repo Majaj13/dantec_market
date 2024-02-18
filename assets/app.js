@@ -23,6 +23,7 @@ import NouveauteComponent from './composants/nouveaute.vue';
 import TendanceComponent from './composants/tendance.vue';
 import FlashComponent from './composants/flash.vue';
 import ActualiteComponent from './composants/actualite.vue';
+import MessageComponent from './composants/message.vue';
 
 
 
@@ -39,6 +40,7 @@ const appNouveauteComponentComposants = createApp(NouveauteComponent);
 const appTendanceComponentComposants = createApp(TendanceComponent);
 const appFlashComponentComposants = createApp(FlashComponent);
 const appActualiteComponentComposants = createApp(ActualiteComponent);
+const appMessageComponentComposants = createApp(MessageComponent);
 
 
 appCategoriesComposants.mount('#app');
@@ -53,6 +55,7 @@ appNouveauteComponentComposants.mount('#app9');
 appFlashComponentComposants.mount('#app10');
 appTendanceComponentComposants.mount('#app11');
 appActualiteComponentComposants.mount('#app12');
+appMessageComponentComposants.mount('#app13');
 
 
 
