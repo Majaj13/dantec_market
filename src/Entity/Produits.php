@@ -57,6 +57,9 @@ class Produits
     #[ORM\Column]
     private ?int $nbAvis = null;
 
+    #[ORM\Column]
+    private ?int $points = null;
+
     public function __construct()
     {
         $this->lesCommandes = new ArrayCollection();
@@ -319,6 +322,18 @@ class Produits
     public function setNbAvis(int $nbAvis): static
     {
         $this->nbAvis = $nbAvis;
+
+        return $this;
+    }
+
+    public function getPoints(): ?int
+    {
+        return $this->points;
+    }
+
+    public function setPoints(int $points): static
+    {
+        $this->points = $points;
 
         return $this;
     }

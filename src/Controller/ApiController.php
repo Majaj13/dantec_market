@@ -471,6 +471,7 @@ public function getCreermessage(Request $request, MessagesRepository $messageRep
     $user = $userRepository->find($user->getId());
 
     $message = new Messages();
+    $message->setleUser($user);
     $message->setMessage($postdata->message);
     $message->setDateMessage(new \DateTime());
     $message->setEtat('A traiter');
@@ -482,6 +483,18 @@ $entityManager->flush();
 
     return new Response('commentaire created successfully');
 
+}
+
+#[Route('/api/mobile/touslesmessages', name: 'api_mobile_gettouslesmessages')]
+public function gettouslesmessages(Request $request, EntityManagerInterface $entityManager,MessagesRepository $messagesRepository,UserRepository $userRepository): Response
+{
+    $postdata = json_decode($request->getContent());
+    $user = $this->getUser();
+    $user = $userRepository->find($user->getId());
+$var = $messagesRepository->findBy(['leUser'=>$user]); 
+$response = new Utils;
+$tab = ["lesCommandes","lesReservations","laCategorie","lesCommentaires","leUser"];
+return $response->GetJsonResponse($request, $var,$tab);
 }
 
 }

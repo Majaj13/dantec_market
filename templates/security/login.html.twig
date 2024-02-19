@@ -36,17 +36,15 @@
             <label for="inputEmail">Email</label>
             <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
             
-            
+            <br>
+            <label for="inputPassword">Mot de Passe </label>
+            <div class="password-icon"></div>
             <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-            <label for="inputPassword">Mot de Passe
-            <div class="password-icon">
-                    <i data-feather="eye"></i>
-                    <i data-feather="eye-off"></i>
-                </div>
-            </label>
+            
             <input type="hidden" name="_csrf_token"value="{{ csrf_token('authenticate') }}">
-
+<br>
             <button type="submit" class="registerButton">Se Connecter</button>
+            <br>
             <a href="{{ path('app_register') }}">Pas encore de compte ? S'inscrire</a>
         </form>
     </div>

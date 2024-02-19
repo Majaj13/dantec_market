@@ -1,8 +1,8 @@
 <template>
     <div>
        <div class="bienvenue-actu">
-          <h1>Bienvenue sur l’actualité de Dantec Market</h1>
-          <p>Ici nous traiteront de l’actualité sur le magasin et sur tout ce qui l’entoure...</p>
+          <h1>Quoi de neuf chez Dantec Market</h1>
+          <p>Ici nous traiterons de l’actualité du magasin et de ce qui l’entoure...</p>
        </div>
        <div v-if="loading">Chargement...</div>
        <div v-else-if="error">Erreur de chargement des données.</div>
@@ -68,7 +68,7 @@
     .bienvenue-actu {
     width: 100%;
     height: 75%;
-    background-image: url('/public/images/dantecMarket2.jpg');
+    background-image: url('/public/images/dantecMarketactu.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     }

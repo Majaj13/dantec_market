@@ -31,7 +31,8 @@ label .password-icon .feather-eye-off {
     align-items: center;
     background-image: url("/public/images/Register.jpg");
     background-repeat: no-repeat;
-    background-position: center;
+    background-size: cover; /* Assure que l'image de fond couvre le conteneur */
+    background-position: center; /* Centre l'image de fond */
     width: 60%;
     height: auto;
 }
@@ -73,9 +74,13 @@ label .password-icon .feather-eye-off {
 }
 
 .flexrow{
+    width: 90%;
+    
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
+    margin: auto;
+    margin-top: 4vh;
 }
 
 
@@ -107,16 +112,17 @@ label .password-icon .feather-eye-off {
 }
 
 .registerButton {
+    width: 100%;
     background: linear-gradient(113deg, #DFBA61 34.85%, #F3E5AB 95.45%);
     border-color: #ffffff;
-    padding: 20px 30vh;
+    padding: 2vh;
     border-radius: 20px;
     color: rgb(0, 0, 0);
     font-weight: bold;
     justify-content: center;
     display: flex;
     cursor: pointer;
-    margin: 0  auto;
+  
     
 }
 .registerButton:hover {
