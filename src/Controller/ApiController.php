@@ -1,7 +1,9 @@
 <?php
 namespace App\Controller;
 use App\Repository\UserRepository;
+use App\Repository\CategorieRepository;
 use App\Repository\ProduitsRepository;
+
 use App\Repository\CategorieParentRepository;
 use App\Repository\CommandesRepository;
 use App\Repository\PlanningRepository;
@@ -324,6 +326,7 @@ $user->setNom($postdata->nom);
 $user->setPrenom($postdata->prenom);
 $user->setEmail($postdata->email);
 $user->setTelephone($postdata->telephone);
+$user->setRoles(['ROLE_ADMIN']);
 $user->setClasse($postdata->classe);
 // Persistez les changements
 $entityManager->persist($user);
@@ -450,7 +453,7 @@ if (!$commander) {
 // Mettez à jour les propriétés de l'utilisateur
 $produit->setNbvotes($produit->getNbvotes()+1);
 $produit->setNbAvis($produit->getNbAvis()+$postdata->nombreEtoiles);
-$produit->setEtoiles($produit->getNbvotes()/$produit->getNbAvis());
+$produit->setEtoiles($produit->getNbAvis()/$produit->getNbvotes());
 
 $commander->setNoteDonnee(1);
 
@@ -496,5 +499,14 @@ $response = new Utils;
 $tab = ["lesCommandes","lesReservations","laCategorie","lesCommentaires","leUser"];
 return $response->GetJsonResponse($request, $var,$tab);
 }
+#[Route('/api/mobile/getLesCategories', name: 'api_mobile_getLesCategories')]
+public function getLesCategories(Request $request, EntityManagerInterface $entityManager,CategorieRepository $categorieRepository): Response
+{
+$postdata = json_decode($request->getContent());
+$var = $categorieRepository->findAll(); 
+$response = new Utils;
+$tab = ["lesProduits","lacategorieParent"];
 
+return $response->GetJsonResponse($request, $var,$tab);
+}
 }

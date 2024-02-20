@@ -15,8 +15,10 @@
         <div class="titre-favori-container">
            <h1>{{ product.nomProduit }}</h1>
            <span class="coeur" v-if="messageStatus">{{ messageStatus }}</span>
+           <span v-if="utilisateurAuthentifie">
            <i class="fa fa-heart" :class="{ 'coeur-rouge': estDansLesFavoris, 'coeur-blanc': !estDansLesFavoris }" @click="ajouterAuxFavoris(product.id)"></i>
-        </div>
+          </span>
+          </div>
         <p v-if="promo.prixpromo">
            Prix Promo: {{ promo.prixpromo }}€
            <span v-if="utilisateurAuthentifie">
@@ -49,7 +51,7 @@
         <div class="rating"> Avis : 
            <span v-for="star in 5" :key="star" class="star"> 
            <i class="fa fa-star" :class="{'is-active': star <= product.etoiles}"></i>
-           </span>sur {{ product.nbAvis }} avis
+           </span>sur {{ product.nbvotes }} avis
         </div>
         <p>Description :</p>
         <p>{{ descriptionTronquee }}</p>

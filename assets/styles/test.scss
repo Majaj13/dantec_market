@@ -258,9 +258,11 @@ body {
     background-position: center;
     background-size: 70%;
     width:200px;
+    border-radius: 7px;
   }
 
   .swiper-slide img {
+    
     display: block;
     width: 80%;
     -webkit-box-reflect: below 1px linear-gradient(transparent, transparent , #0002 , #0004);

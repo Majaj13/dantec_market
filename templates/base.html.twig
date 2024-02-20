@@ -18,7 +18,9 @@
       <a href="{{ path('app_acceuil') }}"><img src="/images/logo.jpg"></img></a>
    </div>
    <div class="navbar-right">
+   {% if is_granted('ROLE_USER') %}
       <a href="{{ path('app_message') }}" class="textNav">Contactez nous</a>
+      {% endif %}
       <a href="{{ is_granted('ROLE_USER') ? path('app_logout') : path('app_login') }}" class="boutonNav">
       {{ is_granted('ROLE_USER') ? 'Logout' : 'Login' }}
       </a>
