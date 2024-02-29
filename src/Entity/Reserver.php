@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\RéserverRepository;
+use App\Repository\ReserverRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: RéserverRepository::class)]
-class Réserver
+#[ORM\Entity(repositoryClass: ReserverRepository::class)]
+class Reserver
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -93,4 +93,21 @@ class Réserver
 
         return $this;
     }
+    public function getPlanningDetails(): string
+{
+    if (!$this->lePlanning) {
+        return 'Non défini';
+    }
+
+    return sprintf('%s de %s à %s', 
+        $this->lePlanning->getJour()->format('Y-m-d'), 
+        $this->lePlanning->getHeureDebut()->format('H:i'), 
+        $this->lePlanning->getHeureFin()->format('H:i'));
+}
+public function __toString(): string
+{
+    return $this->getPlanningDetails();
+}
+
+
 }

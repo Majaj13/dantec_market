@@ -3,7 +3,7 @@ namespace App\Controller;
 use App\Repository\UserRepository;
 use App\Repository\CategorieRepository;
 use App\Repository\ProduitsRepository;
-
+use App\Repository\ReserverRepository;
 use App\Repository\CategorieParentRepository;
 use App\Repository\CommandesRepository;
 use App\Repository\PlanningRepository;
@@ -14,7 +14,7 @@ use App\Repository\CommentairesRepository;
 use App\Repository\CommanderRepository;
 use App\Repository\MessagesRepository;
 use App\Entity\User;
-use App\Entity\Réserver;
+use App\Entity\Reserver;
 use App\Entity\Commandes;
 use App\Entity\Commander;
 use App\Entity\Categorie;
@@ -258,19 +258,23 @@ $tab = ["lesReservations"];
 return $utils->GetJsonResponse($request, $horaires,$tab);
 }
 #[Route('/api/mobile/reserver', name: 'api_mobile_reserver')]
-public function reserver(Request $request, EntityManagerInterface $entityManager, CommandesRepository $commandesRepository): Response
+public function reserver(Request $request, EntityManagerInterface $entityManager, CommandesRepository $commandesRepository,PlanningRepository $planningRepository): Response
 {
 $data = json_decode($request->getContent(), true);
 $user = $this->getUser(); // Assurez-vous que votre système d'authentification est correctement configuré
 $jour = new \DateTime($data['jour']); // Utilise DateTime au lieu de DateTimeInterface
 $heure = new \DateTime($data['heureDebut']); // Utilise DateTime au lieu de DateTimeInterface
 $commandeid = $data['commandeId'];
+$planningid =  $data['id'];
 // Recherche de la commande par nomProduit
 $commande = $commandesRepository->find($commandeid);
 if (!$commande) {
 return $this->json(['message' => 'Commande introuvable.'], Response::HTTP_NOT_FOUND);
 }
-$reservation = new Réserver();
+$planning = $planningRepository->find($planningid);
+
+$reservation = new Reserver();
+$reservation->setLePlanning($planning);
 $reservation->setDate($jour);
 $reservation->setHeure($heure);
 $reservation->setLeUser($user);
@@ -508,5 +512,28 @@ $response = new Utils;
 $tab = ["lesProduits","lacategorieParent"];
 
 return $response->GetJsonResponse($request, $var,$tab);
+}
+#[Route('/api/mobile/ajoutcommentaire', name: 'api_Setajoutcommentaire')]
+public function Setajoutcommentaire(Request $request, CommentairesRepository $commentaireRepository,  ProduitsRepository $produitsRepository, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
+{
+    $postdata = json_decode($request->getContent());
+    $user = $this->getUser();
+    $user = $userRepository->find($user->getId());
+    $produit = $produitsRepository->find($postdata->idProduit);
+    $commentaire = new Commentaires();
+    $commentaire->setleUser($user);
+    $commentaire->setLeProduit($produit);
+    $commentaire->setCommentaire($postdata->commentaire);
+    $commentaire->setDateCommentaire(new \DateTime());
+    $commentaire->setNote(5);
+
+   
+
+// Persistez les changements
+$entityManager->persist($commentaire);
+$entityManager->flush();
+
+    return new Response('commentaire created successfully');
+
 }
 }

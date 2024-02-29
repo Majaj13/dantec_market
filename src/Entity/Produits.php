@@ -37,7 +37,7 @@ class Produits
     #[ORM\OneToMany(mappedBy: 'leProduit', targetEntity: Promo::class)]
     private Collection $lesPromos;
 
-    #[ORM\ManyToMany(targetEntity: Images::class, inversedBy: 'lesProduits')]
+    #[ORM\ManyToMany(targetEntity: Images::class, inversedBy: 'lesProduits', cascade: ['persist'])]
     private Collection $lesImages;
 
     #[ORM\ManyToOne(inversedBy: 'lesProduits')]

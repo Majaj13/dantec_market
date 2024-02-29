@@ -1,4 +1,7 @@
 <template>
+    <div class="bande-image">
+     <img src="/images/fondprofilvue.png" alt="Image descriptive">
+  </div>
   <div class="product-container" v-if="product">
      <div class="product-image">
         <!-- Affichage de la première image du produit, si disponible -->
@@ -299,7 +302,17 @@
       
   };
 </script>
-<style>
+<style lang="scss" scoped>
+.bande-image {
+  height: 15vw; /* Hauteur fixe pour la bande */
+  width: 100vw; /* Largeur basée sur la largeur de la fenêtre */
+  overflow: hidden; /* Cache tout contenu qui dépasse de la bande */
+  }
+  .bande-image img {
+  width: 100%; /* Assure que l'image s'étend sur toute la largeur */
+  height: 100%; /* Assure que la hauteur de l'image remplit la bande */
+  object-fit: cover; /* Assure que l'image couvre la zone sans être déformée */
+  }
   .rating .fa-star {
   font-size: 1em; /* Définit la taille des étoiles à 10px */
   }
@@ -324,14 +337,14 @@
   }
   .product-container {
   display: flex;
-  background-color: black;
+   background-color: #2D2D2D;
   color: white;
-  padding-top: 140px;
+  padding-top: 5vh;
   padding-bottom: 50px;
   }
   .promo-container {
   display: flex;
-  background-color: black;
+  background-color: #2D2D2D;
   color: white;
   padding-bottom: 10px;
   }
@@ -431,7 +444,7 @@
   }
   .avis-container {
   margin-left: 0px;
-  background-color: #000;
+  background-color: #2D2D2D;
   display: flex;
   justify-content: center;
   align-items: center;

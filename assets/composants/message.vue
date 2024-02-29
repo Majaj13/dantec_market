@@ -1,4 +1,7 @@
 <template>
+    <div class="bande-image">
+     <img src="/images/fondprofilvue.png" alt="Image descriptive">
+  </div>
     <div class="titre-container"><h1>De quoi voulez vous parler ?</h1></div>
     <div class="message-container">
       <div class="message-left">
@@ -75,8 +78,19 @@ onMounted(fetchMessages);
   
   
   <style scoped>
+
+.bande-image {
+  height: 15vw; /* Hauteur fixe pour la bande */
+  width: 100vw; /* Largeur basée sur la largeur de la fenêtre */
+  overflow: hidden; /* Cache tout contenu qui dépasse de la bande */
+  }
+  .bande-image img {
+  width: 100%; /* Assure que l'image s'étend sur toute la largeur */
+  height: 100%; /* Assure que la hauteur de l'image remplit la bande */
+  object-fit: cover; /* Assure que l'image couvre la zone sans être déformée */
+  }
   .titre-container{
-    margin-top: 20vh;
+    margin-top: 5vh;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: white;
     margin-left: 10%;

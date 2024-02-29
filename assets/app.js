@@ -24,7 +24,7 @@ import TendanceComponent from './composants/tendance.vue';
 import FlashComponent from './composants/flash.vue';
 import ActualiteComponent from './composants/actualite.vue';
 import MessageComponent from './composants/message.vue';
-
+import CatalogueComponent from './composants/catalogue.vue';
 
 
 
@@ -41,6 +41,7 @@ const appTendanceComponentComposants = createApp(TendanceComponent);
 const appFlashComponentComposants = createApp(FlashComponent);
 const appActualiteComponentComposants = createApp(ActualiteComponent);
 const appMessageComponentComposants = createApp(MessageComponent);
+const appCatalogueComponentComposants = createApp(CatalogueComponent);
 
 
 appCategoriesComposants.mount('#app');
@@ -56,6 +57,8 @@ appFlashComponentComposants.mount('#app10');
 appTendanceComponentComposants.mount('#app11');
 appActualiteComponentComposants.mount('#app12');
 appMessageComponentComposants.mount('#app13');
+appCatalogueComponentComposants.mount('#app14');
+
 
 
 

@@ -25,7 +25,7 @@ class Commandes
     #[ORM\ManyToOne(inversedBy: 'lesCommandes')]
     private ?User $leUser = null;
 
-    #[ORM\OneToMany(mappedBy: 'laCommande', targetEntity: Réserver::class)]
+    #[ORM\OneToMany(mappedBy: 'laCommande', targetEntity: Reserver::class)]
     private Collection $lesReservations;
 
     #[ORM\OneToMany(mappedBy: 'laCommande', targetEntity: Commander::class)]
@@ -85,14 +85,14 @@ class Commandes
     }
 
     /**
-     * @return Collection<int, Réserver>
+     * @return Collection<int, Reserver>
      */
     public function getLesReservations(): Collection
     {
         return $this->lesReservations;
     }
 
-    public function addLesReservation(Réserver $lesReservation): static
+    public function addLesReservation(Reserver $lesReservation): static
     {
         if (!$this->lesReservations->contains($lesReservation)) {
             $this->lesReservations->add($lesReservation);
@@ -102,7 +102,7 @@ class Commandes
         return $this;
     }
 
-    public function removeLesReservation(Réserver $lesReservation): static
+    public function removeLesReservation(Reserver $lesReservation): static
     {
         if ($this->lesReservations->removeElement($lesReservation)) {
             // set the owning side to null (unless already changed)
@@ -167,4 +167,27 @@ class Commandes
 
         return $this;
     }
+    // Dans l'entité Commandes
+public function getPlanningDetails(): string
+{
+    // Exemple hypothétique, ajustez selon votre modèle de données
+    $details = [];
+    foreach ($this->lesReservations as $reservation) {
+        $planning = $reservation->getLePlanning();
+        if ($planning) {
+            $details[] = sprintf(
+                '%s de %s à %s',
+                $planning->getJour()->format('Y-m-d'),
+                $planning->getHeureDebut()->format('H:i'),
+                $planning->getHeureFin()->format('H:i')
+            );
+        }
+    }
+
+    return implode(', ', $details); // Séparez par des virgules ou selon votre préférence
+}
+public function __toString(): string
+{
+    return $this->dateCommande->format('Y-m-d'); // Adjust the format as needed
+}
 }

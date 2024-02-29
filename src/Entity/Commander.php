@@ -92,4 +92,11 @@ class Commander
 
         return $this;
     }
+
+    public function __toString(): string
+{
+    // Assurez-vous que `leProduit` peut être null et gérez ce cas
+    $produitNom = $this->leProduit ? $this->leProduit->getNomProduit() : 'Produit inconnu';
+    return sprintf("Produit : %s, Quantité : %d", $produitNom, $this->quantite);
+}
 }

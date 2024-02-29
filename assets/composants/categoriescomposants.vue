@@ -1,4 +1,7 @@
 <template>
+    <div class="bande-image">
+     <img src="/images/fondprofilvue.png" alt="Image descriptive">
+  </div>
   <div class="lesProduitsContainer">
     <div class="sticky-container">
       <div class="notre-offre-title">Notre offre</div>
@@ -125,10 +128,19 @@ const loadProductsByCategory = async (category) => {
 
 
 <style scoped>
-
+.bande-image {
+  height: 15vw; /* Hauteur fixe pour la bande */
+  width: 100vw; /* Largeur basée sur la largeur de la fenêtre */
+  overflow: hidden; /* Cache tout contenu qui dépasse de la bande */
+  }
+  .bande-image img {
+  width: 100%; /* Assure que l'image s'étend sur toute la largeur */
+  height: 100%; /* Assure que la hauteur de l'image remplit la bande */
+  object-fit: cover; /* Assure que l'image couvre la zone sans être déformée */
+  }
 .main-container {
     flex: 1;
-    padding-top: 16vh;
+    padding-top: 5vh;
     padding-bottom: 1vh;
     padding-right: 3vh;
     padding-left: 3vh;

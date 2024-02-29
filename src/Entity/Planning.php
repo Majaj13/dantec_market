@@ -25,7 +25,7 @@ class Planning
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $heureFin = null;
 
-    #[ORM\OneToMany(mappedBy: 'lePlanning', targetEntity: Réserver::class)]
+    #[ORM\OneToMany(mappedBy: 'lePlanning', targetEntity: Reserver::class)]
     private Collection $lesReservations;
 
     public function __construct()
@@ -75,14 +75,14 @@ class Planning
     }
 
     /**
-     * @return Collection<int, Réserver>
+     * @return Collection<int, Reserver>
      */
     public function getLesReservations(): Collection
     {
         return $this->lesReservations;
     }
 
-    public function addLesReservation(Réserver $lesReservation): static
+    public function addLesReservation(Reserver $lesReservation): static
     {
         if (!$this->lesReservations->contains($lesReservation)) {
             $this->lesReservations->add($lesReservation);
@@ -92,7 +92,7 @@ class Planning
         return $this;
     }
 
-    public function removeLesReservation(Réserver $lesReservation): static
+    public function removeLesReservation(Reserver $lesReservation): static
     {
         if ($this->lesReservations->removeElement($lesReservation)) {
             // set the owning side to null (unless already changed)
@@ -103,4 +103,13 @@ class Planning
 
         return $this;
     }
+    public function __toString(): string
+{
+    return sprintf('%s de %s à %s', 
+        $this->jour->format('Y-m-d'), 
+        $this->heureDebut->format('H:i'), 
+        $this->heureFin->format('H:i')
+    );
+}
+
 }

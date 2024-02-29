@@ -1,6 +1,9 @@
 <template>
+    <div class="bande-image">
+     <img src="/images/fondprofilvue.png" alt="Image descriptive">
+  </div>
   <div class="partenaires-container">
-    <h1 style="color: white; margin-top: 150px;">Nos partenaires</h1>
+    <h1 style="color: white; margin-top: 50px;">Nos partenaires</h1>
     <div class="partenaires-grid">
       <div
         v-for="partenaire in partenaires"
@@ -53,11 +56,17 @@ setInterval(() => {
 }, 2000);
 </script>
   
-<style>
+<style lang="scss" scoped>
+.bande-image {
+  height: 15vw; /* Hauteur fixe pour la bande */
+  width: 100vw; /* Largeur basée sur la largeur de la fenêtre */
+  overflow: hidden; /* Cache tout contenu qui dépasse de la bande */
+  }
 .partenaires-container {
   text-align: center;
   width: 80%;
   margin: auto;
+  margin-top: 10vh;
 }
 
 .partenaires-grid {
@@ -72,13 +81,13 @@ setInterval(() => {
   position: relative;
   cursor: pointer;
   flex: 1 0 18%; /* Cela permet à chaque carte de prendre environ 20% de la largeur moins les marges */
-  margin: 0.2rem; /* ajustez selon vos besoins pour l'espacement */
+  margin: 0.0rem; /* ajustez selon vos besoins pour l'espacement */
 }
 
 .partenaire-card img {
   width: 100%;
   height: auto;
-  border-radius: 10px;
+  
 }
 
 .overlay {

@@ -1,7 +1,11 @@
 <template>
     <div>
       <p>Une belle découverte...</p>
-      <p><img :src="product.imageUrl" :alt="product.nomProduit"></p>
+      <p>
+        <a :href="`/lesProduits/voirleproduit/${product.id}`">
+        <img :src="product.imageUrl" :alt="product.nomProduit">
+      </a>
+    </p>
       <p> {{ product.nomProduit }}</p>
     </div>
   </template>

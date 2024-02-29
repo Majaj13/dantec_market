@@ -7,6 +7,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ImagesType extends AbstractType
 {
@@ -15,9 +17,15 @@ class ImagesType extends AbstractType
     {
         $builder
             // Assuming your Images entity has a file or similar field for uploads
-            ->add('url', UrlType::class, [
+            ->add('url', TextType::class, [
                 'label' => 'Image Url',
                 // add additional options as needed
+            ])
+            ->add('imageFile', VichImageType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'download_uri' => true,
+                'label' => 'Image (JPG, PNG)',
             ]);
     }
 

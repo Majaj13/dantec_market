@@ -6,8 +6,12 @@ use App\Repository\ImagesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Vich\UploaderBundle\Entity\File as EmbeddedFile;
 
 #[ORM\Entity(repositoryClass: ImagesRepository::class)]
+#[Vich\Uploadable]
 class Images
 {
     #[ORM\Id]
@@ -23,6 +27,14 @@ class Images
 
     #[ORM\ManyToOne(inversedBy: 'lesimages')]
     private ?Actualite $laActualite = null;
+
+     // Assume there's also an imageName property to store the file name
+     #[ORM\Column(type: 'string', length: 255)]
+     private ?string $imageName = null;
+
+    #[Vich\UploadableField(mapping: 'Produits', fileNameProperty: 'imageName')]
+
+    private ?File $imageFile = null;
 
     public function __construct()
     {
@@ -87,5 +99,37 @@ class Images
     public function __toString(): string
     {
         return $this->url;
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile = null): self
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required to at least touch one field to trigger the update
+            // if your entity does not use the `updatedAt` field
+            
+        }
+
+        return $this;
+    }
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageName(?string $imageName): self
+    {
+        $this->imageName = $imageName;
+    
+        // Mettez à jour l'URL en utilisant le nom du fichier stocké
+        $this->url = 'images/' . $imageName;
+    
+        return $this;
     }
 }

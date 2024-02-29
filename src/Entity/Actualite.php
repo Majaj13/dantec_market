@@ -22,7 +22,7 @@ class Actualite
     #[ORM\Column(type: Types::TEXT)]
     private ?string $texte = null;
 
-    #[ORM\OneToMany(mappedBy: 'laActualite', targetEntity: Images::class)]
+    #[ORM\OneToMany(mappedBy: 'laActualite', targetEntity: Images::class, cascade: ['persist'])]
     private Collection $lesimages;
 
     public function __construct()

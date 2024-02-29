@@ -14,7 +14,7 @@ use App\Entity\CategorieParent;
 use App\Entity\CategoriePromo;
 use App\Entity\Messages;
 use App\Entity\Partenaires;
-use App\Entity\Réserver;
+use App\Entity\Reserver;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -49,13 +49,12 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Images', 'fa-solid fa-cubes-stacked', Images::class);
         yield MenuItem::linkToCrud('Messages', 'fa-solid fa-cubes-stacked', Messages::class);
         yield MenuItem::linkToCrud('Partenaires', 'fa-solid fa-cubes-stacked', Partenaires::class);
-        yield MenuItem::linkToCrud('Reservations', 'fa-solid fa-cubes-stacked', Réserver::class);
+        yield MenuItem::linkToCrud('Reservations', 'fa-solid fa-cubes-stacked', Reserver::class);
         yield MenuItem::linkToCrud('Produits', 'fa-solid fa-cubes-stacked', Produits::class);
         yield MenuItem::linkToCrud('Utilisateurs', 'fa-solid fa-users', User::class);
         yield MenuItem::linkToCrud('Commentaires', 'fa-regular fa-comments', Commentaires::class);
         yield MenuItem::linkToCrud('Promo', 'fa-solid fa-tags', Promo::class);
         yield MenuItem::linkToCrud('Planning', 'fa-regular fa-calendar-days', Planning::class);
-        yield MenuItem::linkToCrud('Commandes', 'fa-solid fa-basket-shopping', Commandes::class);
     }
 }
 

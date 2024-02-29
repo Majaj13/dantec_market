@@ -43,7 +43,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $classe = null;
 
-    #[ORM\OneToMany(mappedBy: 'leUser', targetEntity: Réserver::class)]
+    #[ORM\OneToMany(mappedBy: 'leUser', targetEntity: Reserver::class)]
     private Collection $lesReservations;
 
     #[ORM\OneToMany(mappedBy: 'leUser', targetEntity: Commandes::class)]
@@ -192,14 +192,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, Réserver>
+     * @return Collection<int, Reserver>
      */
     public function getLesReservations(): Collection
     {
         return $this->lesReservations;
     }
 
-    public function addLesReservation(Réserver $lesReservation): static
+    public function addLesReservation(Reserver $lesReservation): static
     {
         if (!$this->lesReservations->contains($lesReservation)) {
             $this->lesReservations->add($lesReservation);
@@ -209,7 +209,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeLesReservation(Réserver $lesReservation): static
+    public function removeLesReservation(Reserver $lesReservation): static
     {
         if ($this->lesReservations->removeElement($lesReservation)) {
             // set the owning side to null (unless already changed)
@@ -363,5 +363,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+    public function __toString(): string
+    {
+        // Return the property that best represents this entity, e.g., name
+        return $this->nom;
     }
 }

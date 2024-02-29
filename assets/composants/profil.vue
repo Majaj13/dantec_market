@@ -1,12 +1,21 @@
 <template>
   <div class="bande-image">
-     <img src="/images/fond.png" alt="Image descriptive">
+     <img src="/images/fondprofilvue.png" alt="Image descriptive">
   </div>
   <div class="capsules">
-     <div class="capsule" @click="loadContentData('compte')">Compte</div>
-     <div class="capsule" @click="loadContentData('commandes')">Commandes</div>
-     <div class="capsule" @click="loadContentData('liste')">liste</div>
-     <div class="capsule" @click="loadContentData('fidelite')">Fidélité</div>
+     <div class="capsule" @click="loadContentData('compte')">
+      <img src="/images/profil.png"  alt="Icone Compte" class="image-circulaire rotation-base rotation-moderate">
+
+      Compte</div>
+     <div class="capsule" @click="loadContentData('commandes')">
+      <img src="/images/commande.png" alt="Icone Compte" class="image-circulaire rotation-base rotation-moderate">
+Commandes</div>
+     <div class="capsule" @click="loadContentData('liste')">
+      <img src="/images/favoris.png" alt="Icone Compte" class="image-circulaire rotation-base rotation-moderate">
+liste</div>
+     <div class="capsule" @click="loadContentData('fidelite')">
+      <img src="/images/fidelite.png" alt="Icone Compte" class="image-circulaire rotation-base rotation-moderate">
+Fidélité</div>
      <!-- Ajoutez d'autres capsules si nécessaire -->
   </div>
   <div class="ligne-blanche"></div>
@@ -59,11 +68,27 @@
                              <td>{{ detail.quantite }}</td>
                              <td class="align-right">{{ detail.total.toFixed(2)  }} €</td>
                              <td>
-                                <div class="rating">
-                                   <span v-for="star in 5" :key="star" class="star" @click="!detail.noteDonnee && setRating(star, commande.id, detail.nomProduit, detail.pid,)">
-                                   <i class="fa fa-star" :class="{'is-active': star <= detail.etoiles, 'disabled': detail.noteDonnee}"></i>
-                                   </span>
-                                </div>
+  <div class="detail-actions">
+    <div class="rating">
+      <span v-for="star in 5" :key="star" class="star" @click="!detail.noteDonnee && setRating(star, commande.id, detail.nomProduit, detail.pid)">
+        <i class="fa fa-star" :class="{'is-active': star <= detail.etoiles, 'disabled': detail.noteDonnee}"></i>
+      </span>
+    </div>
+    <div class="commenter">
+      <i class="fa fa-comment" @click="ouvrirModaleCommentaire(detail.pid)">Commenter</i>
+    </div>
+  </div>
+
+                                <div v-if="afficherModale" class="modale">
+    <div class="modale-content">
+      <span class="modale-close" @click="fermerModale">&times;</span>
+      <h2>Ajouter un commentaire</h2>
+      <textarea v-model="commentaire" class="textarea-commentaire" placeholder="Votre commentaire..."></textarea>
+      <div class="footer-modale">
+        <button @click="envoyerCommentaire" class="envoyer-btn">Envoyer</button>
+      </div>
+    </div>
+  </div>
                              </td>
                           </tr>
                        </tbody>
@@ -116,13 +141,49 @@
     classe: '',
     photoUrl: ''
   });
-      
+  const afficherModale = ref(false);
+    const commentaire = ref('');
+    const produitActuelId = ref(null);
+
       const commandesData = ref([]);
       const listeData = ref([]);
       const fideliteData = ref([]);
-  
       const nombreImages = computed(() => Math.floor(compteData.value.fidelite / 10));
   
+      // commentaire
+      const ouvrirModaleCommentaire = (id) => {
+      produitActuelId.value = id;
+      afficherModale.value = true;
+    };
+
+    const fermerModale = () => {
+      afficherModale.value = false;
+      commentaire.value = '';
+    };
+
+    const envoyerCommentaire = async () => {
+      if (!commentaire.value.trim()) {
+        alert("Veuillez entrer un commentaire.");
+        return;
+      }
+      try {
+        const reponse = await fetch('/api/mobile/ajoutcommentaire', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            idProduit: produitActuelId.value,
+            commentaire: commentaire.value,
+          }),
+        });
+
+        if (!reponse.ok) throw new Error('Erreur lors de l’envoi du commentaire');
+
+        alert('Commentaire envoyé avec succès');
+        fermerModale();
+      } catch (error) {
+        console.error('Erreur lors de l’envoi du commentaire:', error);
+      }
+    };
       // rating
       const setRating = async (rating, commandeId, detailId,produiId) => {
         const commandeIndex = commandesData.value.findIndex(c => c.id === commandeId);
@@ -320,13 +381,81 @@
   });
   
       // Expose les variables et fonctions au template
-      return { setRating,nombreImages,enleverFavoris,voirProduit,modifierUtilisateur,commandesData, voirDetails, activeContent, compteData, commandesData, listeData, fideliteData, loadContentData };
+      return { afficherModale, commentaire, ouvrirModaleCommentaire, fermerModale, envoyerCommentaire, setRating,nombreImages,enleverFavoris,voirProduit,modifierUtilisateur,commandesData, voirDetails, activeContent, compteData, commandesData, listeData, fideliteData, loadContentData };
     }
   };
   
   
 </script>
-<style>
+<style scoped>
+
+.modale {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modale-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.modale-close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.modale-close:hover,
+.modale-close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.textarea-commentaire {
+  width: calc(100% - 30px); /* Prend toute la largeur avec un padding de 15px de chaque côté */
+  padding: 15px;
+  margin: 15px 0; /* Ajoute un peu d'espace au-dessus et en dessous */
+  box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur et hauteur totales */
+}
+.footer-modale {
+  text-align: right; /* Alignement du bouton à droite */
+}
+
+.commenter {
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end; /* Aligner le texte de commenter à droite */
+}
+
+.detail-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rating {
+  flex: 1; /* Assure que le rating prend de l'espace et pousse le commenter vers la droite */
+}
+.bande-image {
+  height: 15vw; /* Hauteur fixe pour la bande */
+  width: 100vw; /* Largeur basée sur la largeur de la fenêtre */
+  overflow: hidden; /* Cache tout contenu qui dépasse de la bande */
+  }
+  .bande-image img {
+  width: 100%; /* Assure que l'image s'étend sur toute la largeur */
+  height: 100%; /* Assure que la hauteur de l'image remplit la bande */
+  object-fit: cover; /* Assure que l'image couvre la zone sans être déformée */
+  }
   .star i {
   color: gray; /* Couleur par défaut des étoiles */
   }
@@ -337,11 +466,12 @@
   pointer-events: none; /* Désactive les événements de souris */
   opacity: 0.5; /* Rend l'étoile semi-transparente */
 }
-  .capsules {
+.capsules {
   display: flex;
   justify-content: space-around;
   padding: 10px;
-  margin-top: 50px; /* Positionne l'ensemble à 100px du haut */
+  margin-top: 30vh; /* Positionne l'ensemble à 100px du haut */
+
   }
   .capsule {
   background-color: white;
@@ -353,6 +483,7 @@
   width: 150px; /* Largeur fixe */
   height: 50px; /* Hauteur fixe */
   display: flex;
+  position: relative;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -362,6 +493,8 @@
   .capsule:not(:last-child) {
   margin-right: 10px;
   }
+
+ 
   .ligne-blanche {
   height: 1px; /* Définit la hauteur de la ligne à 1px */
   background-color: white; /* Couleur de la ligne */
@@ -560,14 +693,45 @@
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   margin-top: 10px; /* Espace au-dessus du texte des points de fidélité, ajustez selon besoin */
   }
-  .bande-image {
-  height: 15vw; /* Hauteur fixe pour la bande */
-  width: 100vw; /* Largeur basée sur la largeur de la fenêtre */
-  overflow: hidden; /* Cache tout contenu qui dépasse de la bande */
+
+  /* Style pour les images circulaires */
+.image-circulaire {
+  border-radius: 50%;
+  width: 150px; /* Ajustez selon la taille souhaitée de l'image */
+  height: 150px;
+  object-fit: cover;
+  position: absolute;
+  top: -170px; /* Ajustez cette valeur si nécessaire pour positionner au-dessus des capsules */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Base de l'animation de rotation */
+.rotation-base {
+  animation: rotationInfinie linear infinite;
+}
+
+@keyframes rotationInfinie {
+  from {
+    transform: translateX(-50%) rotate(0deg);
   }
-  .bande-image img {
-  width: 100%; /* Assure que l'image s'étend sur toute la largeur */
-  height: 100%; /* Assure que la hauteur de l'image remplit la bande */
-  object-fit: cover; /* Assure que l'image couvre la zone sans être déformée */
+  to {
+    transform: translateX(-50%) rotate(360deg);
   }
+}
+
+/* Classes pour différentes vitesses d'animation */
+.rotation-lente {
+  animation-duration: 30s; /* Rotation plus lente */
+}
+
+.rotation-moderate {
+  animation-duration: 20s; /* Vitesse moyenne */
+}
+
+.rotation-rapide {
+  animation-duration: 10s; /* Rotation rapide */
+}
+
 </style>
+

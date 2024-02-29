@@ -177,6 +177,7 @@ const reserverCreneau = async () => {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
+        id: creneauSelectionne.value.id,
         jour: creneauSelectionne.value.jour,
         heureDebut: creneauSelectionne.value.heureDebut,
         commandeId:commandeId

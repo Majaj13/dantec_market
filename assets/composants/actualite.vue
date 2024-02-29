@@ -8,31 +8,41 @@
        <div v-else-if="error">Erreur de chargement des données.</div>
        <div v-else>
           <div v-if="actus.length > 0" class="container-actu">
-             <div class="inner-container">
-                <div class="text-container">
-                   <h1>{{ actus[0].titre }}</h1>
-                   <p>{{ actus[0].texte }}</p>
-                   <form :action="`/actualite/voiractu/${actus[0].id}`">
-                      <button type="submit">Lire plus</button>
-                   </form>
-                </div>
-                <div class="image-container">
-                   <img v-for="image in actus[0].images" :key="image.id" :src="image.url" alt="Image de l'actualité">
-                </div>
-             </div>
+            <div class="inner-container">
+   <div class="text-container">
+      <h1>{{ actus[0].titre }}</h1>
+      <p>{{ actus[0].texte }}</p>
+      <form :action="`/actualite/voiractu/${actus[0].id}`">
+         <button type="submit">Lire plus</button>
+      </form>
+   </div>
+   <div class="divider"></div> <!-- Barre verticale -->
+  
+ 
+   <div class="image-container">
+      
+      <img v-for="image in actus[0].lesimages" :key="image.id" :src="'/' + image.url" alt="Image de l'actualité">
+   </div>
+</div>
           </div>
+          <div> <hr class="separateur" /> <!-- Trait horizontal --></div>
+  <div> <p>Découvrez nos récentes actualités:</p></div>
           <div class="mini-actu-container">
-             <p>Découvrez nos récentes actualités:</p>
-             <div v-for="actu in actus.slice(1, 5)" :key="actu.id" class="card-actu">
-                <img :src="actu.lesimages[0].url" alt="Image de l'actualité">
-                <div class="contenu">
-                   <h1>{{ actu.titre }}</h1>
-                   <p>{{ actu.texte }}</p>
-                </div>
-                <a :href="`/actualite/voiractu/${actu.id}`">Lire plus</a> <!-- Utilisation de <a> pour les liens -->
-             </div>
-             <button class="boutonActu">Plus d'actualités</button>
-          </div>
+ 
+            <div v-for="actu in (showAll ? actus : actus.slice(1, 5))" :key="actu.id" class="card-actu">
+      
+      <img :src="'/' + actu.lesimages[0].url" alt="Image de l'actualité" class="image-actu">
+      <div class="miniactutitre">{{ actu.titre }}</div>
+     
+       <div class="contenu">
+         <p>{{ actu.texte }}</p>
+      </div>
+      <hr class="separateur" /> <!-- Trait horizontal -->
+
+   </div>
+  
+</div>
+<div><button class="boutonActu" @click="toggleShowAll">Plus d'actualités</button></div>
        </div>
     </div>
  </template>
@@ -44,22 +54,28 @@
         const actus = ref([]);
         const loading = ref(false);
         const error = ref(null);
+        const showAll = ref(false); // Variable pour contrôler l'affichage
+
     
         const fetchActus = async () => {
-          try {
-            const response = await fetch('/api/mobile/getLesActualites');
-            if (!response.ok) throw new Error('Erreur de chargement des catégories');
-            actus.value = await response.json();
-          } catch (e) {
-            error.value = e.message;
-          }
-        };
+      try {
+        const response = await fetch('/api/mobile/getLesActualites');
+        if (!response.ok) throw new Error('Erreur de chargement des catégories');
+        actus.value = await response.json();
+      } catch (e) {
+        error.value = e.message;
+      }
+    };
+
+    const toggleShowAll = () => {
+      showAll.value = !showAll.value; // Bascule l'état pour afficher toutes les actualités
+    };
     
         onMounted(() => {
             fetchActus();
         });
     
-        return { actus, loading, error };
+        return { actus, loading, error, showAll, toggleShowAll};
       }
     };
  </script>
@@ -102,51 +118,61 @@
     justify-content: space-between;
     }
     .inner-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: 75vh;
-    box-sizing: border-box;
-    margin-bottom: 1vh;
-    background-color: #E3E3E3; /* Couleur de fond des conteneurs */
-    margin-top: 20vh; /* Ajout de la marge en haut (33% de la hauteur de l'écran) */
+      display: flex;
+   
+   justify-content: space-between;
+   width: 100%;
+   height: 75vh;
+   background-color: #2D2D2D; /* Fond noir */
+   padding: 10px; /* Padding général */
     }
     .text-container {
-    width: 50%; /* Réserve 50% de l'espace pour le texte */
-    padding: 0 20px; /* Espacement pour le texte */
-    }
-    .image-container {
-    width: 45%; /* Réserve 45% de l'espace pour l'image */
-    }
-    .inner-container img {
-    width: 100%;
-    height: 100%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    }
-    .inner-container h1,
-    .inner-container p {
-    font-family: 'Inter Black';
-    }
+   background-color:(158, 152, 152)#b3b3b3;
+   width: 45%; /* Ajustement pour le padding */
+   padding-top : 20px; /* Espace entre le texte et la barre verticale */
+   color: white; /* Pour une meilleure lisibilité sur fond noir */
+   text-align: justify; /* Justification du texte */
+}
+.divider {
+   width: 1px;
+   background-color: white; /* Barre verticale blanche */
+   height: 100%;
+}
+.image-container {
+   width: 45%; 
+   height: 100%;
+   padding: 20px; /* Espace entre la barre verticale et l'image */
+}
+
+.image-container img {
+   width: 100%; /* Assure que l'image prend toute la largeur du conteneur */
+   height: 100%; /* Ajuste la hauteur automatiquement pour maintenir le ratio */
+   object-fit: cover; /* Couvre l'espace disponible sans déformation, peut être changé en 'contain' pour s'assurer que toute l'image est visible */
+   border: none; /* Optionnel: enlève toute bordure autour de l'image */
+   padding: 0; /* Enlève le padding autour de l'image, si nécessaire */
+}
+
+
     .inner-container h1 {
-    font-size: 7.5vh;
-    font-weight: 600;
+    font-size: 5.5vh;
+    font-weight: 400;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: #FAFAFA;
     text-shadow: 0px 0.4vh 0.4vh rgba(0, 0, 0, 0.25);
     margin-top: 0; /* Supprimer la marge par défaut */
     }
     .inner-container p {
-    font-size: 4vh;
-    font-weight: 600;
-    color: #000000;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 3vh;
+    color: 
+    #ffffff;
     margin: 8vh 0; /* Espacement avec le bouton */
     }
     .inner-container button {
     width: 40vh;
     height: 8vh;
     background: #DFBA61;
-    border-radius: 5vh;
+    border-radius: 2vh;
     text-decoration: none;
     color: #2D2D2D;
     text-align: center;
@@ -160,109 +186,78 @@
     cursor:pointer;
     }
     .mini-actu-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap; /* Permet aux cartes d'avis de passer à la ligne si l'espace est insuffisant */
-    margin-top: 2vh; /* Ajoutez une marge en haut pour l'espace entre les cartes d'avis et les autres conteneurs */
-    }
-    .mini-actu-container p{
-    height: 20%;
-    color: #E3E3E3;
-    font-size: 7.5vh;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    margin-top: 2vh;
-    margin-bottom: 5vh;
-    margin-right: 30vh;
-    }
-    .card-actu {
-    width: 30%;
-    height: 65vh;
-    flex-shrink: 0;
-    background: #E3E3E3;
-    margin-right: 5vh; /* Ajustez la marge selon vos besoins pour l'espace entre les cartes d'avis */
-    margin-bottom: 1vh; /* Ajoutez une marge en bas pour l'espace entre les lignes */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Ajuste l'espace entre les éléments à l'intérieur de la carte */
-    box-shadow: 0.4vh 0.4vh rgba(0, 0, 0, 0.25);
-    }
-    .boutonActu {
-    width: 64.6vh;
-    height: 12.2vh;
-    flex-shrink: 0;
-    background: rgba(223, 186, 97, 0.80);
-    border-radius: 5vh;
-    text-decoration: none;
-    color: #2D2D2D;
-    text-align: center;
-    font-family: Inter;
-    font-size: 5.5vh;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    margin: 5vh 0vh;
-    cursor:pointer;
-    }
-    .card-actu img {
-    width: 100%;
-    height: 30vh;
-    object-fit: cover; /* Ajuste l'image pour couvrir tout l'espace disponible sans déformation */
-    }
-    .card-actu button {
-    width: 28.5vh;
-    height: 6.8vh;
-    flex-shrink: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Assure une répartition égale de l'espace autour des éléments */
+}
+.mini-actu-container button {
+    width: 40vh;
+    height: 8vh;
     background: #DFBA61;
-    border-radius: 5vh;
+    border-radius: 2vh;
     text-decoration: none;
     color: #2D2D2D;
     text-align: center;
     font-family: Inter;
-    font-size: 3.5vh;
+    font-size: 3.8vh;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    align-items: center;
-    justify-content: center;
-    display: flex;
     margin: auto;
-    margin-bottom: 1.5vh;
+    display: inherit;
     cursor:pointer;
     }
-    .contenu {
-    height: auto;
-    overflow: hidden;
-    padding: 1.5vh;
-    }
-    .contenu h1 {
+.miniactutitre{
+   padding-top: 5vh;
+   padding-left: 10vh;
+   padding-right: 10vh;
+   font-size: 5.5vh;
+    font-weight: 400;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: #FAFAFA;
-    font-size: 7vh;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    word-wrap: break-word;
-    -webkit-text-stroke: 1px #000; /* Contour d'une épaisseur de 1 pixel avec une couleur noire */
-    text-align: center;
-    }
-    .contenu p {
-    width: 100%;
-    height: 50%;
-    color: #000000;
-    font-size: 2.5vh;
-    font-style: normal;
-    font-weight: 650;
-    line-height: 1.5;
-    word-wrap: break-word;
-    overflow: hidden; /* Empêche le texte de déborder */
-    text-overflow: ellipsis; /* Affiche des points de suspension (...) lorsque le texte déborde */
-    display: -webkit-box; /* Utilisé pour contrôler le nombre de lignes */
-    -webkit-line-clamp: 3; /* Limite le contenu à 3 lignes */
-    -webkit-box-orient: vertical; /* Indique que le contenu est empilé verticalement */
-    }
+    text-shadow: 0px 0.4vh 0.4vh rgba(0, 0, 0, 0.25);
+    margin-top: 0; /* Supprimer la marge par défaut */
+}
+    .separateur {
+   width: 80%; /* 80% de la largeur du conteneur */
+   border-top: 1px solid white; /* Un trait horizontal blanc */
+   margin: 20px auto; /* Centré avec une marge au-dessus et en dessous */
+}
+
+.mini-actu-container p {
+   text-align: center; /* Centre le texte du paragraphe */
+   color: white; /* Assurez-vous que la couleur du texte est blanche pour une meilleure visibilité */
+}
+
+.card-actu {
+ 
+   display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ajoute de l'espace entre le contenu et le bouton, poussant le bouton vers le bas */
+  flex-basis: 45%;
+  margin: 10px;
+  max-width: 45%;
+  height: 100%; /* Assurez-vous que cela fonctionne pour votre mise en page, vous devrez peut-être ajuster cette valeur */
+  margin-bottom: 0vh;
+}
+
+.image-actu {
+   width: 80%; /* 80% de la largeur du conteneur de la carte */
+   margin: 10px auto; /* Centré avec une marge au-dessus et en dessous */
+   display: block; /* Assure que l'image est traitée comme un bloc pour le centrage */
+}
+
+.contenu p {
+  height: 30vh; /* Définit la hauteur du conteneur à 20% de la hauteur de la fenêtre */
+  overflow: auto; /* Ajoute une barre de défilement si le contenu dépasse la hauteur du conteneur */
+  text-align: justify;
+  padding: 10vh 10vh;
+}
+
+
+.boutonActu {
+   display: block; /* Assure que le bouton est un bloc pour le centrage */
+   width: auto; /* Permet au bouton de s'adapter au texte */
+   margin: 20px auto; /* Centré avec une marge au-dessus et en dessous */
+}
  </style>

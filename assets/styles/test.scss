@@ -9,7 +9,6 @@ body {
     scroll-behavior: smooth;
 }
 
-
 .container{
     align-items: center;
     justify-content: center;
@@ -508,7 +507,7 @@ body {
 
 .avis-container p{
     height: 20%;
-    color: #000000;
+    color: #ffffff;
     font-size: 7.5vh;
     font-style: normal;
     font-weight: 500;
@@ -613,8 +612,10 @@ body {
 }
 
 .boutonAvis {
-    margin: 1vh 0vh;
-    align-items: center;
+    display: flex;
+    justify-content: center; /* Centre le contenu horizontalement */
+    align-items: center; /* Centre le contenu verticalement si nécessaire */
+    height: 100%; /* Assurez-vous que le div ait une hauteur pour le centrage vertical */
 }
 
 .boutonAvis button{
@@ -624,10 +625,10 @@ body {
     background: rgba(223, 186, 97, 0.80);
     border-radius: 5vh;
     text-decoration: none;
-    color: #871717;
+    color: #000000;
     text-align: center;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 2vh;
+    font-size: 4vh;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -914,4 +915,5 @@ footer {
         height: 30px;
         font-size: 12px;
     }
+
 }
