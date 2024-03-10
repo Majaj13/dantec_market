@@ -167,4 +167,24 @@ class Commandes
 
         return $this;
     }
+    // Dans l'entité Commandes
+public function getPlanningDetails(): string
+{
+    // Exemple hypothétique, ajustez selon votre modèle de données
+    $details = [];
+    foreach ($this->lesReservations as $reservation) {
+        $planning = $reservation->getLePlanning();
+        if ($planning) {
+            $details[] = sprintf(
+                '%s de %s à %s',
+                $planning->getJour()->format('Y-m-d'),
+                $planning->getHeureDebut()->format('H:i'),
+                $planning->getHeureFin()->format('H:i')
+            );
+        }
+    }
+
+    return implode(', ', $details); // Séparez par des virgules ou selon votre préférence
+}
+
 }

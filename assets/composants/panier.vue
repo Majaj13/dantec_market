@@ -281,7 +281,7 @@ const continuerAchats = () => {
 .container {
   width: 60%; /* Assure que le conteneur prend toute la largeur */
   min-height: 120vh; /* Assure que le conteneur prend au moins toute la hauteur de la fenêtre */
-  font-family: Arial, sans-serif;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   display: flex;
   flex-direction: column;
   background: #000000; /* Couleur de fond */
@@ -381,8 +381,8 @@ background: rgba(223, 186, 97, 0.95);
   text-decoration: none;
   color: #2D2D2D;
   text-align: center;
-  font-family: Inter;
-  font-size: 4vh;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 2vh;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -398,8 +398,8 @@ background: rgba(223, 186, 97, 0.95);
   text-decoration: none;
   color: #2D2D2D;
   text-align: center;
-  font-family: Inter;
-  font-size: 4vh;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 2vh;
   font-style: normal;
   font-weight: 700;
   line-height: normal;

@@ -21,6 +21,24 @@ class PlanningRepository extends ServiceEntityRepository
         parent::__construct($registry, Planning::class);
     }
 
+    public function trouverHorairesSemaineCourante(): array
+{
+    // Obtenir l'objet DateTime pour aujourd'hui et pour le dernier jour de la semaine (dimanche)
+    $aujourdhui = new \DateTime();
+    $finDeSemaine = (new \DateTime())->modify('sunday this week');
+
+    // Créer le QueryBuilder
+    $qb = $this->createQueryBuilder('p')
+        ->where('p.jour >= :aujourdhui AND p.jour <= :finDeSemaine')
+        ->setParameter('aujourdhui', $aujourdhui->format('Y-m-d'))
+        ->setParameter('finDeSemaine', $finDeSemaine->format('Y-m-d'))
+        ->orderBy('p.jour', 'ASC')
+        ->addOrderBy('p.heureDebut', 'ASC');
+
+    // Retourner les résultats de la requête
+    return $qb->getQuery()->getResult();
+}
+
 //    /**
 //     * @return Planning[] Returns an array of Planning objects
 //     */

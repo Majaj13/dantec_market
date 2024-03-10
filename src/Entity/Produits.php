@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ProduitsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProduitsRepository::class)]
@@ -45,12 +46,31 @@ class Produits
     #[ORM\Column(length: 255)]
     private ?string $descriptioncourte = null;
 
+    #[ORM\OneToMany(mappedBy: 'leProduit', targetEntity: Favoris::class)]
+    private Collection $lesFavoris;
+
+    #[ORM\Column]
+    private ?int $etoiles = null;
+
+    #[ORM\Column]
+    private ?int $nbvotes = null;
+
+    #[ORM\Column]
+    private ?int $nbAvis = null;
+
+    #[ORM\Column]
+    private ?int $points = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $dateCreation = null;
+
     public function __construct()
     {
         $this->lesCommandes = new ArrayCollection();
         $this->lesCommentaires = new ArrayCollection();
         $this->lesPromos = new ArrayCollection();
         $this->lesImages = new ArrayCollection();
+        $this->lesFavoris = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -242,5 +262,100 @@ class Produits
         $this->descriptioncourte = $descriptioncourte;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Favoris>
+     */
+    public function getLesFavoris(): Collection
+    {
+        return $this->lesFavoris;
+    }
+
+    public function addLesFavori(Favoris $lesFavori): static
+    {
+        if (!$this->lesFavoris->contains($lesFavori)) {
+            $this->lesFavoris->add($lesFavori);
+            $lesFavori->setLeProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLesFavori(Favoris $lesFavori): static
+    {
+        if ($this->lesFavoris->removeElement($lesFavori)) {
+            // set the owning side to null (unless already changed)
+            if ($lesFavori->getLeProduit() === $this) {
+                $lesFavori->setLeProduit(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getEtoiles(): ?int
+    {
+        return $this->etoiles;
+    }
+
+    public function setEtoiles(int $etoiles): static
+    {
+        $this->etoiles = $etoiles;
+
+        return $this;
+    }
+
+    public function getNbvotes(): ?int
+    {
+        return $this->nbvotes;
+    }
+
+    public function setNbvotes(int $nbvotes): static
+    {
+        $this->nbvotes = $nbvotes;
+
+        return $this;
+    }
+
+    public function getNbAvis(): ?int
+    {
+        return $this->nbAvis;
+    }
+
+    public function setNbAvis(int $nbAvis): static
+    {
+        $this->nbAvis = $nbAvis;
+
+        return $this;
+    }
+
+    public function getPoints(): ?int
+    {
+        return $this->points;
+    }
+
+    public function setPoints(int $points): static
+    {
+        $this->points = $points;
+
+        return $this;
+    }
+
+    public function getDateCreation(): ?\DateTimeInterface
+    {
+        return $this->dateCreation;
+    }
+
+    public function setDateCreation(\DateTimeInterface $dateCreation): static
+    {
+        $this->dateCreation = $dateCreation;
+
+        return $this;
+    }
+    public function __toString(): string
+    {
+        // Return the property that best represents this entity, e.g., name
+        return $this->nomProduit;
     }
 }

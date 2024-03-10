@@ -20,7 +20,7 @@ class Planning
     private ?\DateTimeInterface $jour = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $heureDébut = null;
+    private ?\DateTimeInterface $heureDebut = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $heureFin = null;
@@ -50,14 +50,14 @@ class Planning
         return $this;
     }
 
-    public function getHeureDébut(): ?\DateTimeInterface
+    public function getHeureDebut(): ?\DateTimeInterface
     {
-        return $this->heureDébut;
+        return $this->heureDebut;
     }
 
-    public function setHeureDébut(\DateTimeInterface $heureDébut): static
+    public function setHeureDebut(\DateTimeInterface $heureDebut): static
     {
-        $this->heureDébut = $heureDébut;
+        $this->heureDebut = $heureDebut;
 
         return $this;
     }
@@ -103,4 +103,13 @@ class Planning
 
         return $this;
     }
+    public function __toString(): string
+{
+    return sprintf('%s de %s à %s', 
+        $this->jour->format('Y-m-d'), 
+        $this->heureDebut->format('H:i'), 
+        $this->heureFin->format('H:i')
+    );
+}
+
 }

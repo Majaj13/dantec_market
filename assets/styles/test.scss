@@ -1,5 +1,5 @@
 body {
-    background: #FAFAFA;
+    background-color: #2D2D2D;
 }
 
 *{
@@ -9,6 +9,39 @@ body {
     scroll-behavior: smooth;
 }
 
+.container{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+.search-bar-container {
+    margin-left: auto; /* Cela pousse la barre de recherche vers la droite */
+}
+
+.nom-produit {
+    color: #000;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: absolute;
+    text-decoration: none;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 5px;
+}
+
+.prix-produit {
+    color: #000;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: absolute;
+    text-decoration: none;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 5px;
+}
+/* Default styles for navbar */
 // Début navBar
 
 .navbar {
@@ -101,6 +134,26 @@ body {
     cursor:pointer;
 }
 
+.iconProfil {
+    color: white; 
+    font-size: 3vh; 
+    margin: 0 2vh;
+}
+
+.iconProfil:hover {
+    color: #DFBA61;
+}
+
+.iconPanier {
+    color: white; 
+    font-size: 3vh;
+    margin: 0 3.5vh;
+}
+
+.iconPanier:hover {
+    color: #DFBA61;
+}
+
 // fin navBar
 
 // Début Page D'accueil
@@ -126,14 +179,14 @@ body {
     justify-content: center;
     align-items: flex-end;
     position: absolute;
-    bottom: 16.5vh;
+    bottom: 17vh;
     width: 100%;
 }
 
 .pagination-button {
     width: 2vh;
     height: 2vh;
-    border-radius: 50%;
+    border-radius: 100%;
     margin: 0 1vh;
     border: #000;
     cursor: pointer;
@@ -160,32 +213,31 @@ body {
     flex-shrink: 0;
     color: #FAFAFA;
     text-align: center;
-    font-family: 'Inter Black';
-    font-size: 9.6vh;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 7.6vh;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 500;
     line-height: normal;
     text-shadow: 0px 0.4vh 0.4vh rgba(0, 0, 0, 0.25);
 }
 
 .slide#slide1 {
     background-image: url('/public/images/dantecMarket1.1.jpg');
-    background-size: cover;
+    background-size: cover; /* Assure que l'image de fond couvre le conteneur */
+    background-position: center; /* Centre l'image de fond */
 }
 
 .slide#slide2 {
     background-image: url('/public/images/dantecMarket2.1.jpg');
-    background-size: cover;
+   background-size: cover; /* Assure que l'image de fond couvre le conteneur */
+    background-position: center; /* Centre l'image de fond */
 }
 
 .slide#slide3 {
     background-image: url('/public/images/partenaires.1.jpg');
-    background-size: cover;
+    background-size: cover; /* Assure que l'image de fond couvre le conteneur */
+    background-position: center; /* Centre l'image de fond */
 }
-
-// Fin du Carousel 
-
-// Début du container du carousel swipe
 
 .section2 {
     width: 100%;
@@ -330,11 +382,108 @@ body {
     text-decoration: none !important;
 }
 
-// Fin du container du carousel swipe
+  .flex-container {
+    width: 95%;
+    display: flex;
+    margin-top: 5vh;
+    margin-bottom: 5vh;;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20vh;
+  }
+  
+  .col {
+    flex: 1; /* Distribue l'espace également entre les colonnes */
+  }
+  
+  .col .cell {
+    color: rgb(255, 255, 255);
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
+    font-size: 2em;
 
-// Début des Cards containers
+    display: flex;
+    align-items: top;
+    justify-content: center;
+    height: calc(50vh - 2.5vh);
+    background-size: cover;
+    background-position: center;
+    border-radius: 2%;
+    padding-top: 2vh;
+    padding-left: 2vh;
+  }
+  
+  /* Pour la colonne du milieu avec une seule cellule occupant toute la hauteur */
+  .col2 .cell {
+    height: 100vh;
+  }
+
+  .col1 .cell:first-child, .col3 .cell:first-child {
+    margin-bottom: 5vh;
+  }
+  
+  /* Exemples d'images de fond pour chaque cellule */
+  .cell1 {  background-image: url('/public/images/vagues.jpg'); }
+  .cell2 { background-color: rgba(180, 178, 160, 0.5); }
+  .cell3 { background-color: rgba(180, 178, 160, 0.5); }
+  .cell4 { background-color: rgba(172, 226, 204, 0.5); }
+  .cell5 { background-color: rgba(28, 95, 40, 0.5); }
+
+  .cell1 {
+    display: block; /* Change le display pour permettre le positionnement du texte */
+    position: relative; /* Position relative pour le positionnement absolu du texte à l'intérieur */ 
+    height: 20vh;
+  }
+
+
+  
+  .cell3 {
+    display: block; /* Change le display pour permettre le positionnement du texte */
+    position: relative; /* Position relative pour le positionnement absolu du texte à l'intérieur */
+    text-align: center;
+    height: 100vh;
+  }
+
+  .cell1 .text {
+    position: absolute;
+       top: 2%;
+       left: 3%;
+       /* Assurez-vous d'ajouter une classe ou un élément `<span>` ou `<p>` avec la classe `.text` à votre HTML dans .cell3 */
+     }
+
+
+  
+  .cell3 .text {
+ position: absolute;
+    top: 2%;
+    left: 3%;
+    /* Assurez-vous d'ajouter une classe ou un élément `<span>` ou `<p>` avec la classe `.text` à votre HTML dans .cell3 */
+  }
+
+  .cell3 img {
+    width: 75%; /* Fait en sorte que l'image couvre toute la largeur de la cellule */
+    height: 75%; /* Fait en sorte que l'image couvre toute la hauteur de la cellule */
+    object-fit: cover; /* Assure que l'image couvre la cellule sans perdre son ratio */
+    object-position: center; /* Centre l'image dans la cellule */
+    border-radius: 2%; /* Optionnel: Applique un bord arrondi à l'image si désiré */
+    display: block; /* Rend l'image traitée comme un bloc pour permettre le centrage horizontal */
+    margin: auto; /* Centre horizontalement l'image dans la cellule */
+  }
+  .cell1 img {
+    width: 25vh; /* Fait en sorte que l'image couvre toute la largeur de la cellule */
+    height: 25vh; /* Fait en sorte que l'image couvre toute la hauteur de la cellule */
+    object-fit: cover; /* Assure que l'image couvre la cellule sans perdre son ratio */
+    object-position: center; /* Centre l'image dans la cellule */
+    border-radius: 2%; /* Optionnel: Applique un bord arrondi à l'image si désiré */
+    display: block; /* Rend l'image traitée comme un bloc pour permettre le centrage horizontal */
+    margin: auto; /* Centre horizontalement l'image dans la cellule */
+  }
+
+
+
+  
 
 .card-container {
+   
     display: flex;
     justify-content: center;
     align-items: center;
@@ -358,13 +507,14 @@ body {
     margin-top: 2vh;
 }
 
+
 .card-container p{
     flex-shrink: 0;
     color: #FAFAFA;
-    font-family: 'Inter Black', sans-serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 6.5vh;
     font-style: normal;
-    font-weight: 900;
+    font-weight: 500;
     line-height: normal;
     text-shadow: 0vh 0.4vh 0.4vh rgba(0, 0, 0, 0.25);
 }
@@ -375,7 +525,7 @@ body {
     margin-top: 20%;
     transform: translateX(-50%);
     width: 60%;
-    height: 15%;
+    height: 10%;
 }
 
 .card-container .card1 p {
@@ -385,35 +535,47 @@ body {
     transform: translateX(-50%);
     width: 95%;
     height: 50%;
+
 }
 
 .card1 {
     width: 30%;
     height: 75vh;
     flex-shrink: 0;
-    margin-right: 1vh; 
+    margin-right: 2vh; 
     box-shadow: 0vh 0.4vh 0.4vh rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+
 }
 
 .card1#application {
     background-image: url('/public/images/application.jpg');
+    background-size: cover; /* Assure que l'image de fond couvre le conteneur */
+    background-position: center; /* Centre l'image de fond */
 }
 
 .card1#produits {
     background-image: url('/public/images/produits.jpg');
+    background-size: cover; /* Assure que l'image de fond couvre le conteneur */
+    background-position: center; /* Centre l'image de fond */
 }
 
 .card1#actualité {
-    background-image: url('/public/images/dantecMarket1.jpg');
+    background-image: url('/public/images/actualites1.jpg');
+    background-size: cover; /* Assure que l'image de fond couvre le conteneur */
+    background-position: center; /* Centre l'image de fond */
 }
 
 .card2 {
     width: 45.3%;
     height: 75vh;
     flex-shrink: 0;
-    margin-right: 1vh; /* Ajustez la marge selon vos besoins pour l'espace entre les cartes */
+    margin-right: 3vh; /* Ajustez la marge selon vos besoins pour l'espace entre les cartes */
     margin-bottom: 1vh; 
+    margin-top: 4vh; 
     box-shadow: 0vh 0.4vh 0.4vh rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+
 }
 
 .card-container .card2 button {
@@ -422,7 +584,7 @@ body {
     margin-top: 0%;
     transform: translateX(-50%);
     width: 60%;
-    height: 15%;
+    height: 10%;
 }
 
 .card-container .card2 p {
@@ -437,18 +599,19 @@ body {
 
 .card2#catalogue {
     background-image: url('/public/images/catalogue.jpg');
+    background-size: cover; /* Assure que l'image de fond couvre le conteneur */
+    background-position: center; /* Centre l'image de fond */
 }
 
 .card2#partenaires {
     background-image: url('/public/images/partenaires.jpg');
+    background-size: cover; /* Assure que l'image de fond couvre le conteneur */
+    background-position: center; /* Centre l'image de fond */
 }
-
-// Fin des Cards containers
-
-// Début de Avis containers
 
 .avis-container {
     display: flex;
+    background-color: #292929;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap; /* Permet aux cartes d'avis de passer à la ligne si l'espace est insuffisant */
@@ -457,10 +620,10 @@ body {
 
 .avis-container p{
     height: 20%;
-    color: #000000;
+    color: #ffffff;
     font-size: 7.5vh;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 500;
     line-height: normal;
     margin-top: 2vh;
     margin-bottom: 5vh;
@@ -469,7 +632,7 @@ body {
 
 .card-avis {
     width: 25%;
-    height: 50vh;
+    height: 8%;
     flex-shrink: 0;
     background: #E3E3E3;
     margin-right: 5vh; /* Ajustez la marge selon vos besoins pour l'espace entre les cartes d'avis */
@@ -485,7 +648,7 @@ body {
 .date,
 .etoiles {
     width: 100%;
-    font-family: Inter;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .titre {
@@ -562,13 +725,15 @@ body {
 }
 
 .boutonAvis {
-    margin: 6vh 0vh;
-    align-items: center;
+    display: flex;
+    justify-content: center; /* Centre le contenu horizontalement */
+    align-items: center; /* Centre le contenu verticalement si nécessaire */
+    height: 100%; /* Assurez-vous que le div ait une hauteur pour le centrage vertical */
 }
 
 .boutonAvis button{
     width: 64.6vh;
-    height: 15.2vh;
+    height: 10vh;
     flex-shrink: 0;
     background: rgba(223, 186, 97, 0.80);
     border-radius: 5vh;
@@ -582,11 +747,6 @@ body {
     line-height: normal;
 }
 
-// Fin du Avis Container
-
-// Fin de la Page D'accueil
-
-// Début Footer
 
 footer {
     width: 100%;
@@ -627,12 +787,12 @@ footer {
 }
 
 .container-foot p {
-    font-family: 'Inter Black', sans-serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: 900;
 }
 
 .container-foot ul {
-    font-family: Inter;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: 1001;
 }
 
@@ -678,12 +838,15 @@ footer {
     height: auto;
     color: white;
 }
+.iconPanier {
+    margin-right: 15px;
+}
 
 .btn-social-icon:hover {
     color: rgba(223, 186, 97, 0.80);
 }
 
-// Fin Footer
+
 
 
 
@@ -789,7 +952,7 @@ footer {
     }
 
     .textNav {
-        font-size: 18px;
+        font-size: 12px;
         padding: 0;
     }
 
@@ -865,9 +1028,15 @@ footer {
         height: 30px;
         font-size: 12px;
     }
+
 }
 
 body.page-actualite {
+    background-color: #292929;
+    color: #fff; /* Couleur du texte à l'intérieur des conteneurs */
+}
+
+.lactu {
     background-color: #292929;
     color: #fff; /* Couleur du texte à l'intérieur des conteneurs */
 }

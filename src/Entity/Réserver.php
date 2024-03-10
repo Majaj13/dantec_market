@@ -93,4 +93,15 @@ class Réserver
 
         return $this;
     }
+    public function getPlanningDetails(): string
+{
+    if (!$this->lePlanning) {
+        return 'Non défini';
+    }
+
+    return sprintf('%s de %s à %s', 
+        $this->lePlanning->getJour()->format('Y-m-d'), 
+        $this->lePlanning->getHeureDebut()->format('H:i'), 
+        $this->lePlanning->getHeureFin()->format('H:i'));
+}
 }

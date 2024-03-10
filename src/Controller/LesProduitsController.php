@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CategorieParentRepository;
 use App\Repository\ProduitsRepository;
@@ -28,5 +29,17 @@ class LesProduitsController extends AbstractController
            
         ]);
     }
+
+    #[Route('/lesProduits/rechercher', name: 'app_rechercher')]
+    public function rechercher(Request $request,ProduitsRepository $ProduitsRepository) {
+
+        $query = $request->query->get('query');
+        
+        return $this->render('les_produits/recherches.html.twig', [
+            'query' => $query ,
+        ]);
+
+    }
+
     
 }

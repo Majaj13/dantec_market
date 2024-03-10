@@ -297,7 +297,7 @@ const voirProduit = (liste) => {
   padding: 10px; /* Ajustez le padding si nécessaire */
   border-radius: 25px;
   border: 1px solid black;
-  font-family: Arial, sans-serif;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   width: 150px; /* Largeur fixe */
   height: 50px; /* Hauteur fixe */
   display: flex;
@@ -543,7 +543,7 @@ const voirProduit = (liste) => {
   font-weight: bold; /* Texte en gras */
   font-size: 3vh; /* Taille de la police basée sur la hauteur de la vue */
   text-align: center; /* Centre le texte */
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Exemple de police moderne */
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   margin-top: 10px; /* Espace au-dessus du texte des points de fidélité, ajustez selon besoin */
 }
 

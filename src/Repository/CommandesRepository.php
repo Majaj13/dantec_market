@@ -76,8 +76,8 @@ public function findValidatedOrdersByUser(User $user)
     public function getValidatedCommandesDetails(int $id)
     {
         $qb = $this->createQueryBuilder('c')
-            ->select('c.id', 'p.nomProduit', 'cmd.quantite', 'cmd.prixretenu', 
-                     'cmd.quantite * cmd.prixretenu AS total',
+            ->select('c.id','p.id AS pid', 'p.nomProduit', 'cmd.quantite', 'cmd.prixretenu', 
+                     'cmd.quantite * cmd.prixretenu AS total','p.etoiles','cmd.noteDonnee',
                      'MIN(i.url) AS imageUrl')
             ->leftJoin('c.lesCommandes', 'cmd')
             ->leftJoin('cmd.leProduit', 'p')

@@ -25,6 +25,9 @@ class Commander
     #[ORM\Column]
     private ?float $prixretenu = null;
 
+    #[ORM\Column]
+    private ?bool $noteDonnee = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,4 +80,23 @@ class Commander
 
         return $this;
     }
+
+    public function isNoteDonnee(): ?bool
+    {
+        return $this->noteDonnee;
+    }
+
+    public function setNoteDonnee(bool $noteDonnee): static
+    {
+        $this->noteDonnee = $noteDonnee;
+
+        return $this;
+    }
+
+    public function __toString(): string
+{
+    // Assurez-vous que `leProduit` peut être null et gérez ce cas
+    $produitNom = $this->leProduit ? $this->leProduit->getNomProduit() : 'Produit inconnu';
+    return sprintf("Produit : %s, Quantité : %d", $produitNom, $this->quantite);
+}
 }

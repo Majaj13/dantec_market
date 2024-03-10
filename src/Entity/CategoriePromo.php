@@ -72,4 +72,9 @@ class CategoriePromo
 
         return $this;
     }
+    public function __toString(): string
+    {
+        // Return the property that best represents this entity, e.g., name
+        return $this->nom;
+    }
 }

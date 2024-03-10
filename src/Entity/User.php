@@ -61,12 +61,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $photoUrl = null;
 
+    #[ORM\OneToMany(mappedBy: 'leUser', targetEntity: Messages::class)]
+    private Collection $lesMessages;
+
     public function __construct()
     {
         $this->lesReservations = new ArrayCollection();
         $this->lesCommandes = new ArrayCollection();
         $this->lesCommentaires = new ArrayCollection();
         $this->lesFavoris = new ArrayCollection();
+        $this->lesMessages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -329,5 +333,40 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->photoUrl = $photoUrl;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Messages>
+     */
+    public function getLesMessages(): Collection
+    {
+        return $this->lesMessages;
+    }
+
+    public function addLesMessage(Messages $lesMessage): static
+    {
+        if (!$this->lesMessages->contains($lesMessage)) {
+            $this->lesMessages->add($lesMessage);
+            $lesMessage->setLeUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLesMessage(Messages $lesMessage): static
+    {
+        if ($this->lesMessages->removeElement($lesMessage)) {
+            // set the owning side to null (unless already changed)
+            if ($lesMessage->getLeUser() === $this) {
+                $lesMessage->setLeUser(null);
+            }
+        }
+
+        return $this;
+    }
+    public function __toString(): string
+    {
+        // Return the property that best represents this entity, e.g., name
+        return $this->nom;
     }
 }

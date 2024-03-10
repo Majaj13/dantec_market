@@ -21,7 +21,7 @@ class Images
     #[ORM\ManyToMany(targetEntity: Produits::class, mappedBy: 'lesImages')]
     private Collection $lesProduits;
 
-    #[ORM\ManyToOne(inversedBy: 'lesImages')]
+    #[ORM\ManyToOne(inversedBy: 'lesimages')]
     private ?Actualite $laActualite = null;
 
     public function __construct()
@@ -83,5 +83,9 @@ class Images
         $this->laActualite = $laActualite;
 
         return $this;
+    }
+    public function __toString(): string
+    {
+        return $this->url;
     }
 }

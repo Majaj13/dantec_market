@@ -2,34 +2,35 @@
     <div>
         <div class="bienvenue-actu">
             <h1>Bienvenue sur l’actualité de Dantec Market</h1>
-            <p>Ici nous traiteront de l’actualité sur le magasin et sur tout ce qui l’entourent...</p>
+            <p>Ici nous traiteront de l’actualité sur le magasin et sur tout ce qui l’entoure...</p>
         </div>
         <div v-if="loading">Chargement...</div>
-        <div v-else-if="error">Erreur de chargement des données.</div>
+        <div v-else-if="error">{{ error }}</div>
         <div v-else>
-            <div v-for="actu in actus" :key="actu.id" class="container-actu">
+            <div v-if="actus.length > 0" class="container-actu">
                 <div class="inner-container">
                     <div class="text-container">
-                        <h1>{{ actu.titre }}</h1>
-                        <p>{{ actu.texte }}</p>
-                        <form :action="`/actualite/voiractu/${actu.id}`">
+                        <h1>{{ actus[0].titre }}</h1>
+                        <p>{{ actus[0].texte }}</p>
+                        <form :action="`/actualite/voiractu/${actus[0].id}`">
                             <button type="submit">Lire plus</button>
                         </form>
                     </div>
                     <div class="image-container">
-                        <img v-for="image in actu.images" :key="image.id" :src="image.url" alt="Image">
+                        <img :src="actus[0].image" alt="Image">
                     </div>
                 </div>
             </div>
+
             <div class="mini-actu-container">
                 <p>Découvrez nos récentes actualités:</p>
-                <div v-for="actu in actus" :key="actu.id" class="card-actu">
-                    <img :src="actu.image" alt="Image">
+                <div v-for="(actu, index) in actus.slice(1, 4)" :key="actu.id" class="card-actu">
+                    <img :src="actu.lesimages[0].url" alt="Image de l'actualité">
                     <div class="contenu">
                         <h1>{{ actu.titre }}</h1>
                         <p>{{ actu.texte }}</p>
                     </div>
-                    <a :href="`/actualite/voiractu/${actu.id}`">Lire plus</a> <!-- Utilisation de <a> pour les liens -->
+                    <a :href="`/actualite/voiractu/${actu.id}`">Lire plus</a>
                 </div>
                 <button class="boutonActu">Plus d'actualités</button>
             </div>
@@ -41,38 +42,30 @@
 import { ref, onMounted } from 'vue';
 
 export default {
-  setup() {
-    const actus = ref([]);
-    const loading = ref(false);
-    const error = ref(null);
+    setup() {
+        const actus = ref([]);
+        const loading = ref(false);
+        const error = ref(null);
 
-    const fetchActus = async () => {
-    try {
-        loading.value = true;
-        const response = await fetch('/api/mobile/getLesActualites');
-        const data = await response.json();
-        actus.value = data.map(actu => ({
-            id: actu.id,
-            titre: actu.titre,
-            texte: actu.texte,
-            images: actu.lesImages.map(image => ({
-                id: image.id,
-                // Ajoutez d'autres propriétés de l'image si nécessaire
-            }))
-        }));
-    } catch (e) {
-        error.value = 'Erreur de chargement des données.';
-    } finally {
-        loading.value = false;
+        const fetchActus = async () => {
+            try {
+                loading.value = true;
+                const response = await fetch('/api/mobile/getLesActualites');
+                if (!response.ok) throw new Error('Erreur de chargement des données.');
+                actus.value = await response.json();
+            } catch (e) {
+                error.value = e.message;
+            } finally {
+                loading.value = false;
+            }
+        };
+
+        onMounted(() => {
+            fetchActus();
+        });
+
+        return { actus, loading, error,};
     }
-};
-
-    onMounted(() => {
-        fetchActus();
-    });
-
-    return { actus, loading, error };
-  }
 };
 </script>
 
@@ -83,7 +76,7 @@ export default {
 .bienvenue-actu {
     width: 100%;
     height: 75%;
-    background-image: url('/public/images/dantecMarket2.jpg');
+    background-image: url('/public/images/dantecMarket2.1.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -249,12 +242,13 @@ export default {
     object-fit: cover; /* Ajuste l'image pour couvrir tout l'espace disponible sans déformation */
 }
 
-.card-actu button {
+.card-actu a {
     width: 28.5vh;
     height: 6.8vh;
     flex-shrink: 0;
     background: #DFBA61;
     border-radius: 5vh;
+    border: 2px solid #000; /* Ajout de la bordure noire */
     text-decoration: none;
     color: #2D2D2D;
     text-align: center;

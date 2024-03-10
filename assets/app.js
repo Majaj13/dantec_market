@@ -1,4 +1,6 @@
 import './bootstrap.js';
+import Swiper from 'swiper';
+import 'swiper/swiper-bundle.css';
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -14,21 +16,47 @@ import FicheProduitComposants from './composants/ficheproduit.vue';
 import PanierComposants from './composants/panier.vue';
 import RecherchesComposants from './composants/recherches.vue';
 import ProfilComposants from './composants/profil.vue';
-import Actualite from './composants/actualite.vue';
-import LesActualites from './composants/LesActualites.vue';
+import PartenairesComposants from './composants/partenaires.vue';
+import TodayComponent from './composants/TodayComponent.vue';
+import MoinsVendusComponent from './composants/moinsvendus.vue';
+import NouveauteComponent from './composants/nouveaute.vue';
+import TendanceComponent from './composants/tendance.vue';
+import FlashComponent from './composants/flash.vue';
+import ActualiteComponent from './composants/actualite.vue';
+import LesActualiteComponent from './composants/lesActualites.vue';
+
+
+
+
 const appCategoriesComposants = createApp(CategoriesComposants);
 const appFicheProduitComposants = createApp(FicheProduitComposants);
 const appPanierComposants = createApp(PanierComposants);
 const appRecherchesComposants = createApp(RecherchesComposants);
 const appProfilComposants = createApp(ProfilComposants);
-const appActualite = createApp(Actualite);
-const appLesActualites = createApp(LesActualites);
+const appPartenairesComposants = createApp(PartenairesComposants);
+const appTodayComponentComposants = createApp(TodayComponent);
+const appMoinsVendusComponentComposants = createApp(MoinsVendusComponent);
+const appNouveauteComponentComposants = createApp(NouveauteComponent);
+const appTendanceComponentComposants = createApp(TendanceComponent);
+const appFlashComponentComposants = createApp(FlashComponent);
+const appActualiteComponentComposants = createApp(ActualiteComponent);
+const appLesActualiteComponentComposants = createApp(LesActualiteComponent);
+
+
 appCategoriesComposants.mount('#app');
 appFicheProduitComposants.mount('#app2');
 appPanierComposants.mount('#app3');
 appRecherchesComposants.mount('#app4');
 appProfilComposants.mount('#app5');
-appActualite.mount('#app6');
-appLesActualites.mount('#app7');
+appPartenairesComposants.mount('#app6');
+appTodayComponentComposants.mount('#app7');
+appMoinsVendusComponentComposants.mount('#app8');
+appNouveauteComponentComposants.mount('#app9');
+appFlashComponentComposants.mount('#app10');
+appTendanceComponentComposants.mount('#app11');
+appActualiteComponentComposants.mount('#app12');
+appLesActualiteComponentComposants.mount('#app13')
+
+
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉')

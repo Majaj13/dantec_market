@@ -16,53 +16,23 @@ class Actualite
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToMany(mappedBy: 'laActualite', targetEntity: Images::class)]
-    private Collection $lesImages;
-
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(length: 255)]
     private ?string $titre = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $texte = null;
 
+    #[ORM\OneToMany(mappedBy: 'laActualite', targetEntity: Images::class)]
+    private Collection $lesimages;
+
     public function __construct()
     {
-        $this->lesImages = new ArrayCollection();
+        $this->lesimages = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * @return Collection<int, Images>
-     */
-    public function getLesImages(): Collection
-    {
-        return $this->lesImages;
-    }
-
-    public function addLesImage(Images $lesImage): static
-    {
-        if (!$this->lesImages->contains($lesImage)) {
-            $this->lesImages->add($lesImage);
-            $lesImage->setLaActualite($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLesImage(Images $lesImage): static
-    {
-        if ($this->lesImages->removeElement($lesImage)) {
-            // set the owning side to null (unless already changed)
-            if ($lesImage->getLaActualite() === $this) {
-                $lesImage->setLaActualite(null);
-            }
-        }
-
-        return $this;
     }
 
     public function getTitre(): ?string
@@ -85,6 +55,36 @@ class Actualite
     public function setTexte(string $texte): static
     {
         $this->texte = $texte;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Images>
+     */
+    public function getLesimages(): Collection
+    {
+        return $this->lesimages;
+    }
+
+    public function addLesimage(Images $lesimage): static
+    {
+        if (!$this->lesimages->contains($lesimage)) {
+            $this->lesimages->add($lesimage);
+            $lesimage->setLaActualite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLesimage(Images $lesimage): static
+    {
+        if ($this->lesimages->removeElement($lesimage)) {
+            // set the owning side to null (unless already changed)
+            if ($lesimage->getLaActualite() === $this) {
+                $lesimage->setLaActualite(null);
+            }
+        }
 
         return $this;
     }

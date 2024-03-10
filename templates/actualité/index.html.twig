@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+{{ parent() }}
 <body class="page-actualite">
-    {{ parent() }}
-    
-    <div id="app7"></div>
+
+    <div id="app13">
+    </div>
 
     {% block footer %}
         {{ parent() }}
     {% endblock %}
+
 </body>
 {% endblock %}
